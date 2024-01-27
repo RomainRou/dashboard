@@ -1,0 +1,3163 @@
+type: vertical-stack
+cards:
+  - type: horizontal-stack
+    cards:
+      - type: custom:vertical-stack-in-card
+        cards:
+          - type: custom:mushroom-template-card
+            icon: mdi:theme-light-dark
+            icon_color: |
+              {% if is_state('binary_sensor.il_fait_nuit', 'off') %}
+                #80808080
+              {% else %}  
+                #FFAE0080
+              {% endif %}
+            primary: Meteo
+            secondary: >-
+              {{ states('sensor.chilleurs_aux_bois_temperature') }}°C/{{
+              states('sensor.chilleurs_aux_bois_humidity') }}%
+            layout: horizontal
+            tap_action:
+              action: more-info
+            double_tap_action:
+              action: none
+            hold_action:
+              action: none
+            badge_icon: ''
+            badge_color: ''
+            entity: weather.chilleurs_aux_bois
+            card_mod:
+              style:
+                mushroom-state-info$: |
+                  .primary {
+                    font-size: 16px !important;
+                    position: relative;
+                    top: -50px;
+                    left: -155px;
+                    overflow: visible !important;
+                    white-space: normal !important;
+                  }
+                  .secondary {
+                    position: relative;
+                    overflow: visible !important;
+                    top: -52px;
+                    left: -155px;
+                  }
+                mushroom-shape-icon$: |
+                  .shape {
+                    position: relative;
+                    left: -43px;
+                    top: 30px;
+                  }
+                .: |
+                  :host {
+                    --mush-icon-size: 146px;
+                  }
+                style: |
+                  mushroom-badge-icon {
+                    left: 60px;
+                    top: 25px;
+                  }
+                  ha-card {
+                    background: none;
+                    font-style: italic;
+                    --primary-text-color: black;
+                    --secondary-text-color: black;
+                    border: none;
+                  }
+        card_mod:
+          style: |
+            ha-card {
+              height: 153px ;
+              margin-left: auto;
+              margin-right: auto;
+              background-image: url(https://i.ibb.co/FwXpGWX/ciel.png);
+              background-size: cover;
+              background-position: center;
+            }
+      - type: custom:digital-clock
+        dateFormat:
+          weekday: long
+          day: 2-digit
+          month: long
+        timeFormat:
+          hour: 2-digit
+          minute: 2-digit
+        card_mod:
+          style: |
+            ha-card {
+              height: 153px ;
+              margin-left: auto;
+              margin-right: auto;
+              background-image: url(https://i.ibb.co/BswBHdZ/blank.png);
+              background-size: cover;
+              background-position: center;
+              filter: opacity(100%);
+              font-family: Days One;
+              font-size: 30px;
+              text-shadow: 20px 20px 20px black;
+              font-style: italic;
+            }
+
+              
+      - type: custom:popup-card
+        title: Meteo
+        dismissable: true
+        entity: weather.chilleurs_aux_bois
+        card:
+          type: custom:meteofrance-weather-card
+          entity: weather.chilleurs_aux_bois
+          details: true
+          forecast: true
+          hourly_forecast: false
+          current: true
+          rainChanceEntity: sensor.chilleurs_aux_bois_rain_chance
+          uvEntity: sensor.chilleurs_aux_bois_uv
+          cloudCoverEntity: sensor.chilleurs_aux_bois_cloud_cover
+          freezeChanceEntity: sensor.chilleurs_aux_bois_freeze_chance
+          snowChanceEntity: sensor.chilleurs_aux_bois_snow_chance
+          alertEntity: sensor.45_weather_alert
+          rainForecastEntity: sensor.chilleurs_aux_bois_next_rain
+          card_mod:
+            style: |
+              ha-card {
+                background: none !important;
+                border: none !important;
+                font-style: italic;
+              }
+  - type: horizontal-stack
+    cards:
+      - type: custom:vertical-stack-in-card
+        cards:
+          - type: custom:mushroom-template-card
+            entity: light.le_salon
+            icon: mdi:sofa
+            icon_color: |-
+              {% if is_state('light.le_salon', 'on') %}
+                #FFAE0080
+              {% else %}  
+                #0000
+              {% endif %}
+            primary: Salon
+            secondary: >-
+              {{ states('sensor.thermometre_salon_temperature') }}°C/{{
+              states('sensor.thermometre_salon_humidity') }}%
+            layout: horizontal
+            tap_action:
+              action: more-info
+            double_tap_action:
+              action: none
+            hold_action:
+              action: none
+            badge_icon: ''
+            badge_color: ''
+            card_mod:
+              style:
+                mushroom-state-info$: |
+                  .primary {
+                    font-size: 16px !important;
+                    position: relative;
+                    top: -50px;
+                    left: -155px;
+                    overflow: visible !important;
+                    white-space: normal !important;
+                  }
+                  .secondary {
+                    position: relative;
+                    overflow: visible !important;
+                    top: -52px;
+                    left: -155px;
+                  }
+                mushroom-shape-icon$: |
+                  .shape {
+                    position: relative;
+                    left: -43px;
+                    top: 55px;
+                  }
+                .: |
+                  :host {
+                    --mush-icon-size: 146px;
+                  }
+                style: |
+                  mushroom-badge-icon {
+                    left: 60px;
+                    top: 25px;
+                  }
+                  ha-card {
+                    background: none;
+                    font-style: italic;
+                    --primary-text-color: white;
+                    --secondary-text-color: white;
+                  }
+          - type: custom:mushroom-chips-card
+            chips:
+              - type: template
+                entity: light.le_salon
+                tap_action:
+                  action: none
+                icon: mdi:ceiling-light
+                icon_color: |-
+                  {% if is_state(entity, 'on') %} 
+                   orange
+                  {% elif is_state(entity, 'off') %} 
+                   grey
+                  {% else %}
+                   grey
+                  {% endif %}
+                hold_action:
+                  action: none
+                double_tap_action:
+                  action: none
+              - type: template
+                entity: media_player.samsung_7_series_65
+                icon: mdi:play-pause
+                icon_color: |-
+                  {% if is_state('media_player.samsung_7_series_65', 'on') %} 
+                    #03A9F4
+                  {% else %}
+                   grey
+                  {% endif %}
+                hold_action:
+                  action: none
+                double_tap_action:
+                  action: none
+                tap_action:
+                  action: none
+              - type: alarm-control-panel
+                entity: alarm_control_panel.alarmo
+                tap_action:
+                  action: none
+                content_info: none
+            card_mod:
+              style:
+                .: |
+                  ha-card {
+                    width: 66px;
+                    margin-left: 85%;
+                    top: -170px;
+                    background: none;
+                    --chip-border-width: 0;
+                  }
+        card_mod:
+          style: |
+            ha-card {
+              height: 178px ;
+              margin-left: auto;
+              margin-right: auto;
+              background-image: url(https://i.ibb.co/NjM7Dd6/salon.png);
+              background-size: cover;
+              background-position: center;
+            }
+      - type: custom:vertical-stack-in-card
+        cards:
+          - type: custom:mushroom-template-card
+            icon: mdi:silverware-variant
+            icon_color: |-
+              {% if is_state('light.la_salle_a_manger', 'on') %}
+                #FFAE0080
+              {% else %}  
+                #0000
+              {% endif %}
+            primary: Salle a manger
+            secondary: ''
+            layout: horizontal
+            tap_action:
+              action: more-info
+            double_tap_action:
+              action: none
+            hold_action:
+              action: none
+            badge_icon: ''
+            badge_color: ''
+            entity: light.la_salle_a_manger
+            card_mod:
+              style:
+                mushroom-state-info$: |
+                  .primary {
+                    font-size: 16px !important;
+                    position: relative;
+                    top: -50px;
+                    left: -155px;
+                    overflow: visible !important;
+                    white-space: normal !important;
+                  }
+                  .secondary {
+                    position: relative;
+                    overflow: visible !important;
+                    top: -52px;
+                    left: -155px;
+                  }
+                mushroom-shape-icon$: |
+                  .shape {
+                    position: relative;
+                    left: -43px;
+                    top: 55px;
+                  }
+                .: |
+                  :host {
+                    --mush-icon-size: 146px;
+                  }
+                style: |
+                  mushroom-badge-icon {
+                    left: 60px;
+                    top: 25px;
+                  }
+                  ha-card {
+                    background: none;
+                    font-style: italic;
+                    --primary-text-color: black;
+                    --secondary-text-color: black; 
+                  }
+          - type: custom:mushroom-chips-card
+            chips:
+              - type: template
+                entity: light.la_salle_a_manger
+                tap_action:
+                  action: none
+                icon: mdi:ceiling-light
+                icon_color: |-
+                  {% if is_state(entity, 'on') %} 
+                   orange
+                  {% elif is_state(entity, 'off') %} 
+                   grey
+                  {% else %}
+                   grey
+                  {% endif %}
+                hold_action:
+                  action: none
+                double_tap_action:
+                  action: none
+              - type: template
+                entity: switch.prise_connectee_mystrom
+                tap_action:
+                  action: none
+                icon_color: |-
+                  {% if is_state(entity, 'on') %} 
+                   orange
+                  {% elif is_state(entity, 'off') %} 
+                   grey
+                  {% else %}
+                   grey
+                  {% endif %}
+                icon: mdi:power-socket-eu
+                hold_action:
+                  action: none
+                double_tap_action:
+                  action: none
+              - type: template
+                icon_color: |-
+                  {% if is_state(entity, 'on') %} 
+                   orange
+                  {% elif is_state(entity, 'off') %} 
+                   grey
+                  {% else %}
+                   grey
+                  {% endif %}
+                icon: mdi:power-socket-eu
+                entity: switch.prise_salle_a_manger
+                tap_action:
+                  action: none
+                hold_action:
+                  action: none
+                double_tap_action:
+                  action: none
+            card_mod:
+              style:
+                .: |
+                  ha-card {
+                    width: 66px;
+                    margin-left: 85%;
+                    top: -170px;
+                    background: none;
+                    --chip-border-width: 0;
+                  }
+        card_mod:
+          style: |
+            ha-card {
+              height: 178px ;
+              margin-left: auto;
+              margin-right: auto;
+              background-image: url(https://i.ibb.co/rmk15p2/salle-a-manger.png);
+              background-size: cover;
+              background-position: center;
+            }
+      - type: custom:vertical-stack-in-card
+        cards:
+          - type: custom:mushroom-template-card
+            entity: light.cuisine
+            icon: mdi:pot-steam
+            icon_color: |-
+              {% if is_state('light.la_cuisine', 'on') %}
+                #FFAE0080
+              {% else %}  
+                #0000
+              {% endif %}
+            primary: Cuisine
+            secondary: ''
+            layout: horizontal
+            tap_action:
+              action: more-info
+            double_tap_action:
+              action: none
+            hold_action:
+              action: none
+            badge_icon: ''
+            badge_color: ''
+            card_mod:
+              style:
+                mushroom-state-info$: |
+                  .primary {
+                    font-size: 16px !important;
+                    position: relative;
+                    top: -50px;
+                    left: -155px;
+                    overflow: visible !important;
+                    white-space: normal !important;
+                  }
+                  .secondary {
+                    position: relative;
+                    overflow: visible !important;
+                    top: -52px;
+                    left: -155px;
+                  }
+                mushroom-shape-icon$: |
+                  .shape {
+                    position: relative;
+                    left: -43px;
+                    top: 55px;
+                  }
+                .: |
+                  :host {
+                    --mush-icon-size: 146px;
+                  }
+                style: |
+                  mushroom-badge-icon {
+                    left: 60px;
+                    top: 25px;
+                  }
+                  ha-card {
+                    background: none;
+                    font-style: italic;
+                    --primary-text-color: black;
+                  }
+          - type: custom:mushroom-chips-card
+            chips:
+              - type: template
+                entity: light.cuisine
+                tap_action:
+                  action: none
+                icon: mdi:vanity-light
+                icon_color: |-
+                  {% if is_state(entity, 'on') %} 
+                   orange
+                  {% elif is_state(entity, 'off') %} 
+                   grey
+                  {% else %}
+                   grey
+                  {% endif %}
+                hold_action:
+                  action: none
+                double_tap_action:
+                  action: none
+              - type: template
+                icon_color: |-
+                  {% if is_state(entity, 'on') %} 
+                   orange
+                  {% elif is_state(entity, 'off') %} 
+                   grey
+                  {% else %}
+                   grey
+                  {% endif %}
+                entity: light.plan_de_travail
+                icon: mdi:vanity-light
+                tap_action:
+                  action: none
+                hold_action:
+                  action: none
+                double_tap_action:
+                  action: none
+            card_mod:
+              style:
+                .: |
+                  ha-card {
+                    width: 66px;
+                    margin-left: 85%;
+                    top: -170px;
+                    background: none;
+                    --chip-border-width: 0;
+                  }
+        card_mod:
+          style: |
+            ha-card {
+              height: 178px ;
+              margin-left: auto;
+              margin-right: auto;
+              background-image: url(https://i.ibb.co/19NXD2Z/cuisine.png);
+              background-size: cover;
+              background-position: center;
+            }
+      - type: custom:popup-card
+        entity: light.le_salon
+        dismissable: true
+        card:
+          type: vertical-stack
+          cards:
+            - type: custom:mushroom-light-card
+              entity: light.le_salon
+              show_brightness_control: true
+              use_light_color: true
+              show_color_control: false
+              name: ' Le salon'
+              collapsible_controls: true
+              icon: mdi:ceiling-light
+              show_color_temp_control: true
+              card_mod:
+                style: |
+                  ha-card {
+                    --ha-card-background: none;
+                    border: none;
+                    font-style: italic;
+                  }
+            - type: custom:mushroom-alarm-control-panel-card
+              states:
+                - armed_away
+                - armed_night
+              entity: alarm_control_panel.alarmo
+              card_mod:
+                style: |
+                  ha-card {
+                    --ha-card-background: none;
+                    border: none;
+                    font-style: italic;
+                  }
+            - type: custom:mushroom-media-player-card
+              entity: media_player.samsung_7_series_65
+              name: télé salon
+              card_mod:
+                style: |
+                  ha-card {
+                    background: none;
+                    border: none;
+                    font-style: italic;
+                  }
+        size: normal
+        card_mod:
+          style: |
+            ha-card {
+              --ha-card-background: none;
+              font-style: italic;
+              --ha-card-border: none;
+            }
+      - type: custom:popup-card
+        entity: light.la_salle_a_manger
+        dismissable: true
+        card:
+          type: vertical-stack
+          cards:
+            - type: custom:mushroom-light-card
+              entity: light.la_salle_a_manger
+              show_brightness_control: true
+              use_light_color: true
+              show_color_control: false
+              name: ' La salle a manger'
+              collapsible_controls: true
+              icon: mdi:ceiling-light
+              show_color_temp_control: true
+              card_mod:
+                style: |
+                  ha-card {
+                    background: none;
+                    border: none;
+                  }
+            - type: horizontal-stack
+              cards:
+                - type: custom:mushroom-entity-card
+                  entity: switch.prise_salle_a_manger
+                  icon: mdi:power-socket-fr
+                  name: Prise salle à manger
+                  double_tap_action:
+                    action: none
+                  hold_action:
+                    action: none
+                  tap_action:
+                    action: toggle
+                  card_mod:
+                    style: |
+                      ha-card {
+                        background: none;
+                        border: none;
+                      }
+                - type: custom:mushroom-entity-card
+                  entity: switch.prise_connectee_mystrom
+                  icon: mdi:power-socket-fr
+                  name: Prise mystrom
+                  tap_action:
+                    action: toggle
+                  hold_action:
+                    action: none
+                  double_tap_action:
+                    action: none
+                  card_mod:
+                    style: |
+                      ha-card {
+                        background: none;
+                        border: none;
+                      }
+        card_mod:
+          style: |
+            ha-card {
+              --ha-card-background: none;
+              font-style: italic;
+              --ha-card-border: none;
+            }
+      - type: custom:popup-card
+        entity: light.cuisine
+        dismissable: true
+        card:
+          type: vertical-stack
+          cards:
+            - type: custom:mushroom-light-card
+              entity: light.cuisine
+              show_brightness_control: true
+              use_light_color: true
+              show_color_control: false
+              name: ' La cuisine'
+              collapsible_controls: true
+              show_color_temp_control: true
+              card_mod:
+                style: |
+                  ha-card {
+                    background: none;
+                    border: none;
+                  }
+            - type: custom:mushroom-light-card
+              entity: light.plan_de_travail
+              show_brightness_control: true
+              use_light_color: true
+              show_color_control: false
+              name: ' Le plan de travail'
+              collapsible_controls: true
+              show_color_temp_control: true
+              card_mod:
+                style: |
+                  ha-card {
+                    background: none;
+                    border: none;
+                  }
+        card_mod:
+          style: |
+            ha-card {
+              --ha-card-background: none;
+              font-style: italic;
+              --ha-card-border: none;
+            }
+  - type: horizontal-stack
+    cards:
+      - type: custom:vertical-stack-in-card
+        cards:
+          - type: custom:mushroom-template-card
+            entity: light.le_couloir
+            icon: mdi:globe-light
+            icon_color: |-
+              {% if is_state('light.le_couloir', 'on') %}
+                #FFAE0080
+              {% else %}  
+                #0000
+              {% endif %}
+            primary: Couloir
+            secondary: ''
+            layout: horizontal
+            tap_action:
+              action: more-info
+            double_tap_action:
+              action: none
+            hold_action:
+              action: none
+            badge_icon: ''
+            badge_color: ''
+            card_mod:
+              style:
+                mushroom-state-info$: |
+                  .primary {
+                    font-size: 16px !important;
+                    position: relative;
+                    top: -50px;
+                    left: -155px;
+                    overflow: visible !important;
+                    white-space: normal !important;
+                  }
+                  .secondary {
+                    position: relative;
+                    overflow: visible !important;
+                    top: -52px;
+                    left: -155px;
+                  }
+                mushroom-shape-icon$: |
+                  .shape {
+                    position: relative;
+                    left: -43px;
+                    top: 55px;
+                  }
+                .: |
+                  :host {
+                    --mush-icon-size: 146px;
+                  }
+                style: |
+                  mushroom-badge-icon {
+                    left: 60px;
+                    top: 25px;
+                  }
+                  ha-card {
+                    background: none;
+                    font-style: italic;
+                    --primary-text-color: white;
+                    --secondary-text-color: white;
+                  }
+          - type: custom:mushroom-chips-card
+            chips:
+              - type: template
+                entity: light.le_couloir
+                tap_action:
+                  action: none
+                icon: mdi:globe-light
+                icon_color: |-
+                  {% if is_state(entity, 'on') %} 
+                   orange
+                  {% elif is_state(entity, 'off') %} 
+                   grey
+                  {% else %}
+                   grey
+                  {% endif %}
+                hold_action:
+                  action: none
+                double_tap_action:
+                  action: none
+            card_mod:
+              style:
+                .: |
+                  ha-card {
+                    width: 66px;
+                    margin-left: 85%;
+                    top: -170px;
+                    --chip-border-width: 0;
+                  }
+        card_mod:
+          style: |
+            ha-card {
+              height: 178px;
+              margin-left: auto;
+              margin-right: auto;
+              background-image: url(https://i.ibb.co/df4LfL3/couloir.png);
+              background-size: cover;
+              background-position: center;
+            }
+      - type: custom:vertical-stack-in-card
+        cards:
+          - type: custom:mushroom-template-card
+            icon: mdi:shower
+            icon_color: |-
+              {% if is_state('light.salle_de_bain_rdc', 'on') %}
+                #FFAE0080
+              {% else %}  
+                #0000
+              {% endif %}
+            primary: Salle de bain rdc
+            secondary: >-
+              {{ states('sensor.thermometre_salle_de_bain_bas_temperature')
+              }}°C/{{ states('sensor.thermometre_salle_de_bain_bas_humidity')
+              }}%
+            layout: horizontal
+            double_tap_action:
+              action: none
+            hold_action:
+              action: none
+            badge_icon: ''
+            badge_color: ''
+            tap_action:
+              action: more-info
+            entity: light.salle_de_bain_rdc
+            card_mod:
+              style:
+                mushroom-state-info$: |
+                  .primary {
+                    font-size: 16px !important;
+                    position: relative;
+                    top: -50px;
+                    left: -155px;
+                    overflow: visible !important;
+                    white-space: normal !important;
+                  }
+                  .secondary {
+                    position: relative;
+                    overflow: visible !important;
+                    top: -52px;
+                    left: -155px;
+                  }
+                mushroom-shape-icon$: |
+                  .shape {
+                    position: relative;
+                    left: -43px;
+                    top: 55px;
+                  }
+                .: |
+                  :host {
+                    --mush-icon-size: 146px;
+                  }
+                style: |
+                  mushroom-badge-icon {
+                    left: 60px;
+                    top: 25px;
+                  }
+                  ha-card {
+                    background: none;
+                    font-style: italic;
+                    --primary-text-color: black;
+                    --secondary-text-color: black;
+                  }
+          - type: custom:mushroom-chips-card
+            chips:
+              - type: template
+                entity: light.la_chambre_d_ethan
+                tap_action:
+                  action: toggle
+                icon: mdi:vanity-light
+                icon_color: |-
+                  {% if is_state(entity, 'on') %} 
+                   orange
+                  {% elif is_state(entity, 'off') %} 
+                   grey
+                  {% else %}
+                   grey
+                  {% endif %}
+                hold_action:
+                  action: more-info
+            card_mod:
+              style:
+                .: |
+                  ha-card {
+                    width: 66px;
+                    margin-left: 85%;
+                    top: -170px;
+                    background: none;
+                    --chip-border-width: 0;
+                  }
+        card_mod:
+          style: |
+            ha-card {
+              height: 178px;
+              margin-left: auto;
+              margin-right: auto;
+              background-image: url(https://i.ibb.co/F8ZqGGg/salle-de-bain-rdc.png);
+              background-size: cover;
+              background-position: center;
+            }
+      - type: custom:vertical-stack-in-card
+        cards:
+          - type: custom:mushroom-template-card
+            icon: mdi:bed
+            icon_color: |-
+              {% if is_state('light.la_chambre_parentale', 'on') %}
+                #FFAE0080
+              {% else %}  
+                #0000
+              {% endif %}
+            primary: Chambre parentale
+            secondary: >-
+              {{ states('sensor.thermometre_salon_temperature') }}°C/{{
+              states('sensor.thermometre_salon_humidity') }}%
+            layout: horizontal
+            double_tap_action:
+              action: none
+            hold_action:
+              action: none
+            badge_icon: ''
+            badge_color: ''
+            entity: light.la_chambre_parentale
+            tap_action:
+              action: more-info
+            card_mod:
+              style:
+                mushroom-state-info$: |
+                  .primary {
+                    font-size: 16px !important;
+                    position: relative;
+                    top: -50px;
+                    left: -155px;
+                    overflow: visible !important;
+                    white-space: normal !important;
+                  }
+                  .secondary {
+                    position: relative;
+                    overflow: visible !important;
+                    top: -52px;
+                    left: -155px;
+                  }
+                mushroom-shape-icon$: |
+                  .shape {
+                    position: relative;
+                    left: -43px;
+                    top: 55px;
+                  }
+                .: |
+                  :host {
+                    --mush-icon-size: 146px;
+                  }
+                style: |
+                  mushroom-badge-icon {
+                    left: 60px;
+                    top: 25px;
+                  }
+                  ha-card {
+                    background: none;
+                    font-style: italic;
+                    --primary-text-color: white;
+                    --secondary-text-color: white;
+                  }
+          - type: custom:mushroom-chips-card
+            chips:
+              - type: template
+                entity: light.la_chambre_parentale
+                tap_action:
+                  action: none
+                icon: mdi:ceiling-light
+                icon_color: |-
+                  {% if is_state(entity, 'on') %} 
+                   orange
+                  {% elif is_state(entity, 'off') %} 
+                   grey
+                  {% else %}
+                   grey
+                  {% endif %}
+                hold_action:
+                  action: none
+                double_tap_action:
+                  action: none
+            card_mod:
+              style:
+                .: |
+                  ha-card {
+                    width: 66px;
+                    margin-left: 85%;
+                    top: -170px;
+                    background: none;
+                    --chip-border-width: 0;
+                  }
+        card_mod:
+          style: |
+            ha-card {
+              height: 178px;
+              margin-left: auto;
+              margin-right: auto;
+              background-image: url(https://i.ibb.co/1JSvK9C/chambre-parentale.png);
+              background-size: cover;
+              background-position: center;
+            }
+      - type: custom:popup-card
+        dismissable: true
+        entity: light.le_couloir
+        card:
+          type: custom:mushroom-light-card
+          entity: light.le_couloir
+          show_brightness_control: true
+          use_light_color: true
+          show_color_control: false
+          name: ' Le couloir'
+          collapsible_controls: true
+          icon: mdi:globe-light
+          show_color_temp_control: true
+          card_mod:
+            style: |
+              ha-card {
+                background: none;
+                border: none;
+                font-style: italic;
+              }
+        card_mod:
+          style: |
+            ha-card {
+              --ha-card-background: none;
+              font-style: italic;
+              --ha-card-border: none;
+            }
+      - type: custom:popup-card
+        dismissable: true
+        entity: salle_de_bain_rdc
+        card:
+          type: vertical-stack
+          cards:
+            - icon: ''
+              type: custom:mushroom-light-card
+              show_brightness_control: true
+              use_light_color: true
+              show_color_control: false
+              name: ' '
+              collapsible_controls: true
+              card_mod:
+                style: |
+                  ha-card {
+                    background: none;
+                    border: none;
+                  }
+                  mushroom-light-brightness-control {
+                    position: absolute;
+                    width: 65% !important;
+                    height: 20px;
+                    right: 10px;
+                  }
+                  mushroom-light-brightness-control:after {
+                    content: "{{ state_attr(config.entity, 'friendly_name') }}";
+                    position: relative;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    color: #000000;
+                    font-weight: bolder;
+                    top: -29px;
+                    right: 1%;
+                    width: 65%;
+                    height: 16px;
+                    font-size: 14px;
+                    pointer-events: none;
+                  }
+                  {% if states(config.entity) == 'off' %}
+                    mushroom-state-info:before {
+                      content: "{{ state_attr(config.entity, 'friendly_name') }}";
+                      font-size: 14px;
+                      color: var(--card-primary-text-color);
+                      font-weight: bolder;
+                    }
+                  {% else %}
+                  {% endif %}
+        card_mod:
+          style: |
+            ha-card {
+              --ha-card-background: none;
+              font-style: italic;
+              --ha-card-border: none;
+            }
+      - type: custom:popup-card
+        dismissable: true
+        entity: light.la_chambre_parentale
+        card:
+          type: vertical-stack
+          cards:
+            - type: custom:mushroom-light-card
+              entity: light.la_chambre_parentale
+              show_brightness_control: true
+              use_light_color: true
+              show_color_control: false
+              name: ' La chambre parentale'
+              collapsible_controls: true
+              icon: mdi:ceiling-light
+              show_color_temp_control: true
+              card_mod:
+                style: |
+                  ha-card {
+                    background: none;
+                    border: none;
+                    font-style: italic;
+                  }
+            - type: custom:mushroom-entity-card
+              entity: switch.prise_romain
+              icon: mdi:power-socket-fr
+              tap_action:
+                action: toggle
+              card_mod:
+                style: |
+                  ha-card {
+                    background: none;
+                    border: none;
+                  }
+        card_mod:
+          style: |
+            ha-card {
+              --ha-card-background: none;
+              font-style: italic;
+              --ha-card-border: none;
+            }
+  - type: horizontal-stack
+    cards:
+      - type: custom:vertical-stack-in-card
+        cards:
+          - type: custom:mushroom-template-card
+            icon: mdi:bed
+            icon_color: |
+              {% if is_state('light.la_chambre_d_amis', 'on') %}
+                #FFAE0080
+              {% else %}
+                #0000
+              {% endif %}
+            primary: Chambre d'amis
+            secondary: >-
+              {{ states('sensor.thermometre_salon_temperature') }}°C/{{
+              states('sensor.thermometre_salon_humidity') }}%
+            layout: horizontal
+            double_tap_action:
+              action: none
+            hold_action:
+              action: none
+            badge_icon: ''
+            badge_color: ''
+            entity: light.la_chambre_d_amis
+            tap_action:
+              action: more-info
+            card_mod:
+              style:
+                mushroom-state-info$: |
+                  .primary {
+                    font-size: 16px !important;
+                    position: relative;
+                    top: -50px;
+                    left: -155px;
+                    overflow: visible !important;
+                    white-space: normal !important;
+                  }
+                  .secondary {
+                    position: relative;
+                    overflow: visible !important;
+                    top: -52px;
+                    left: -155px;
+                  }
+                mushroom-shape-icon$: |
+                  .shape {
+                    position: relative;
+                    left: -43px;
+                    top: 55px;
+                  }
+                .: |
+                  :host {
+                    --mush-icon-size: 146px;
+                  }
+                style: |
+                  mushroom-badge-icon {
+                    left: 60px;
+                    top: 25px;
+                  }
+                  ha-card {
+                    background: #0000;
+                    font-style: italic;
+                    --primary-text-color: black;
+                    --secondary-text-color: black;
+                  }
+          - type: custom:mushroom-chips-card
+            chips:
+              - type: template
+                entity: light.la_chambre_d_amis
+                tap_action:
+                  action: none
+                icon: mdi:ceiling-light
+                icon_color: |-
+                  {% if is_state(entity, 'on') %} 
+                   orange
+                  {% elif is_state(entity, 'off') %} 
+                   grey
+                  {% else %}
+                   grey
+                  {% endif %}
+                hold_action:
+                  action: none
+                double_tap_action:
+                  action: none
+            card_mod:
+              style:
+                .: |
+                  ha-card {
+                    width: 66px;
+                    margin-left: 85%;
+                    top: -170px;
+                    background: none;
+                    --chip-border-width: 0;
+                  }
+        card_mod:
+          style: |
+            ha-card {
+              height: 178px;
+              margin-left: auto;
+              margin-right: auto;
+              background-image: url(https://i.ibb.co/PTCWJ0d/chambredamis.png);
+              background-size: cover;
+              background-position: center;
+            }
+      - type: custom:vertical-stack-in-card
+        cards:
+          - type: custom:mushroom-template-card
+            icon: mdi:bed
+            icon_color: |
+              {% if is_state('light.la_chambre_de_rox', 'on') %}
+                #FFAE0080
+              {% else %}
+                #0000
+              {% endif %}
+            primary: Chambre de Rox
+            secondary: >-
+              {{ states('sensor.thermometre_salon_temperature') }}°C/{{
+              states('sensor.thermometre_salon_humidity') }}%
+            layout: horizontal
+            double_tap_action:
+              action: none
+            hold_action:
+              action: none
+            badge_icon: ''
+            badge_color: ''
+            entity: light.la_chambre_de_rox
+            tap_action:
+              action: more-info
+            card_mod:
+              style:
+                mushroom-state-info$: |
+                  .primary {
+                    font-size: 16px !important;
+                    position: relative;
+                    top: -50px;
+                    left: -155px;
+                    overflow: visible !important;
+                    white-space: normal !important;
+                  }
+                  .secondary {
+                    position: relative;
+                    overflow: visible !important;
+                    top: -52px;
+                    left: -155px;
+                  }
+                mushroom-shape-icon$: |
+                  .shape {
+                    position: relative;
+                    left: -43px;
+                    top: 55px;
+                  }
+                .: |
+                  :host {
+                    --mush-icon-size: 146px;
+                  }
+                style: |
+                  mushroom-badge-icon {
+                    left: 60px;
+                    top: 25px;
+                  }
+                  ha-card {
+                    background: none;
+                    font-style: italic;
+                    --primary-text-color: black;
+                    --secondary-text-color: black;
+                  }
+          - type: custom:mushroom-chips-card
+            chips:
+              - type: template
+                entity: light.la_chambre_de_rox
+                tap_action:
+                  action: none
+                icon: mdi:ceiling-light
+                icon_color: |-
+                  {% if is_state(entity, 'on') %} 
+                   orange
+                  {% elif is_state(entity, 'off') %} 
+                   grey
+                  {% else %}
+                   grey
+                  {% endif %}
+                hold_action:
+                  action: none
+                double_tap_action:
+                  action: none
+            card_mod:
+              style:
+                .: |
+                  ha-card {
+                    width: 66px;
+                    margin-left: 85%;
+                    top: -170px;
+                    background: none;
+                    --chip-border-width: 0;
+                  }
+        card_mod:
+          style: |
+            ha-card {
+              height: 178px;
+              margin-left: auto;
+              margin-right: auto;
+              background-image: url(https://i.ibb.co/xSGC5pv/chambre-rox.png);
+              background-size: cover;
+              background-position: center;
+            }
+      - type: custom:vertical-stack-in-card
+        cards:
+          - type: custom:mushroom-template-card
+            icon: mdi:stairs
+            icon_color: |
+              {% if is_state('light.palier', 'on') %}
+                #FFAE0080
+              {% else %}
+                #0000
+              {% endif %}
+            primary: Palier
+            secondary: >-
+              {{ states('sensor.thermometre_salle_de_bain_bas_temperature')
+              }}°C/{{ states('sensor.thermometre_salle_de_bain_bas_humidity')
+              }}%
+            layout: horizontal
+            double_tap_action:
+              action: none
+            hold_action:
+              action: none
+            badge_icon: ''
+            badge_color: ''
+            tap_action:
+              action: more-info
+            entity: light.palier
+            card_mod:
+              style:
+                mushroom-state-info$: |
+                  .primary {
+                    font-size: 16px !important;
+                    position: relative;
+                    top: -50px;
+                    left: -155px;
+                    overflow: visible !important;
+                    white-space: normal !important;
+                  }
+                  .secondary {
+                    position: relative;
+                    overflow: visible !important;
+                    top: -52px;
+                    left: -155px;
+                  }
+                mushroom-shape-icon$: |
+                  .shape {
+                    position: relative;
+                    left: -43px;
+                    top: 55px;
+                  }
+                .: |
+                  :host {
+                    --mush-icon-size: 146px;
+                  }
+                style: |
+                  mushroom-badge-icon {
+                    left: 60px;
+                    top: 25px;
+                  }
+                  ha-card {
+                    background: none;
+                    font-style: italic;
+                    --primary-text-color: black;
+                    --secondary-text-color: black;
+                  }
+          - type: custom:mushroom-chips-card
+            chips:
+              - type: template
+                entity: light.placard_etage
+                tap_action:
+                  action: none
+                icon: mdi:vanity-light
+                icon_color: |-
+                  {% if is_state(entity, 'on') %} 
+                   orange
+                  {% elif is_state(entity, 'off') %} 
+                   grey
+                  {% else %}
+                   grey
+                  {% endif %}
+                hold_action:
+                  action: none
+                double_tap_action:
+                  action: none
+              - type: template
+                icon: mdi:vanity-light
+            card_mod:
+              style:
+                .: |
+                  ha-card {
+                    width: 66px;
+                    margin-left: 85%;
+                    top: -170px;
+                    background: none;
+                    --chip-border-width: 0;
+                  }
+        card_mod:
+          style: |
+            ha-card {
+              height: 178px;
+              margin-left: auto;
+              margin-right: auto;
+              background-image: url(https://i.ibb.co/v3qM0Zb/palier.jpg);
+              background-size: cover;
+              background-position: center;
+            }
+      - type: custom:popup-card
+        dismissable: true
+        entity: light.la_chambre_d_amis
+        card:
+          type: vertical-stack
+          cards:
+            - type: custom:mushroom-light-card
+              entity: light.la_chambre_d_amis
+              show_brightness_control: true
+              use_light_color: true
+              show_color_control: false
+              name: ' La chambre d''amis'
+              collapsible_controls: true
+              icon: mdi:ceiling-light
+              show_color_temp_control: true
+              card_mod:
+                style: |
+                  ha-card {
+                    background: none;
+                    border: none;
+                    font-style: italic;
+                  }
+        card_mod:
+          style: |
+            ha-card {
+              --ha-card-background: none;
+              font-style: italic;
+              --ha-card-border: none;
+            }
+      - type: custom:popup-card
+        dismissable: true
+        entity: light.la_chambre_de_rox
+        card:
+          type: vertical-stack
+          cards:
+            - type: custom:mushroom-light-card
+              entity: light.la_chambre_de_rox
+              show_brightness_control: true
+              use_light_color: true
+              show_color_control: false
+              name: ' La chambre de rox'
+              collapsible_controls: true
+              icon: mdi:ceiling-light
+              show_color_temp_control: true
+              card_mod:
+                style: |
+                  ha-card {
+                    background: none;
+                    border: none;
+                    font-style: italic;
+                  }
+        card_mod:
+          style: |
+            ha-card {
+              --ha-card-background: none;
+              font-style: italic;
+              --ha-card-border: none;
+            }
+      - type: custom:popup-card
+        entity: light.palier
+        dismissable: true
+        card:
+          type: vertical-stack
+          cards:
+            - type: custom:mushroom-light-card
+              entity: light.placard_etage
+              show_brightness_control: true
+              use_light_color: true
+              show_color_control: false
+              name: ' Placard étage'
+              collapsible_controls: true
+              show_color_temp_control: true
+              card_mod:
+                style: |
+                  ha-card {
+                    background: none;
+                    border: none;
+                    font-style:italic;
+                  }
+            - type: custom:mushroom-light-card
+              show_brightness_control: true
+              layout: horizontal
+              use_light_color: true
+              show_color_control: false
+              name: ' '
+              collapsible_controls: true
+              card_mod:
+                style: |
+                  ha-card {
+                    background: none !important;
+                    border: none !important;
+                  }
+                  mushroom-light-brightness-control {
+                    position: absolute;
+                    width: 65% !important;
+                    height: 20px;
+                    right: 10px;
+                  }
+                  mushroom-light-brightness-control:after {
+                    content: "{{ state_attr(config.entity, 'friendly_name') }}";
+                    position: relative;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    color: #000000;
+                    font-weight: bolder;
+                    top: -29px;
+                    right: 1%;
+                    width: 65%;
+                    height: 16px;
+                    font-size: 14px;
+                    pointer-events: none;
+                  }
+                  {% if states(config.entity) == 'off' %}
+                    mushroom-state-info:before {
+                      content: "{{ state_attr(config.entity, 'friendly_name') }}";
+                      font-size: 14px;
+                      color: var(--card-primary-text-color);
+                      font-weight: bolder;
+                    }
+                  {% else %}
+                  {% endif %}
+        card_mod:
+          style: |
+            ha-card {
+              --ha-card-background: none;
+              font-style: italic;
+              --ha-card-border: none;
+            }
+  - type: horizontal-stack
+    cards:
+      - type: custom:vertical-stack-in-card
+        cards:
+          - type: custom:mushroom-template-card
+            icon: mdi:shower
+            icon_color: |
+              {% if is_state('light.salle_de_bain_etage', 'on') %}
+                #FFAE0080
+              {% else %}  
+                #0000
+              {% endif %}
+            primary: Salle de bain étage
+            secondary: >-
+              {{ states('sensor.thermometre_salle_de_bain_bas_temperature')
+              }}°C/{{ states('sensor.thermometre_salle_de_bain_bas_humidity')
+              }}%
+            layout: horizontal
+            double_tap_action:
+              action: none
+            hold_action:
+              action: none
+            badge_icon: ''
+            badge_color: ''
+            tap_action:
+              action: more-info
+            entity: light.salle_de_bain_etage
+            card_mod:
+              style:
+                mushroom-state-info$: |
+                  .primary {
+                    font-size: 16px !important;
+                    position: relative;
+                    top: -50px;
+                    left: -155px;
+                    overflow: visible !important;
+                    white-space: normal !important;
+                  }
+                  .secondary {
+                    position: relative;
+                    overflow: visible !important;
+                    top: -52px;
+                    left: -155px;
+                  }
+                mushroom-shape-icon$: |
+                  .shape {
+                    position: relative;
+                    left: -43px;
+                    top: 55px;
+                  }
+                .: |
+                  :host {
+                    --mush-icon-size: 146px;
+                  }
+                style: |
+                  mushroom-badge-icon {
+                    left: 60px;
+                    top: 25px;
+                  }
+                  ha-card {
+                    background: none;
+                    font-style: italic;
+                    --primary-text-color: black;
+                    --secondary-text-color: black;
+                  }
+          - type: custom:mushroom-chips-card
+            chips:
+              - type: template
+                entity: light.la_chambre_d_ethan
+                tap_action:
+                  action: toggle
+                icon: mdi:vanity-light
+                icon_color: |-
+                  {% if is_state('light.la_chambre_d_ethan', 'on') %} 
+                   orange
+                  {% else %} 
+                   grey
+                  {% endif %}
+                hold_action:
+                  action: more-info
+            card_mod:
+              style:
+                .: |
+                  ha-card {
+                    width: 66px;
+                    margin-left: 85%;
+                    top: -170px;
+                    background: none;
+                    --chip-border-width: 0;
+                  }
+        card_mod:
+          style: |
+            ha-card {
+              height: 178px ;
+              margin-left: auto;
+              margin-right: auto;
+              background-image: url(https://i.ibb.co/MRm950r/salledebain1etage.png);
+              background-size: cover;
+              background-position: center;
+            }
+      - type: custom:vertical-stack-in-card
+        cards:
+          - type: custom:mushroom-template-card
+            icon: mdi:bed
+            icon_color: |
+              {% if is_state('light.la_chambre_d_ethan', 'on') %}
+                #FFAE0080
+              {% else %}  
+                #0000
+              {% endif %}
+            primary: Chambre d'Ethan
+            secondary: >-
+              {{ states('sensor.thermometre_salon_temperature') }}°C/{{
+              states('sensor.thermometre_salon_humidity') }}%
+            layout: horizontal
+            double_tap_action:
+              action: none
+            hold_action:
+              action: none
+            badge_icon: ''
+            badge_color: ''
+            entity: light.la_chambre_d_ethan
+            tap_action:
+              action: more-info
+            card_mod:
+              style:
+                mushroom-state-info$: |
+                  .primary {
+                    font-size: 16px !important;
+                    position: relative;
+                    top: -50px;
+                    left: -155px;
+                    overflow: visible !important;
+                    white-space: normal !important;
+                  }
+                  .secondary {
+                    position: relative;
+                    overflow: visible !important;
+                    top: -52px;
+                    left: -155px;
+                  }
+                mushroom-shape-icon$: |
+                  .shape {
+                    position: relative;
+                    left: -43px;
+                    top: 55px;
+                  }
+                .: |
+                  :host {
+                    --mush-icon-size: 146px;
+                  }
+                style: |
+                  mushroom-badge-icon {
+                    left: 60px;
+                    top: 25px;
+                  }
+                  ha-card {
+                    background: none;
+                    font-style: italic;
+                    --primary-text-color: white;
+                    --secondary-text-color: white;
+                  }
+          - type: custom:mushroom-chips-card
+            chips:
+              - type: template
+                entity: light.la_chambre_d_ethan
+                tap_action:
+                  action: none
+                icon: mdi:ceiling-light
+                icon_color: |-
+                  {% if is_state('light.la_chambre_d_ethan', 'on') %} 
+                   orange
+                  {% else %} 
+                   grey
+                  {% endif %}
+                hold_action:
+                  action: none
+                double_tap_action:
+                  action: none
+            card_mod:
+              style:
+                .: |
+                  ha-card {
+                    width: 66px;
+                    margin-left: 85%;
+                    top: -170px;
+                    background: none;
+                    --chip-border-width: 0;
+                  }
+        card_mod:
+          style: |
+            ha-card {
+              height: 178px ;
+              margin-left: auto;
+              margin-right: auto;
+              background-image: url(https://i.ibb.co/K6SCvHg/chambre-ethan.png);
+              background-size: cover;
+              background-position: center;
+            }
+      - type: custom:vertical-stack-in-card
+        cards:
+          - type: custom:mushroom-template-card
+            icon: mdi:bed
+            icon_color: |
+              {% if is_state('light.la_chambre_de_nathan', 'on') %}
+                #FFAE0080
+              {% else %}  
+                #0000
+              {% endif %}
+            primary: Chambre de Nathan
+            secondary: >-
+              {{ states('sensor.thermometre_salon_temperature') }}°C/{{
+              states('sensor.thermometre_salon_humidity') }}%
+            layout: horizontal
+            double_tap_action:
+              action: none
+            hold_action:
+              action: none
+            badge_icon: ''
+            badge_color: ''
+            entity: light.la_chambre_de_nathan
+            tap_action:
+              action: more-info
+            card_mod:
+              style:
+                mushroom-state-info$: |
+                  .primary {
+                    font-size: 16px !important;
+                    position: relative;
+                    top: -50px;
+                    left: -155px;
+                    overflow: visible !important;
+                    white-space: normal !important;
+                  }
+                  .secondary {
+                    position: relative;
+                    overflow: visible !important;
+                    top: -52px;
+                    left: -155px;
+                  }
+                mushroom-shape-icon$: |
+                  .shape {
+                    position: relative;
+                    left: -43px;
+                    top: 55px;
+                  }
+                .: |
+                  :host {
+                    --mush-icon-size: 146px;
+                  }
+                style: |
+                  mushroom-badge-icon {
+                    left: 60px;
+                    top: 25px;
+                  }
+                  ha-card {
+                    background: none;
+                    font-style: italic;
+                    --primary-text-color:  white;
+                    --secondary-text-color:   white;
+                  }
+          - type: custom:mushroom-chips-card
+            chips:
+              - type: template
+                entity: light.la_chambre_de_nathan
+                tap_action:
+                  action: none
+                icon: mdi:ceiling-light
+                icon_color: |-
+                  {% if is_state('light.la_chambre_de_nathan', 'on') %} 
+                   orange
+                  {% else %} 
+                   grey
+                  {% endif %}
+                hold_action:
+                  action: none
+                double_tap_action:
+                  action: none
+              - type: template
+                entity: media_player.tele_nathan_2
+                icon: mdi:play-pause
+                icon_color: |-
+                  {% if is_state('media_player.tele_nathan_2', 'on') %} 
+                    #03A9F4
+                  {% else %}
+                   grey
+                  {% endif %}
+                tap_action:
+                  action: none
+                hold_action:
+                  action: none
+                double_tap_action:
+                  action: none
+              - type: template
+                icon: mdi:school
+                icon_color: |-
+                  {% if is_state('sensor.pronote_NOM PRENOM', 'on') %} 
+                   orange
+                  {% else %} 
+                   grey
+                  {% endif %}
+            card_mod:
+              style:
+                .: |
+                  ha-card {
+                    width: 66px;
+                    margin-left: 85%;
+                    top: -170px;
+                    background: none;
+                    --chip-border-width: 0;
+                  }
+        card_mod:
+          style: |
+            ha-card {
+              height: 178px ;
+              margin-left: auto;
+              margin-right: auto;
+              background-image: url(https://i.ibb.co/0KVhWgm/chambre-nathan.png);
+              background-size: cover;
+              background-position: center;
+            }
+      - type: custom:popup-card
+        dismissable: true
+        entity: salle_de_bain_etage
+        card:
+          type: vertical-stack
+          cards:
+            - entities:
+                - entities:
+                    - entity: sensor.capteur_ouverture_porte_d_entree_battery
+                    - entity: sensor.thermometre_salon_battery
+                  head:
+                    type: section
+                    label: Batterie capteurs/thermometres
+                  type: custom:fold-entity-row
+              type: entities
+              card_mod:
+                style: |
+                  :host {
+                    --divider-color: #0000;
+                  }
+                  ha-card {
+                   color: white;
+                   background: none;
+                   border: none;
+                  }
+                   .card-header {
+                   font-size: 26px;
+                  }
+            - icon: ''
+              type: custom:mushroom-light-card
+              show_brightness_control: true
+              layout: horizontal
+              use_light_color: true
+              show_color_control: false
+              name: ' '
+              collapsible_controls: true
+              card_mod:
+                style: |
+                  ha-card {
+                    background: none;
+                    border: none;
+                  }
+                  mushroom-light-brightness-control {
+                    position: absolute;
+                    width: 65% !important;
+                    height: 20px;
+                    right: 10px;
+                  }
+                  mushroom-light-brightness-control:after {
+                    content: "{{ state_attr(config.entity, 'friendly_name') }}";
+                    position: relative;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    color: #000000;
+                    font-weight: bolder;
+                    top: -29px;
+                    right: 1%;
+                    width: 65%;
+                    height: 16px;
+                    font-size: 14px;
+                    pointer-events: none;
+                  }
+                  {% if states(config.entity) == 'off' %}
+                    mushroom-state-info:before {
+                      content: "{{ state_attr(config.entity, 'friendly_name') }}";
+                      font-size: 14px;
+                      color: var(--card-primary-text-color);
+                      font-weight: bolder;
+                    }
+                  {% else %}
+                  {% endif %}
+        card_mod:
+          style: |
+            ha-card {
+              --ha-card-background: none;
+              font-style: italic;
+              --ha-card-border: none;
+            }
+      - type: custom:popup-card
+        dismissable: true
+        entity: light.la_chambre_d_ethan
+        card:
+          type: vertical-stack
+          cards:
+            - icon: mdi:ceiling-light
+              type: custom:mushroom-light-card
+              entity: light.la_chambre_d_ethan
+              show_brightness_control: true
+              use_light_color: true
+              show_color_control: false
+              name: ' La chambre d''ethan'
+              collapsible_controls: true
+              show_color_temp_control: true
+              card_mod:
+                style: |
+                  ha-card {
+                    background: none;
+                    border: none;
+                    font-style: italic;
+                  }
+        card_mod:
+          style: |
+            ha-card {
+              --ha-card-background: none;
+              font-style: italic;
+              --ha-card-border: none;
+            }
+      - type: custom:popup-card
+        dismissable: true
+        entity: light.la_chambre_de_nathan
+        card:
+          type: vertical-stack
+          cards:
+            - icon: mdi:ceiling-light
+              type: custom:mushroom-light-card
+              entity: light.la_chambre_de_nathan
+              show_brightness_control: true
+              use_light_color: true
+              show_color_control: false
+              name: ' La chambre de nathan'
+              collapsible_controls: true
+              show_color_temp_control: true
+              card_mod:
+                style: |
+                  ha-card {
+                    background: none;
+                    border: none;
+                    font-style: italic;
+                  }
+            - type: custom:mushroom-media-player-card
+              entity: media_player.tele_nathan_2
+              volume_controls: []
+              media_controls:
+                - on_off
+              collapsible_controls: true
+              card_mod:
+                style: |
+                  ha-card {
+                    background: none;
+                    border: none;
+                  }
+            - type: custom:tabbed-card
+              title: menu cantine nathan
+              styles:
+                '--mdc-typography-button-font-size': 11px
+                '--mdc-theme-primary': white
+                '--mdc-tab-text-label-color-default': grey
+                background: rgb(54, 54, 54, 0.3)
+                border: solid 1px rgb(40, 40, 40)
+                border-top-left-radius: 10px
+                border-top-right-radius: 10px
+                border-bottom-left-radius: 10px
+                border-bottom-right-radius: 10px
+                font-style: italic
+              tabs:
+                - attributes:
+                    isMinWidthIndicator: true
+                    label: 📆 Emploi du temps du jour
+                  card:
+                    type: markdown
+                    content: >-
+                      <div>{% set items =
+                      state_attr('sensor.pronote_NOM PRENOM_timetable_today','lessons')
+                      %}{{as_timestamp(items[0].start_at) | int
+                      |timestamp_custom('%d/%m/%Y', true)}}</div> 
+                        <table>   
+                          {% for i in range(0,items | count, 1) %}  
+                        <tr>  
+                          {%- if items[i].canceled != True -%}  
+                          <td width='12%'>
+                            <mark>{{ items[i].start_time}}</mark>
+                          </td>  
+                          <td width='12%'>
+                            <mark>{{items[i].end_time }}</mark>
+                          </td>
+                          <td>{{ items[i].lesson }} {% else %}
+                            <td width='12%'>
+                              <del>{{ items[i].start_time }}</del>
+                            </td> 
+                            <td width='12%'>
+                              <del>{{ items[i].end_time}}</del>
+                            </td>
+                            <td>
+                              {{ items[i].lesson }} &emsp;{%- endif -%} / {{items[i].teacher_name}}{% if items[i].status!= None %} 
+                              <br><span>{{ items[i].status }}</span>
+                            </td>
+                              {% endif %} <td width='12%'>
+                              <h1>{{items[i].classroom}}</h1>
+                            </td>
+                            <td>{{items[i].classroom}}</td>
+                          </tr> {% endfor %} 
+                          </table> 
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card ha-markdown {
+                            padding:0px
+                          }
+                          ha-card ha-markdown.no-header {
+                            padding:0px
+                          }
+                          ha-markdown {
+                              overflow-y: auto;
+                              border-bottom-left-radius: 10px; 
+                              border-bottom-right-radius: 10px;
+                              border-top-left-radius: 10px; 
+                              border-top-right-radius: 10px;
+                            }
+                        ha-markdown$: |
+                          div {
+                              background-color:rgb(54, 54, 54, 0.3);
+                              padding: 5px 5px;
+                              color:white;
+                              font-weight:normal;
+                              font-size:1em;
+                              border-top-left-radius: 10px; 
+                              text-align: center;
+                          }
+                          table{
+                            border-collapse: collapse;
+                            font-size: 0.7em;
+                            font-family: Roboto;
+                            width: 100%;
+                            outline: 0px solid #393c3d;
+                            margin-top:5px
+                          } caption {
+                              font-weight: bold;
+                              font-size: 1.2em;
+                          } td {
+                              padding: 5px 8px 5px 8px;
+                              text-align: center;
+                              border-bottom: 0px solid #1c2020;
+                          }
+                          tr {
+                              border-bottom: 0px solid #1c2020;
+                          }
+
+                          tr:nth-of-type(even) {
+                              background-color: rgb(54, 54, 54, 0.3);
+                          }
+                          tr:last-of-type {
+                              border-bottom: transparent;          }
+                          mark {
+                              background: transparent;
+                              color: white;
+                              border-radius: 5px;
+                              padding: 5px;
+                              border: solid grey 2px;
+                          }
+                          del {
+                              background: transparent;
+                              color: #ff4f4f;
+                              border-radius: 5px;
+                              padding: 5px;
+                              border: solid #ff4f4f 2px;
+                              }
+                          h1 {
+                              background: white;
+                              color: black;
+                              border-radius: 5px;
+                              padding: 5px;
+                              font-size: 0.7em;
+                              font-weight:normal;
+                              text-align: center; 
+                              border: solid #E5E2E1 2px;
+                          }
+                          class {
+                              background: #00E199;
+                              color: #222627;
+                              border-radius: 10px;
+                              padding: 5px;
+                          }
+                          span {
+                              background: transparent;
+                              color: #ff4f4f;
+                              border-radius: 5px;
+                              padding: 5px;
+                              fonty-size: 1em;
+                              border: solid #ff4f4f 2px;
+                          }
+                          tr:nth-child(n+2) > td:nth-child(2) {
+                            text-align: center;
+                          }
+                - attributes:
+                    isMinWidthIndicator: true
+                    label: 📆 Prochain Emploi du temps
+                  card:
+                    type: markdown
+                    content: >-
+                      <div>{% set items =
+                      state_attr('sensor.pronote_NOM PRENOM_timetable_next_day','lessons')
+                      %}{{as_timestamp(items[0].start_at) | int
+                      |timestamp_custom('%d/%m/%Y', true)}}</div> 
+                        <table>   
+                          {% for i in range(0,items | count, 1) %}  
+                        <tr>  
+                          {%- if items[i].canceled != True -%}  
+                          <td width='12%'>
+                            <mark>{{ items[i].start_time}}</mark>
+                          </td>  
+                          <td width='12%'>
+                            <mark>{{items[i].end_time }}</mark>
+                          </td>
+                          <td>{{ items[i].lesson }} {% else %}
+                            <td width='12%'>
+                              <del>{{ items[i].start_time }}</del>
+                            </td> 
+                            <td width='12%'>
+                              <del>{{ items[i].end_time}}</del>
+                            </td>
+                            <td>
+                              {{ items[i].lesson }} &emsp;{%- endif -%} / {{items[i].teacher_name}}{% if items[i].status!= None %} 
+                              <br><span>{{ items[i].status }}</span>
+                            </td> 
+                              {% endif %} <td width='12%'>
+                              <h1>{{items[i].classroom }}</h1>
+                            </td> 
+                          </tr> {% endfor %} 
+                          </table> 
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card ha-markdown {
+                            padding:0px
+                          }
+                          ha-card ha-markdown.no-header {
+                            padding:0px
+                          }
+                          ha-markdown {
+                              overflow-y: auto;
+                              border-bottom-left-radius: 10px; 
+                              border-bottom-right-radius: 10px;
+                              border-top-left-radius: 10px; 
+                              border-top-right-radius: 10px;
+                            }
+                        ha-markdown$: |
+                          div {
+                              background-color:rgb(54, 54, 54, 0.3);
+                              padding: 5px 5px;
+                              color:white;
+                              font-weight:normal;
+                              font-size:1em;
+                              border-top-left-radius: 10px; 
+                              text-align: center;
+                          }
+                          table{
+                            border-collapse: collapse;
+                            font-size: 0.7em;
+                            font-family: Roboto;
+                            width: 100%;
+                            outline: 0px solid #393c3d;
+                            margin-top:5px
+                          } caption {
+                              font-weight: bold;
+                              font-size: 1.2em;
+                          } td {
+                              padding: 5px 8px 5px 8px;
+                              text-align: center;
+                              border-bottom: 0px solid #1c2020;
+                          }
+                          tr {
+                              border-bottom: 0px solid #1c2020;
+                          }
+
+                          tr:nth-of-type(even) {
+                              background-color: rgb(54, 54, 54, 0.3);
+                          }
+                          tr:last-of-type {
+                              border-bottom: transparent;          }
+                          mark {
+                              background: transparent;
+                              color: white;
+                              border-radius: 5px;
+                              padding: 5px;
+                              border: solid grey 2px;
+                          }
+                          del {
+                              background: transparent;
+                              color: #ff4f4f;
+                              border-radius: 5px;
+                              padding: 5px;
+                              border: solid #ff4f4f 2px;
+                              }
+                          h1 {
+                              background: white;
+                              color: black;
+                              border-radius: 5px;
+                              padding: 5px;
+                              font-size: 0.7em;
+                              font-weight:normal;
+                              text-align: center; 
+                              border: solid #E5E2E1 2px;
+                          }
+                          class {
+                              background: #00E199;
+                              color: #222627;
+                              border-radius: 10px;
+                              padding: 5px;
+                          }
+                          span {
+                              background: transparent;
+                              color: #ff4f4f;
+                              border-radius: 5px;
+                              padding: 5px;
+                              fonty-size: 1em;
+                              border: solid #ff4f4f 2px;
+                          }
+                          tr:nth-child(n+2) > td:nth-child(2) {
+                            text-align: center;
+                          }
+                - attributes:
+                    isMinWidthIndicator: true
+                    label: ❌ Absences et sorties
+                  card:
+                    type: markdown
+                    content: |-
+                      <table>
+                        {% set items=state_attr('sensor.pronote_NOM PRENOM_absences','absences') %} {% for i in range(0, items | count, 1) %} 
+                        <tr> 
+                          {%- if items[i].justified == True -%} 
+                          <td>
+                            <mark>{{ items[i].from.strftime("%d/%m") }}</mark>
+                          </td> 
+                            {% else %} 
+                          <td width='10%'>
+                            <span>{{ items[i].from.strftime("%d/%m") }} {%-endif-%}</span> 
+                          <td>
+                            <h1>{{ items[i].hours }}</h1>
+                          </td>
+                          <td>{{ items[i].reason }} {% endfor %}</td>
+                        </tr>
+                      </table>
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card ha-markdown {
+                            padding:0px;
+                          }
+                          ha-card ha-markdown.no-header {
+                            padding:0px;
+                          }
+                          ha-markdown {
+                              max-height: 205px;
+                              overflow-y: auto;
+                              border-bottom-left-radius: 10px; 
+                              border-bottom-right-radius: 10px;
+                              border-top-left-radius: 10px;  
+                            }
+                        ha-markdown$: |
+                          div {
+                              background-color: rgb(54, 54, 54, 0.3);
+                              padding: 5px 5px;
+                              color:white;
+                              font-weight:normal;
+                              font-size:1em;
+                              border-top-left-radius: 10px; 
+                              text-align:center;
+                          }
+                          table{
+                            border-collapse: collapse;
+                            font-family: Roboto;
+                            outline: 0px solid #393c3d;
+                            margin-top:0px;
+                            font-size:0.7em;
+                            width: 100%;
+                          } 
+                          caption {
+                              font-weight: bold;
+                              font-size: 0.7em;
+                          } 
+                          td {
+                              padding: 5px 8px 5px 8px;
+                              border-bottom: 0px solid #1c2020;
+                              text-align: center;
+                          }
+                          tr {
+                              border-bottom: 0px solid #1c2020;
+                          }
+                          tr:nth-of-type(even) {
+                              background-color: rgb(54, 54, 54, 0.3);
+                          }
+                          tr:last-of-type {
+                              border-bottom: transparent;
+                          }
+                          mark {
+                              background:transparent;
+                              color: white;
+                              border-radius: 5px;
+                              padding: 5px;
+                              border: solid grey 2px;
+                          }
+                          h1 {
+                              background: transparent;
+                              color: #ffa14f ;
+                              border-radius: 5px
+                              padding: 5px;
+                              font-size: 0.9em;
+                              font-weight: normal;
+                              text-align: center;
+                          }
+                          span {
+                              background: transparent;
+                              color: #ff4f4f;
+                              border-radius: 5px;
+                              padding: 5px;
+                              border: solid #ff4f4f 2px;
+                          }
+                          tr:nth-child(n+2) > td:nth-child(2) {
+                            text-align: left;
+                          }
+                - attributes:
+                    isMinWidthIndicator: true
+                    label: 📗Devoirs
+                  card:
+                    type: markdown
+                    content: |-
+                      <table>
+                          <tbody>
+                              {% set items = state_attr('sensor.pronote_NOM PRENOM_homework','homework') %}
+                              {%-for i in range(0, items | count, 1) -%}
+                              <tr>
+                                  <td>
+                                  {%- if items[i].done == true -%}
+                                      <mark>
+                                       {{items[i].date.strftime("%d/%m")}}</td>
+                                      </mark>
+                                  {%- else -%}
+                                      <span>
+                                      {{items[i].date.strftime("%d/%m")}}
+                                      </span>
+                                  {% endif %}</td>              
+                                  <td>{{items[i].subject}}</td>
+                                  <td>{{items[i].description}}</td>
+                              </tr>
+                              {% endfor %}
+                        </tbody>
+                      </table>
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card ha-markdown {
+                            padding:0px
+                          }
+                          ha-card ha-markdown.no-header {
+                            padding:0px
+                          }
+                          ha-markdown {
+                              overflow-y: auto;
+                              border-bottom-left-radius: 10px; 
+                              border-bottom-right-radius: 10px;
+                              border-top-left-radius: 10px; 
+                              border-top-right-radius: 10px;
+                            }
+                        ha-markdown$: |
+                          div {
+                              background-color:rgb(54, 54, 54, 0.3);
+                              padding: 5px 5px;
+                              color:white;
+                              font-weight:normal;
+                              font-size:1em;
+                              border-top-left-radius: 10px; 
+                              text-align: center;
+                               
+                          }
+                          table{
+                            border-collapse: collapse;
+                            font-size: 0.7em;
+                            font-family: Roboto;
+                            width: 100%;
+                            outline: 0px solid #393c3d;
+                            margin-top: 0px;
+                          } caption {
+                              text-align: center;
+                              font-weight: bold;
+                              font-size: 1em;
+                          } td {
+                              padding: 5px 8px 5px 8px;
+                              text-align: center;
+                              border-bottom: 0px solid #1c2020;
+                          }
+                          tr {
+                              border-bottom: 0px solid #1c2020;
+                          }
+
+                          tr:nth-of-type(even) {
+                              background-color: rgb(54, 54, 54, 0.3);
+                          }
+                          tr:last-of-type {
+                              border-bottom: transparent;
+                          }
+                          mark {
+                              background: transparent;
+                              color: white;
+                              border-radius: 5px;
+                              padding: 5px;
+                              border: solid #51ff4f  2px;
+                          }
+                          span {
+                              background: transparent;
+                              color: white;
+                              border-radius: 5px;
+                              padding: 5px;
+                              border: solid #ff4f4f 2px;
+                          }
+                          span {
+                              padding: 5px;
+                          }
+                          tr:nth-child(n+2) > td:nth-child(2) {
+                            text-align: center;
+                          }
+                - attributes:
+                    isMinWidthIndicator: true
+                    label: 📝Evaluations
+                  card:
+                    type: markdown
+                    content: |-
+                      <div>
+                        ✅très bonne maitrise,🟩bonne maitrise,🟧maitrise fragile,🟥maitrise insufisante,🚫absent,❌dispensé
+                      </div> 
+                      <table>
+                        {% set items = state_attr('sensor.pronote_NOM PRENOM_evaluations','evaluations')%}  {% for i in range(0, items | count, 1) %} 
+                        <tr> 
+                          <td width='15%'>
+                            <mark> {{ items[i].date.strftime("%d/%m") }} 
+                          </td> 
+                          <td width='40%'> {{ items[i].subject }} 
+                          </td> 
+                          <td width='25%'>
+                            {% set acquisitions = items[i].acquisitions %}{% for j in range(0,acquisitions|count,1) %}{% if acquisitions[j].level == 'Très bonne maîtrise' %}✅ {% elif acquisitions[j].level == 'Maîtrise satisfaisante' %}🟩{% elif acquisitions[j].level == 'Maîtrise fragile'  %}🟧{% elif acquisitions[j].level == 'Maîtrise insuffisante'  %}🟥{% elif acquisitions[j].level == 'Absent'  %}🚫{% elif acquisitions[j].level == 'Dispensé'  %}❌{% else %}?{% endif %}{% endfor %}
+                          </td>
+                          <td width='20%'>
+                            <h1>
+                              {{items[i].name}}
+                            </h1>
+                          </td> 
+                        </tr> 
+                        {% endfor %}
+                      </table>
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card ha-markdown {
+                            padding:0px
+                          }
+                          ha-card ha-markdown.no-header {
+                            padding:0px
+                          }
+                          ha-markdown {
+                              overflow-y: auto;
+                              border-bottom-left-radius: 10px; 
+                              border-bottom-right-radius: 10px;
+                              border-top-left-radius: 10px; 
+                              border-top-right-radius: 10px;
+                          }
+                        ha-markdown$: |
+                          div{
+                              background-color: rgb(54, 54, 54, 0.3);
+                              padding: 5px 5px;
+                              color:white;
+                              font-weight:normal;
+                              text-align: center;
+                              font-size:1em; 
+                              border-top-left-radius: 10px; 
+                              }
+                          table{
+                              border-collapse: collapse;
+                              font-family: Roboto;
+                              outline: 0px solid #393c3d;
+                              font-size:0.7em;
+                              width: 100%;
+                              }
+                          td {
+                              padding: 5px 8px 5px 8px;
+                              border-bottom: 0px solid #1c2020;
+                              text-align: center;
+                              }
+                          tr {
+                              line-height: 4px;
+                              margin-top:0px;
+                              background-color:transparent;
+                              }
+                          tr:nth-of-type(even) {
+                              background-color: rgb(54, 54, 54, 0.3);
+                              }
+                          tr:last-of-type {
+                              border-bottom: transparent;
+                              }
+                            h1{
+                              font-size: 1em;
+                              }
+                          mark {
+                              background: transparent;
+                              color: white;
+                              border-radius: 5px;
+                              padding: 5px;
+                              border: solid grey 2px;
+                              }
+                          span {
+                              background: #EC4B34;
+                              color: #222627;
+                              border-radius: 10px;
+                              padding: 5px;
+                              }
+                          span {
+                              padding: 5px;
+                              }
+                          tr:nth-child(n+2) > td:nth-child(2) {
+                            text-align: center;
+                              }
+                - attributes:
+                    isMinWidthIndicator: true
+                    label: 🗞️Informations
+                  card:
+                    type: markdown
+                    content: |-
+                      <table>
+                          <tbody>
+                              {% set items = state_attr('sensor.pronote_NOM PRENOM_information_and_surveys','information_and_surveys') %}
+                              {%-for i in range(0, items | count, 1) -%}
+                              <tr> 
+                                  <td><span>{{items[i].author}} / {{items[i].category}} :</span>
+                                  {{items[i].content}}</td>
+                              </tr>
+                              {% endfor %}
+                        </tbody>
+                      </table>
+                    card_mod:
+                      style:
+                        .: |
+                          ha-card ha-markdown {
+                            padding:0px
+                          }
+                          ha-card ha-markdown.no-header {
+                            padding:0px
+                          }
+                          ha-markdown {
+                              overflow-y: auto;
+                              border-bottom-left-radius: 10px; 
+                              border-bottom-right-radius: 10px;
+                              border-top-left-radius: 10px; 
+                              border-top-right-radius: 10px;
+                            }
+                        ha-markdown$: |
+                          div {
+                              background-color:rgb(54, 54, 54, 0.3);
+                              padding: 5px 5px;
+                              color:white;
+                              font-weight:normal;
+                              font-size:1em;
+                              border-top-left-radius: 10px; 
+                              text-align: center;
+                               
+                          }
+                          mark {
+                              background: #00BD81;
+                              color: #222627;
+                              border-radius: 5px;
+                              padding: 5px;
+                              border: solid #005f41 2px;
+                              font-size: 1.2em;
+                              }
+                          h2 {
+                              background: #2471A3;
+                              color: white;
+                              border-radius: 5px;
+                              padding: 5px;
+                              border: solid #A9CCE3 2px;
+                              font-size: 1em;
+                              text-align: center;
+                              margin-left: 10%;
+                              margin-right: 10%;
+                              }
+                          table{
+                            border-collapse: collapse;
+                            font-size: 0.85em;
+                            font-family: Roboto;
+                            width: auto;
+                            outline: 0px solid #393c3d;
+                            margin-top: 0px;
+                          } caption {
+                              text-align: center;
+                              font-weight: bold;
+                              font-size: 1em;
+                          } td {
+                              padding: 5px 8px 5px 8px;
+                              text-align: left;
+                              border-bottom: 0px solid #1c2020;
+                          }
+                          tr {
+                              border-bottom: 0px solid #1c2020;
+                          }
+
+                          tr:nth-of-type(even) {
+                              background-color: rgb(54, 54, 54, 0.3);
+                          }
+                          tr:last-of-type {
+                              border-bottom: transparent;
+                          }
+                          mark {
+                              background: #009767;
+                              color: #222627;
+                              border-radius: 5px;
+                              padding: 5px;
+                          }
+                          span {
+                              background: #2471A3;
+                              color: white;
+                              border-radius: 5px;
+                              padding: 5px;
+                              border: solid #A9CCE3 2px;
+                              font-size: 1em;
+                              text-align: center;
+                              vertical-align: center;
+                              height: auto;
+                              padding: 5px;
+                              display: block;
+                          }
+                          span {
+                              padding: 5px;
+                          }
+                - attributes:
+                    isMinWidthIndicator: true
+                    label: 🍖Menu cantine
+                  card:
+                    type: custom:tabbed-card
+                    title: menu cantine nathan
+                    styles:
+                      '--mdc-typography-button-font-size': 10px
+                      '--mdc-theme-primary': white
+                      '--mdc-tab-text-label-color-default': grey
+                      background: rgb(54, 54, 54, 0.3)
+                      border: solid 1px rgb(40, 40, 40)
+                      border-top-left-radius: 10px
+                      border-top-right-radius: 10px
+                      border-bottom-left-radius: 10px
+                      border-bottom-right-radius: 10px
+                    tabs:
+                      - attributes:
+                          isMinWidthIndicator: true
+                          label: 🥗Entrées
+                        card:
+                          type: markdown
+                          content: >-
+                            <table>
+                                <tbody>
+                            {% set items =
+                            state_attr('sensor.pronote_NOM PRENOM_menus','menus')
+                            %} {% for i in range(0, items | count, 1) %}
+                              {% if items[i].is_lunch == True %}
+                              <tr>
+                              <td width='11%'>      
+                              <mark>  
+                              {{ items[i].date | as_datetime | as_timestamp | timestamp_custom('%d/%m') }}
+                              </mark>
+                              </td>
+                              <td width='70%'> 
+                                {% for entry in items[i].first_meal %}
+                                 {{ entry.name }}
+                                {% endfor %}
+                              </td>
+                              </td>
+                                {% endif %}
+                            {% endfor %}
+                              </tbody>
+                            </table>
+                          card_mod:
+                            style:
+                              .: |
+                                ha-card ha-markdown {
+                                  padding:0px
+                                }
+                                ha-card ha-markdown.no-header {
+                                  padding:0px
+                                }
+                                 ha-markdown {
+                                    overflow-y: auto;
+                                    border-top-left-radius:10px;
+                                    border-top-right-radius:10px;
+                                    border-bottom-left-radius:10px;
+                                  }
+                              ha-markdown$: |
+                                div {
+                                    background-color:rgb(54, 54, 54, 0.3);
+                                    padding: 5px 5px;
+                                    color:white;
+                                    font-weight:normal;
+                                    font-size:1em;
+                                    border-top-left-radius: 10px; 
+                                    text-align: center;
+                                }table{
+                                  border-collapse: collapse;
+                                  font-family: Roboto;
+                                  width: 100%;
+                                  outline: 0px solid #393c3d;
+                                  margin-top: 0px;
+                                  text-align: center;
+                                } caption {
+                                    text-align: center;
+                                    font-weight: bold;
+                                    font-size: 1em;
+                                } td {
+                                    padding: 5px 8px 5px 8px;
+                                    text-align: center;
+                                    border-bottom: 0px solid #1c2020;
+                                    margin-top: 0px;
+                                    font-size: 0.9em;
+                                }
+                                tr {
+                                    border-bottom: 0px solid #1c2020;
+                                }
+
+                                tr:nth-of-type(even) {
+                                    background-color: rgb(54, 54, 54, 0.3);
+                                }
+                                tr:last-of-type {
+                                    border-bottom: transparent; 
+                                }
+                                mark {
+                                      background: transparent;
+                                      color: white;
+                                      border-radius: 5px;
+                                      padding: 5px;
+                                      border: solid grey 2px;
+                                      font-weight: normal;
+                                      font-size: 0.8em;
+                                      }
+                                span {
+                                    background: transparent;
+                                    color: white;
+                                    border-radius: 5px;
+                                    padding: 5px;
+                                }
+                                tr:nth-child(n+2) > td:nth-child(2) {
+                                  text-align: center;
+                                }
+                      - attributes:
+                          isMinWidthIndicator: true
+                          label: 🍖Plats principal
+                        card:
+                          type: markdown
+                          content: >-
+                            <table>
+                                <tbody>
+                            {% set items =
+                            state_attr('sensor.pronote_NOM PRENOM_menus','menus')
+                            %}
+
+                            {% for i in range(0, items | count, 1) %}
+                              {% if items[i].is_lunch == True %}
+                              <tr>
+                              <td width='11%'>      
+                              <mark>  
+                              {{ items[i].date | as_datetime | as_timestamp | timestamp_custom('%d/%m') }}
+                              </mark>
+                              </td>
+                              <td width='70%'> 
+                                {% for main in items[i].main_meal %}
+                                  {{ main.name }}
+                                {% endfor %}
+                              </td>
+                                {% endif %}
+                            {% endfor %}
+                              </tbody>
+                            </table>
+                          card_mod:
+                            style:
+                              .: |
+                                ha-card ha-markdown {
+                                  padding:0px
+                                }
+                                ha-card ha-markdown.no-header {
+                                  padding:0px
+                                }
+                                 ha-markdown {
+                                    overflow-y: auto;
+                                  }
+                              ha-markdown$: |
+                                div {
+                                    background-color:rgb(54, 54, 54, 0.3);
+                                    padding: 5px 5px;
+                                    color:white;
+                                    font-weight:normal;
+                                    font-size:1em;
+                                    border-top-left-radius: 10px; 
+                                    text-align: center;
+                                }
+                                table{
+                                  border-collapse: collapse;
+                                  font-family: Roboto;
+                                  width: 100%;
+                                  outline: 0px solid #393c3d;
+                                  margin-top: 5px;
+                                } caption {
+                                    text-align: center;
+                                    font-weight: bold;
+                                    font-size: 1em;
+                                } td {
+                                    padding: 5px 8px 5px 8px;
+                                    text-align: center;
+                                    border-bottom: 0px solid #1c2020;
+                                    margin-top: 5px;
+                                    font-size: 0.9em;
+                                }
+                                tr {
+                                    border-bottom: 0px solid #1c2020;
+                                }
+
+                                tr:nth-of-type(even) {
+                                    background-color: rgb(54, 54, 54, 0.3);
+                                }
+                                tr:last-of-type {
+                                    border-bottom: transparent;          }
+                                mark {
+                                      background: transparent;
+                                      color: white;
+                                      border-radius: 5px;
+                                      padding: 5px;
+                                      border: solid grey 2px;
+                                      font-size: 0.8em;
+                                      font-weight: normal;
+                                      }
+                                span {
+                                    background: #EC4B34;
+                                    color: #222627;
+                                    border-radius: 5px;
+                                    padding: 5px;
+                                }
+                                tr:nth-child(n+2) > td:nth-child(2) {
+                                  text-align: center;
+                                }
+                      - attributes:
+                          isMinWidthIndicator: true
+                          label: 🍟Accompagnements
+                        card:
+                          type: markdown
+                          content: >-
+                            <table>
+                                <tbody>
+                            {% set items =
+                            state_attr('sensor.pronote_NOM PRENOM_menus','menus')
+                            %}
+
+                            {% for i in range(0, items | count, 1) %}
+                              {% if items[i].is_lunch == True %}
+                              <tr>
+                              <td width='11%'>      
+                              <mark>  
+                              {{ items[i].date | as_datetime | as_timestamp | timestamp_custom('%d/%m') }}
+                              </mark>
+                              </td>
+                              <td width='70%'>
+                                {% if items[i].side_meal %}
+                                  {% for side in items[i].side_meal %}
+                                    {{ side.name }}
+                                  {% endfor %}
+                                {% else %}
+                                  PAS_DISPO
+                                {% endif %}
+                              </td>
+                                {% endif %}
+                            {% endfor %}
+                              </tbody>
+                            </table>
+                          card_mod:
+                            style:
+                              .: |
+                                ha-card ha-markdown {
+                                  padding:0px
+                                }
+                                ha-card ha-markdown.no-header {
+                                  padding:0px
+                                }
+                                 ha-markdown {
+                                    overflow-y: auto;
+                                  }
+                              ha-markdown$: |
+                                div {
+                                    background-color:rgb(54, 54, 54, 0.3);
+                                    padding: 5px 5px;
+                                    color:white;
+                                    font-weight:normal;
+                                    font-size:1em;
+                                    border-top-left-radius: 10px; 
+                                    text-align: center;
+                                }
+                                table{
+                                  border-collapse: collapse;
+                                  font-family: Roboto;
+                                  width: 100%;
+                                  outline: 0px solid #393c3d;
+                                  margin-top: 5px;
+                                } caption {
+                                    text-align: center;
+                                    font-weight: bold;
+                                    font-size: 1em;
+                                } td {
+                                    padding: 5px 8px 5px 8px;
+                                    text-align: center;
+                                    border-bottom: 0px solid #1c2020;
+                                    margin-top: 5px;
+                                    font-size: 0.9em;
+                                }
+                                tr {
+                                    border-bottom: 0px solid #1c2020;
+                                }
+
+                                tr:nth-of-type(even) {
+                                    background-color: rgb(54, 54, 54, 0.3);
+                                }
+                                tr:last-of-type {
+                                    border-bottom: transparent;          }
+                                mark {
+                                      background: transparent;
+                                      color: white;
+                                      border-radius: 5px;
+                                      padding: 5px;
+                                      border: solid grey 2px;
+                                      font-size: 0.8em;
+                                      font-weight: normal;
+                                      }
+                                span {
+                                    background: #EC4B34;
+                                    color: #222627;
+                                    border-radius: 5px;
+                                    padding: 5px;
+                                }
+                                tr:nth-child(n+2) > td:nth-child(2) {
+                                  text-align: center;
+                                }
+                      - attributes:
+                          isMinWidthIndicator: true
+                          label: 🧀Fromages
+                        card:
+                          type: markdown
+                          content: >-
+                            <table>
+                                <tbody>
+                            {% set items =
+                            state_attr('sensor.pronote_NOM PRENOM_menus','menus')
+                            %}
+
+                            {% for i in range(0, items | count, 1) %}
+                              {% if items[i].is_lunch == True %}
+                              <tr>
+                              <td width='11%'>      
+                              <mark>  
+                              {{ items[i].date | as_datetime | as_timestamp | timestamp_custom('%d/%m') }}
+                              </mark>
+                              </td>
+                              <td width='70%'>
+                                {% for cheese in items[i].cheese %}
+                                  {{ cheese.name }}
+                                {% endfor %}
+                              </td>
+                                {% endif %}
+                            {% endfor %}
+                              </tbody>
+                            </table>
+                          card_mod:
+                            style:
+                              .: |
+                                ha-card ha-markdown {
+                                  padding:0px
+                                }
+                                ha-card ha-markdown.no-header {
+                                  padding:0px
+                                }
+                                 ha-markdown {
+                                    overflow-y: auto;
+                                  }
+                              ha-markdown$: |
+                                div {
+                                    background-color:rgb(54, 54, 54, 0.3);
+                                    padding: 5px 5px;
+                                    color:white;
+                                    font-weight:normal;
+                                    font-size:1em;
+                                    border-top-left-radius: 10px; 
+                                    text-align: center;
+                                }
+                                table{
+                                  border-collapse: collapse;
+                                  font-family: Roboto;
+                                  width: 100%;
+                                  outline: 0px solid #393c3d;
+                                  margin-top: 5px;
+                                } caption {
+                                    text-align: center;
+                                    font-weight: bold;
+                                    font-size: 1em;
+                                } td {
+                                    padding: 5px 8px 5px 8px;
+                                    text-align: center;
+                                    border-bottom: 0px solid #1c2020;
+                                    margin-top: 5px;
+                                    font-size: 0.9em;
+                                }
+                                tr {
+                                    border-bottom: 0px solid #1c2020;
+                                }
+
+                                tr:nth-of-type(even) {
+                                    background-color: rgb(54, 54, 54, 0.3);
+                                }
+                                tr:last-of-type {
+                                    border-bottom: transparent;          }
+                                mark {
+                                      background: transparent;
+                                      color: white;
+                                      border-radius: 5px;
+                                      padding: 5px;
+                                      border: solid grey 2px;
+                                      font-size: 0.8em;
+                                      font-weight: normal;
+                                      }
+                                span {
+                                    background: #EC4B34;
+                                    color: #222627;
+                                    border-radius: 5px;
+                                    padding: 5px;
+                                }
+                                tr:nth-child(n+2) > td:nth-child(2) {
+                                  text-align: center;
+                                }
+                      - attributes:
+                          isMinWidthIndicator: true
+                          label: 🍦Desserts
+                        card:
+                          type: markdown
+                          content: >-
+                            <table>
+                                <tbody>
+                            {% set items =
+                            state_attr('sensor.pronote_NOM PRENOM_menus','menus')
+                            %} {% for i in range(0, items | count, 1) %}
+                              {% if items[i].is_lunch == True %}
+                              <tr>
+                              <td width='11%'>      
+                              <mark>  
+                              {{ items[i].date | as_datetime | as_timestamp | timestamp_custom('%d/%m') }}
+                              </mark>
+                              </td>
+                              <td width='70%'>
+                                {% for dessert in items[i].dessert %}
+                                  {{ dessert.name }}
+                                {% endfor %}
+                              </td>
+                                {% endif %}
+                            {% endfor %}
+                              </tbody>
+                            </table>
+                          card_mod:
+                            style:
+                              .: |
+                                ha-card ha-markdown {
+                                  padding:0px
+                                }
+                                ha-card ha-markdown.no-header {
+                                  padding:0px
+                                }
+                                 ha-markdown {
+                                    overflow-y: auto;
+                                  }
+                              ha-markdown$: |
+                                div {
+                                    background-color:rgb(54, 54, 54, 0.3);
+                                    padding: 5px 5px;
+                                    color:white;
+                                    font-weight:normal;
+                                    font-size:1em;
+                                    border-top-left-radius: 10px; 
+                                    text-align: center;
+                                }
+                                table{
+                                  border-collapse: collapse;
+                                  font-family: Roboto;
+                                  width: 100%;
+                                  outline: 0px solid #393c3d;
+                                  margin-top: 5px;
+                                } caption {
+                                    text-align: center;
+                                    font-weight: bold;
+                                    font-size: 1em;
+                                } td {
+                                    padding: 5px 8px 5px 8px;
+                                    text-align: center;
+                                    border-bottom: 0px solid #1c2020;
+                                    margin-top: 5px;
+                                    font-size: 0.9em;
+                                }
+                                tr {
+                                    border-bottom: 0px solid #1c2020;
+                                }
+
+                                tr:nth-of-type(even) {
+                                    background-color: rgb(54, 54, 54, 0.3);
+                                }
+                                tr:last-of-type {
+                                    border-bottom: transparent;          }
+                                mark {
+                                      background: transparent;
+                                      color: white;
+                                      border-radius: 5px;
+                                      padding: 5px;
+                                      border: solid grey 2px;
+                                      font-size: 0.8em;
+                                      font-weight: normal;
+                                      }
+                                span {
+                                    background: #EC4B34;
+                                    color: #222627;
+                                    border-radius: 5px;
+                                    padding: 5px;
+                                }
+                                tr:nth-child(n+2) > td:nth-child(2) {
+                                  text-align: center;
+                                }
+                                tr:nth-child(n+2) > td:nth-child(2) {
+                                  text-align: center;
+                                }
+        card_mod:
+          style: |
+            ha-card {
+              --ha-card-background: none;
+              font-style: italic;
+              --ha-card-border: none;
+            }
