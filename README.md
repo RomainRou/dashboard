@@ -1,4 +1,6 @@
 Dashboard 2024 
+Le code des cartes est dans le fichier carte dashboard
+pour le sensor "il fait nuit" le lien pour la création https://www.sigalou-domotique.fr/je-voudrais-savoir-si-nous-sommes-le-jour-ou-la-nuit
 Addons et intégrations nécessaire
 Addon: 
   - lovelace-meteofrance-weather-card ( https://github.com/hacf-fr/lovelace-meteofrance-weather-card )
