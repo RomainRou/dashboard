@@ -13,3 +13,5 @@ Integrations:
   - meteo france 
   - alarmo ( https://github.com/nielsfaber/alarmo )
   - pronote ( https://github.com/delphiki/hass-pronote )
+![screenshot](https://i.ibb.co/RQ3GLKM/dashboard-0.png)
+![screebshot2](https://i.ibb.co/pnqCMtz/dashboard-1.png)
