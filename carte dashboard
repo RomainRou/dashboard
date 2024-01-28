@@ -77,9 +77,9 @@ cards:
             }
       - type: custom:digital-clock
         dateFormat:
-          weekday: long
+          weekday: short
           day: 2-digit
-          month: long
+          month: short
         timeFormat:
           hour: 2-digit
           minute: 2-digit
