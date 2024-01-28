@@ -121,10 +121,8 @@ cards:
           card_mod:
             style: |
               ha-card {
-                background: none !important;
-                border: none !important;
                 font-style: italic;
-              }
+                }
   - type: horizontal-stack
     cards:
       - type: custom:vertical-stack-in-card
@@ -536,18 +534,11 @@ cards:
               card_mod:
                 style: |
                   ha-card {
-                    background: none;
+                    --ha-card-background: none;
                     border: none;
                     font-style: italic;
                   }
         size: normal
-        card_mod:
-          style: |
-            ha-card {
-              --ha-card-background: none;
-              font-style: italic;
-              --ha-card-border: none;
-            }
       - type: custom:popup-card
         entity: light.la_salle_a_manger
         dismissable: true
@@ -568,6 +559,7 @@ cards:
                   ha-card {
                     background: none;
                     border: none;
+                    font-style: italic;
                   }
             - type: horizontal-stack
               cards:
@@ -586,6 +578,7 @@ cards:
                       ha-card {
                         background: none;
                         border: none;
+                        font-style: italic;
                       }
                 - type: custom:mushroom-entity-card
                   entity: switch.prise_connectee_mystrom
@@ -602,14 +595,8 @@ cards:
                       ha-card {
                         background: none;
                         border: none;
+                        font-style: italic;
                       }
-        card_mod:
-          style: |
-            ha-card {
-              --ha-card-background: none;
-              font-style: italic;
-              --ha-card-border: none;
-            }
       - type: custom:popup-card
         entity: light.cuisine
         dismissable: true
@@ -629,6 +616,7 @@ cards:
                   ha-card {
                     background: none;
                     border: none;
+                    font-style: italic;
                   }
             - type: custom:mushroom-light-card
               entity: light.plan_de_travail
@@ -643,14 +631,8 @@ cards:
                   ha-card {
                     background: none;
                     border: none;
+                    font-style: italic;
                   }
-        card_mod:
-          style: |
-            ha-card {
-              --ha-card-background: none;
-              font-style: italic;
-              --ha-card-border: none;
-            }
   - type: horizontal-stack
     cards:
       - type: custom:vertical-stack-in-card
@@ -972,13 +954,6 @@ cards:
                 border: none;
                 font-style: italic;
               }
-        card_mod:
-          style: |
-            ha-card {
-              --ha-card-background: none;
-              font-style: italic;
-              --ha-card-border: none;
-            }
       - type: custom:popup-card
         dismissable: true
         entity: salle_de_bain_rdc
@@ -1067,14 +1042,8 @@ cards:
                   ha-card {
                     background: none;
                     border: none;
+                    font-style: italic;
                   }
-        card_mod:
-          style: |
-            ha-card {
-              --ha-card-background: none;
-              font-style: italic;
-              --ha-card-border: none;
-            }
   - type: horizontal-stack
     cards:
       - type: custom:vertical-stack-in-card
@@ -1405,13 +1374,6 @@ cards:
                     border: none;
                     font-style: italic;
                   }
-        card_mod:
-          style: |
-            ha-card {
-              --ha-card-background: none;
-              font-style: italic;
-              --ha-card-border: none;
-            }
       - type: custom:popup-card
         dismissable: true
         entity: light.la_chambre_de_rox
@@ -1434,13 +1396,6 @@ cards:
                     border: none;
                     font-style: italic;
                   }
-        card_mod:
-          style: |
-            ha-card {
-              --ha-card-background: none;
-              font-style: italic;
-              --ha-card-border: none;
-            }
       - type: custom:popup-card
         entity: light.palier
         dismissable: true
@@ -1505,13 +1460,6 @@ cards:
                     }
                   {% else %}
                   {% endif %}
-        card_mod:
-          style: |
-            ha-card {
-              --ha-card-background: none;
-              font-style: italic;
-              --ha-card-border: none;
-            }
   - type: horizontal-stack
     cards:
       - type: custom:vertical-stack-in-card
@@ -1857,6 +1805,7 @@ cards:
                    color: white;
                    background: none;
                    border: none;
+                   font-style: italic;
                   }
                    .card-header {
                    font-size: 26px;
@@ -1874,6 +1823,7 @@ cards:
                   ha-card {
                     background: none;
                     border: none;
+                    font-style: italic;
                   }
                   mushroom-light-brightness-control {
                     position: absolute;
@@ -1905,13 +1855,6 @@ cards:
                     }
                   {% else %}
                   {% endif %}
-        card_mod:
-          style: |
-            ha-card {
-              --ha-card-background: none;
-              font-style: italic;
-              --ha-card-border: none;
-            }
       - type: custom:popup-card
         dismissable: true
         entity: light.la_chambre_d_ethan
@@ -1934,13 +1877,6 @@ cards:
                     border: none;
                     font-style: italic;
                   }
-        card_mod:
-          style: |
-            ha-card {
-              --ha-card-background: none;
-              font-style: italic;
-              --ha-card-border: none;
-            }
       - type: custom:popup-card
         dismissable: true
         entity: light.la_chambre_de_nathan
@@ -1974,6 +1910,7 @@ cards:
                   ha-card {
                     background: none;
                     border: none;
+                    font-style: italic;
                   }
             - type: custom:tabbed-card
               title: menu cantine nathan
@@ -3154,10 +3091,3 @@ cards:
                                 tr:nth-child(n+2) > td:nth-child(2) {
                                   text-align: center;
                                 }
-        card_mod:
-          style: |
-            ha-card {
-              --ha-card-background: none;
-              font-style: italic;
-              --ha-card-border: none;
-            }
