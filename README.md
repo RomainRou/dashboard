@@ -14,8 +14,8 @@ Addon:
   - digital-clock ( https://github.com/wassy92x/lovelace-digital-clock )
 
 Integrations:
-  - browser mod ( https://github.com/thomasloven/hass-browser_mod )
-  - meteo france 
+  - browser mod (pour l'affichage des popup) ( https://github.com/thomasloven/hass-browser_mod )
+  - meteo france (pour afficher la meteo)
   - alarmo (si utiliser sinon peut etre supprimer)( https://github.com/nielsfaber/alarmo )
   - pronote (si utiliser sinon peut etre supprimer)( https://github.com/delphiki/hass-pronote )
 ![screenshot](https://i.ibb.co/RQ3GLKM/dashboard-0.png)
