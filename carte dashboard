@@ -71,7 +71,7 @@ cards:
               height: 153px ;
               margin-left: auto;
               margin-right: auto;
-              background-image: url(https://i.ibb.co/FwXpGWX/ciel.png);
+              background-image: url('{% if is_state("weather.chilleurs_aux_bois", "sunny") %}https://i.gifer.com/Iqp.gif{% elif is_state("weather.chilleurs_aux_bois", "partlycloudy") %}https://i.gifer.com/g1vA.gif{% elif is_state("weather.chilleurs_aux_bois", "cloudy") %}https://i.gifer.com/g1vA.gif{% elif is_state("weather.chilleurs_aux_bois", "mostlycloudy") %}https://i.gifer.com/Lx0q.gif{% elif is_state("weather.chilleurs_aux_bois", "clear-night") %}https://i.gifer.com/IrS.gif{% elif is_state("weather.chilleurs_aux_bois", "fog") %}https://i.gifer.com/8AC8.gif{% elif is_state("weather.chilleurs_aux_bois", "rainy") %}https://i.gifer.com/FEuz.gif{% endif %}');
               background-size: cover;
               background-position: center;
             }
