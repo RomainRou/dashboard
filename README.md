@@ -1,4 +1,5 @@
 Dashboard 2024 <br>
+(attention demande pas de ressource materiel pour etre afficher et opérationnel le problème est en cours de résolution)
 update:<br>
 28/01/2024: nettoyage du code<br>
 31/01/2014: maintenant le background animé de la carte meteo change en foction de l'état du sensor et ajout du background animé sur la carte horloge (les gif ou images peuvent être changer dans background-image: url(l'url de l'image);<br>
