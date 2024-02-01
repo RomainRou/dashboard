@@ -29,7 +29,7 @@ Integrations:
 ![screenshot](https://i.ibb.co/RQ3GLKM/dashboard-0.png)
 ![screebshot2](https://i.ibb.co/pnqCMtz/dashboard-1.png)
 
-Pour installer le dashboard il vous suffit de cliquer en haut a droite de votre dashboard , modifier tableau de bord et de créé un nouveau tableau de bord<br><br>
+Pour installer le dashboard une fois tout les addons et intégration installé il vous suffit de cliquer en haut a droite de votre dashboard , modifier tableau de bord et de créé un nouveau tableau de bord<br><br>
 ![screenshot](https://github.com/RomainRou/dashboard/blob/main/2.png)
 ![screenshot](https://github.com/RomainRou/dashboard/blob/main/3.png)
 ![screenshot](https://github.com/RomainRou/dashboard/blob/main/4.png)<br><br>
