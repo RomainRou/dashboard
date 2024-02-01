@@ -8,7 +8,7 @@ update:<br>
 01/02/2024: redaction d'un tuto d'installation[terminer]<br>
 <br>
 update en cours:<br>
-01/01/2024: résolution des souci de ressources [en cours]<br>
+01/01/2024: résolution des probleme de ressources rencontré pour certain apareils [en cours]<br>
 <br>
 Le code des cartes est dans le fichier carte dashboard
 pour le sensor "il fait nuit" le lien pour la création https://www.sigalou-domotique.fr/je-voudrais-savoir-si-nous-sommes-le-jour-ou-la-nuit
