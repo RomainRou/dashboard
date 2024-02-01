@@ -1,5 +1,6 @@
 Dashboard 2024 <br>
-(attention demande beaucoup de ressource materiel pour etre afficher et opérationnel le problème est en cours de résolution)
+(attention demande beaucoup de ressource materiel pour etre afficher et opérationnel le problème est en cours de résolution)<br>
+un tuto pour l'installation est dispo en bas de page<br>
 <br>
 update:<br>
 28/01/2024: nettoyage du code<br>
@@ -23,3 +24,8 @@ Integrations:
   - pronote (si utiliser sinon peut etre supprimer)( https://github.com/delphiki/hass-pronote )
 ![screenshot](https://i.ibb.co/RQ3GLKM/dashboard-0.png)
 ![screebshot2](https://i.ibb.co/pnqCMtz/dashboard-1.png)
+
+Pour installer le dashboard il vous suffit de cliquer en haut a droite de votre dashboard , modifier tableau de bord et de créé un nouveau tableau de bord<br>
+![screenshot](https://github.com/RomainRou/dashboard/blob/main/2.png)
+![screenshot](https://github.com/RomainRou/dashboard/blob/main/3.png)
+![screenshot](https://github.com/RomainRou/dashboard/blob/main/4.png)
