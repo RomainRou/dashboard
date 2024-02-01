@@ -29,3 +29,8 @@ Pour installer le dashboard il vous suffit de cliquer en haut a droite de votre 
 ![screenshot](https://github.com/RomainRou/dashboard/blob/main/2.png)
 ![screenshot](https://github.com/RomainRou/dashboard/blob/main/3.png)
 ![screenshot](https://github.com/RomainRou/dashboard/blob/main/4.png)
+Dans configuration de la vue vous mettez se que vous voulez sauf pour la partie type de vue il faut mettre Panneau (1 carte) et vous sauvegarder
+![screenshot](https://github.com/RomainRou/dashboard/blob/main/5.png)
+Vous cliquez sure ajouter une carte en bas a droite , et vous choisissez la carte manuel ensuite vous copier tout le code en lieu et place de type:'' en prenant soin de le supprimer puis vous sauvegarder et c'est terminer, il vous reste plus qu'a reconfiguré vos entitée etc...
+![screenshot](https://github.com/RomainRou/dashboard/blob/main/6.png)
+![screenshot](https://github.com/RomainRou/dashboard/blob/main/7.png)
