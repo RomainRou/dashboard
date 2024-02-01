@@ -1,5 +1,5 @@
 Dashboard 2024 <br>
-(attention demande pas de ressource materiel pour etre afficher et opérationnel le problème est en cours de résolution)
+(attention demande beaucoup de ressource materiel pour etre afficher et opérationnel le problème est en cours de résolution)
 <br>
 update:<br>
 28/01/2024: nettoyage du code<br>
