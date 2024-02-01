@@ -35,6 +35,6 @@ Pour installer le dashboard une fois tout les addons et intégration installé i
 ![screenshot](https://github.com/RomainRou/dashboard/blob/main/4.png)<br><br>
 Dans configuration de la vue vous mettez se que vous voulez sauf pour la partie type de vue il faut mettre Panneau (1 carte) et vous sauvegarder<br>
 ![screenshot](https://github.com/RomainRou/dashboard/blob/main/5.png)<br><br>
-Vous cliquez sure ajouter une carte en bas a droite , et vous choisissez la carte manuel ensuite vous copier tout le code en lieu et place de type:'' en prenant soin de le supprimer puis vous sauvegarder et c'est terminer, il vous reste plus qu'a reconfiguré vos entitée etc...<br><br>
+Vous cliquez sure ajouter une carte en bas a droite , et vous choisissez la carte manuel ensuite vous copier tout le code en lieu et place de type:'' en prenant soin de le supprimer puis vous sauvegarder et c'est terminer, il vous reste plus qu'a reconfiguré vos entitée etc... et de vous amusez a changer se que vous voulez libre a vous les possibilitées sont nombreuses niveau personalisation <br><br>
 ![screenshot](https://github.com/RomainRou/dashboard/blob/main/6.png)
 ![screenshot](https://github.com/RomainRou/dashboard/blob/main/7.png)
