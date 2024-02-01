@@ -3,8 +3,12 @@ Dashboard 2024 <br>
 un tuto pour l'installation est dispo en bas de page<br>
 <br>
 update:<br>
-28/01/2024: nettoyage du code<br>
-31/01/2014: maintenant le background animé de la carte meteo change en foction de l'état du sensor et ajout du background animé sur la carte horloge (les gif ou images peuvent être changer dans background-image: url(l'url de l'image);<br>
+28/01/2024: nettoyage du code[terminer]<br>
+31/01/2024: maintenant le background animé de la carte meteo change en foction de l'état du sensor et ajout du background animé sur la carte horloge (les gif ou images peuvent être changer dans background-image: url(l'url de l'image);[terminer]<br>
+01/02/2024: redaction d'un tuto d'installation[terminer]<br>
+<br>
+update en cours:<br>
+01/01/2024: résolution des souci de ressources [en cours]<br>
 <br>
 Le code des cartes est dans le fichier carte dashboard
 pour le sensor "il fait nuit" le lien pour la création https://www.sigalou-domotique.fr/je-voudrais-savoir-si-nous-sommes-le-jour-ou-la-nuit
