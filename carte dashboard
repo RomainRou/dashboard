@@ -5,6 +5,7 @@ cards:
       - type: custom:vertical-stack-in-card
         cards:
           - type: custom:mushroom-template-card
+            entity: weather.chilleurs_aux_bois
             icon: mdi:theme-light-dark
             icon_color: |
               {% if is_state('binary_sensor.il_fait_nuit', 'off') %}
@@ -23,9 +24,6 @@ cards:
               action: none
             hold_action:
               action: none
-            badge_icon: ''
-            badge_color: ''
-            entity: weather.chilleurs_aux_bois
             card_mod:
               style:
                 mushroom-state-info$: |
@@ -36,12 +34,18 @@ cards:
                     left: -155px;
                     overflow: visible !important;
                     white-space: normal !important;
+                    background-color: #00000090;
+                    width: 20%;
+                    border-radius: 5px 5px 5px 5px;
                   }
                   .secondary {
                     position: relative;
                     overflow: visible !important;
-                    top: -52px;
+                    top: -49px;
                     left: -155px;
+                    background-color: #00000090;
+                    width: 35%;
+                    border-radius: 5px 5px 5px 5px;
                   }
                 mushroom-shape-icon$: |
                   .shape {
@@ -59,22 +63,10 @@ cards:
                     top: 25px;
                   }
                   ha-card {
-                    background: none;
-                    font-style: italic;
-                    --primary-text-color: black;
-                    --secondary-text-color: black;
-                    border: none;
+                    height: 153px;
+                    margin: auto;
+                    background-image: url('{% if is_state("weather.chilleurs_aux_bois", "sunny") %}https://i.pinimg.com/originals/d8/a2/ee/d8a2eee27b91f50078645085e4057f3c.gif{% elif is_state("weather.chilleurs_aux_bois", "partlycloudy") %}https://i.gifer.com/g1vA.gif{% elif is_state("weather.chilleurs_aux_bois", "cloudy") %}https://i.gifer.com/g1vA.gif{% elif is_state("weather.chilleurs_aux_bois", "mostlycloudy") %}https://i.gifer.com/Lx0q.gif{% elif is_state("weather.chilleurs_aux_bois", "clear-night") %}https://i.gifer.com/IrS.gif{% elif is_state("weather.chilleurs_aux_bois", "fog") %}https://i.gifer.com/8AC8.gif{% elif is_state("weather.chilleurs_aux_bois", "rainy") %}https://i.gifer.com/FEuz.gif{% endif %}');
                   }
-        card_mod:
-          style: |
-            ha-card {
-              height: 153px ;
-              margin-left: auto;
-              margin-right: auto;
-              background-image: url('{% if is_state("weather.chilleurs_aux_bois", "sunny") %}https://i.gifer.com/Iqp.gif{% elif is_state("weather.chilleurs_aux_bois", "partlycloudy") %}https://i.gifer.com/g1vA.gif{% elif is_state("weather.chilleurs_aux_bois", "cloudy") %}https://i.gifer.com/g1vA.gif{% elif is_state("weather.chilleurs_aux_bois", "mostlycloudy") %}https://i.gifer.com/Lx0q.gif{% elif is_state("weather.chilleurs_aux_bois", "clear-night") %}https://i.gifer.com/IrS.gif{% elif is_state("weather.chilleurs_aux_bois", "fog") %}https://i.gifer.com/8AC8.gif{% elif is_state("weather.chilleurs_aux_bois", "rainy") %}https://i.gifer.com/FEuz.gif{% endif %}');
-              background-size: cover;
-              background-position: center;
-            }
       - type: custom:digital-clock
         dateFormat:
           weekday: short
@@ -86,22 +78,15 @@ cards:
         card_mod:
           style: |
             ha-card {
-              height: 153px ;
-              margin-left: auto;
-              margin-right: auto;
-              background-image: url(https://i.gifer.com/fxvT.gif);
-              background-size: cover;
-              background-position: center;
+              margin: auto;
+              background: url() center/cover;
               filter: opacity(100%);
-              font-family: Days One;
-              font-size: 30px;
+              font: italic 30px Days One;
               text-shadow: 20px 20px 20px black;
-              font-style: italic;
+              border: none;
+              background-image: url(https://i.gifer.com/fxvT.gif);
             }
-
-              
       - type: custom:popup-card
-        title: Meteo
         dismissable: true
         entity: weather.chilleurs_aux_bois
         card:
@@ -118,11 +103,6 @@ cards:
           snowChanceEntity: sensor.chilleurs_aux_bois_snow_chance
           alertEntity: sensor.45_weather_alert
           rainForecastEntity: sensor.chilleurs_aux_bois_next_rain
-          card_mod:
-            style: |
-              ha-card {
-                font-style: italic;
-                }
   - type: horizontal-stack
     cards:
       - type: custom:vertical-stack-in-card
@@ -147,24 +127,28 @@ cards:
               action: none
             hold_action:
               action: none
-            badge_icon: ''
-            badge_color: ''
             card_mod:
               style:
                 mushroom-state-info$: |
                   .primary {
-                    font-size: 16px !important;
+                    font-size: 14px !important;
                     position: relative;
                     top: -50px;
                     left: -155px;
                     overflow: visible !important;
                     white-space: normal !important;
+                    background-color: #00000090;
+                    width: 44%;
+                    border-radius: 5px 5px 5px 5px;
                   }
                   .secondary {
                     position: relative;
                     overflow: visible !important;
-                    top: -52px;
+                    top: -49px;
                     left: -155px;
+                    background-color: #00000090;
+                    width: 78%;
+                    border-radius: 5px 5px 5px 5px;
                   }
                 mushroom-shape-icon$: |
                   .shape {
@@ -182,50 +166,59 @@ cards:
                     top: 25px;
                   }
                   ha-card {
-                    background: none;
-                    font-style: italic;
-                    --primary-text-color: white;
-                    --secondary-text-color: white;
+                    background: none; 
                   }
           - type: custom:mushroom-chips-card
             chips:
-              - type: template
-                entity: light.le_salon
-                tap_action:
-                  action: none
-                icon: mdi:ceiling-light
-                icon_color: |-
-                  {% if is_state(entity, 'on') %} 
-                   orange
-                  {% elif is_state(entity, 'off') %} 
-                   grey
-                  {% else %}
-                   grey
-                  {% endif %}
-                hold_action:
-                  action: none
-                double_tap_action:
-                  action: none
-              - type: template
-                entity: media_player.samsung_7_series_65
-                icon: mdi:play-pause
-                icon_color: |-
-                  {% if is_state('media_player.samsung_7_series_65', 'on') %} 
-                    #03A9F4
-                  {% else %}
-                   grey
-                  {% endif %}
-                hold_action:
-                  action: none
-                double_tap_action:
-                  action: none
-                tap_action:
-                  action: none
-              - type: alarm-control-panel
-                entity: alarm_control_panel.alarmo
-                tap_action:
-                  action: none
-                content_info: none
+              - type: conditional
+                conditions:
+                  - condition: state
+                    entity: light.le_salon
+                    state: 'on'
+                chip:
+                  type: template
+                  entity: light.le_salon
+                  tap_action:
+                    action: none
+                  icon: mdi:ceiling-light
+                  icon_color: |-
+                    {% if is_state(entity, 'on') %} 
+                     orange
+                    {% endif %}
+                  hold_action:
+                    action: none
+                  double_tap_action:
+                    action: none
+              - type: conditional
+                conditions:
+                  - condition: state
+                    entity: media_player.samsung_7_series_65
+                    state: 'on'
+                chip:
+                  type: template
+                  entity: media_player.samsung_7_series_65
+                  icon: mdi:play-pause
+                  icon_color: |-
+                    {% if is_state('media_player.samsung_7_series_65', 'on') %} 
+                      orange
+                    {% endif %}
+                  hold_action:
+                    action: none
+                  double_tap_action:
+                    action: none
+                  tap_action:
+                    action: none
+              - type: conditional
+                conditions:
+                  - condition: state
+                    entity: alarm_control_panel.alarmo
+                    state: armed_away
+                chip:
+                  type: alarm-control-panel
+                  entity: alarm_control_panel.alarmo
+                  tap_action:
+                    action: none
+                  content_info: none
             card_mod:
               style:
                 .: |
@@ -250,14 +243,13 @@ cards:
         cards:
           - type: custom:mushroom-template-card
             icon: mdi:silverware-variant
-            icon_color: |-
+            icon_color: |
               {% if is_state('light.la_salle_a_manger', 'on') %}
                 #FFAE0080
               {% else %}  
                 #0000
               {% endif %}
             primary: Salle a manger
-            secondary: ''
             layout: horizontal
             tap_action:
               action: more-info
@@ -265,25 +257,31 @@ cards:
               action: none
             hold_action:
               action: none
-            badge_icon: ''
-            badge_color: ''
+            badge_icon: |+
+
+            badge_color: |+
+
             entity: light.la_salle_a_manger
             card_mod:
               style:
                 mushroom-state-info$: |
                   .primary {
-                    font-size: 16px !important;
+                    font-size: 14px !important;
                     position: relative;
                     top: -50px;
                     left: -155px;
                     overflow: visible !important;
                     white-space: normal !important;
+                    background-color: #00000090;
+                    width: 110%;
+                    border-radius: 5px 5px 5px 5px;
                   }
                   .secondary {
                     position: relative;
                     overflow: visible !important;
-                    top: -52px;
+                    top: -49px;
                     left: -155px;
+                    border-radius: 5px 5px 5px 5px;
                   }
                 mushroom-shape-icon$: |
                   .shape {
@@ -302,63 +300,78 @@ cards:
                   }
                   ha-card {
                     background: none;
-                    font-style: italic;
-                    --primary-text-color: black;
-                    --secondary-text-color: black; 
                   }
           - type: custom:mushroom-chips-card
             chips:
-              - type: template
-                entity: light.la_salle_a_manger
-                tap_action:
-                  action: none
-                icon: mdi:ceiling-light
-                icon_color: |-
-                  {% if is_state(entity, 'on') %} 
-                   orange
-                  {% elif is_state(entity, 'off') %} 
-                   grey
-                  {% else %}
-                   grey
-                  {% endif %}
-                hold_action:
-                  action: none
-                double_tap_action:
-                  action: none
-              - type: template
-                entity: switch.prise_connectee_mystrom
-                tap_action:
-                  action: none
-                icon_color: |-
-                  {% if is_state(entity, 'on') %} 
-                   orange
-                  {% elif is_state(entity, 'off') %} 
-                   grey
-                  {% else %}
-                   grey
-                  {% endif %}
-                icon: mdi:power-socket-eu
-                hold_action:
-                  action: none
-                double_tap_action:
-                  action: none
-              - type: template
-                icon_color: |-
-                  {% if is_state(entity, 'on') %} 
-                   orange
-                  {% elif is_state(entity, 'off') %} 
-                   grey
-                  {% else %}
-                   grey
-                  {% endif %}
-                icon: mdi:power-socket-eu
-                entity: switch.prise_salle_a_manger
-                tap_action:
-                  action: none
-                hold_action:
-                  action: none
-                double_tap_action:
-                  action: none
+              - type: conditional
+                conditions:
+                  - condition: state
+                    entity: light.la_salle_a_manger
+                    state: 'on'
+                chip:
+                  type: template
+                  entity: light.la_salle_a_manger
+                  tap_action:
+                    action: none
+                  icon: mdi:ceiling-light
+                  icon_color: |-
+                    {% if is_state(entity, 'on') %} 
+                     orange
+                    {% elif is_state(entity, 'off') %} 
+                     grey
+                    {% else %}
+                     grey
+                    {% endif %}
+                  hold_action:
+                    action: none
+                  double_tap_action:
+                    action: none
+              - type: conditional
+                conditions:
+                  - condition: state
+                    entity: switch.prise_connectee_mystrom
+                    state: 'on'
+                chip:
+                  type: template
+                  entity: switch.prise_connectee_mystrom
+                  tap_action:
+                    action: none
+                  icon_color: |-
+                    {% if is_state(entity, 'on') %} 
+                     orange
+                    {% elif is_state(entity, 'off') %} 
+                     grey
+                    {% else %}
+                     grey
+                    {% endif %}
+                  icon: mdi:power-socket-eu
+                  hold_action:
+                    action: none
+                  double_tap_action:
+                    action: none
+              - type: conditional
+                conditions:
+                  - condition: state
+                    entity: switch.prise_salle_a_manger
+                    state: 'on'
+                chip:
+                  type: template
+                  icon_color: |-
+                    {% if is_state(entity, 'on') %} 
+                     orange
+                    {% elif is_state(entity, 'off') %} 
+                     grey
+                    {% else %}
+                     grey
+                    {% endif %}
+                  icon: mdi:power-socket-eu
+                  entity: switch.prise_salle_a_manger
+                  tap_action:
+                    action: none
+                  hold_action:
+                    action: none
+                  double_tap_action:
+                    action: none
             card_mod:
               style:
                 .: |
@@ -384,14 +397,13 @@ cards:
           - type: custom:mushroom-template-card
             entity: light.cuisine
             icon: mdi:pot-steam
-            icon_color: |-
-              {% if is_state('light.la_cuisine', 'on') %}
+            icon_color: |
+              {% if is_state('light.cuisine', 'on') %}
                 #FFAE0080
               {% else %}  
                 #0000
               {% endif %}
             primary: Cuisine
-            secondary: ''
             layout: horizontal
             tap_action:
               action: more-info
@@ -399,24 +411,30 @@ cards:
               action: none
             hold_action:
               action: none
-            badge_icon: ''
-            badge_color: ''
+            badge_icon: |+
+
+            badge_color: |+
+
             card_mod:
               style:
                 mushroom-state-info$: |
                   .primary {
-                    font-size: 16px !important;
+                    font-size: 14px !important;
                     position: relative;
                     top: -50px;
                     left: -155px;
                     overflow: visible !important;
                     white-space: normal !important;
+                    background-color: #00000090;
+                    width: 55%;   
+                    border-radius: 5px 5px 5px 5px;
                   }
                   .secondary {
                     position: relative;
                     overflow: visible !important;
-                    top: -52px;
+                    top: -49px;
                     left: -155px;
+                    border-radius: 5px 5px 5px 5px;
                   }
                 mushroom-shape-icon$: |
                   .shape {
@@ -435,45 +453,55 @@ cards:
                   }
                   ha-card {
                     background: none;
-                    font-style: italic;
-                    --primary-text-color: black;
                   }
           - type: custom:mushroom-chips-card
             chips:
-              - type: template
-                entity: light.cuisine
-                tap_action:
-                  action: none
-                icon: mdi:vanity-light
-                icon_color: |-
-                  {% if is_state(entity, 'on') %} 
-                   orange
-                  {% elif is_state(entity, 'off') %} 
-                   grey
-                  {% else %}
-                   grey
-                  {% endif %}
-                hold_action:
-                  action: none
-                double_tap_action:
-                  action: none
-              - type: template
-                icon_color: |-
-                  {% if is_state(entity, 'on') %} 
-                   orange
-                  {% elif is_state(entity, 'off') %} 
-                   grey
-                  {% else %}
-                   grey
-                  {% endif %}
-                entity: light.plan_de_travail
-                icon: mdi:vanity-light
-                tap_action:
-                  action: none
-                hold_action:
-                  action: none
-                double_tap_action:
-                  action: none
+              - type: conditional
+                conditions:
+                  - condition: state
+                    entity: light.cuisine
+                    state: 'on'
+                chip:
+                  type: template
+                  entity: light.cuisine
+                  tap_action:
+                    action: none
+                  icon: mdi:vanity-light
+                  icon_color: |-
+                    {% if is_state(entity, 'on') %} 
+                     orange
+                    {% elif is_state(entity, 'off') %} 
+                     grey
+                    {% else %}
+                     grey
+                    {% endif %}
+                  hold_action:
+                    action: none
+                  double_tap_action:
+                    action: none
+              - type: conditional
+                conditions:
+                  - condition: state
+                    entity: light.plan_de_travail
+                    state: 'on'
+                chip:
+                  type: template
+                  icon_color: |-
+                    {% if is_state(entity, 'on') %} 
+                     orange
+                    {% elif is_state(entity, 'off') %} 
+                     grey
+                    {% else %}
+                     grey
+                    {% endif %}
+                  entity: light.plan_de_travail
+                  icon: mdi:vanity-light
+                  tap_action:
+                    action: none
+                  hold_action:
+                    action: none
+                  double_tap_action:
+                    action: none
             card_mod:
               style:
                 .: |
@@ -505,17 +533,14 @@ cards:
               show_brightness_control: true
               use_light_color: true
               show_color_control: false
-              name: ' Le salon'
               collapsible_controls: true
               icon: mdi:ceiling-light
               show_color_temp_control: true
               card_mod:
                 style: |
                   ha-card {
-                    --ha-card-background: none;
                     border: none;
-                    font-style: italic;
-                  }
+                    }
             - type: custom:mushroom-alarm-control-panel-card
               states:
                 - armed_away
@@ -524,21 +549,32 @@ cards:
               card_mod:
                 style: |
                   ha-card {
-                    --ha-card-background: none;
                     border: none;
-                    font-style: italic;
-                  }
+                    }
             - type: custom:mushroom-media-player-card
               entity: media_player.samsung_7_series_65
               name: télé salon
               card_mod:
                 style: |
                   ha-card {
-                    --ha-card-background: none;
                     border: none;
-                    font-style: italic;
+                    }
+            - type: custom:webrtc-camera
+              url: hass://supervisor?entity_id=camera.lsc_ptz_camera
+              intersection: 0.75
+              mode: webrtc,mse,mp4,mjpeg
+              camera_view: live
+              card_mod:
+                style: |
+                  ha-card {
+                   border: none;
                   }
         size: normal
+        card_mod:
+          style: |
+            ha-card {
+              border: none;
+              }
       - type: custom:popup-card
         entity: light.la_salle_a_manger
         dismissable: true
@@ -557,9 +593,7 @@ cards:
               card_mod:
                 style: |
                   ha-card {
-                    background: none;
                     border: none;
-                    font-style: italic;
                   }
             - type: horizontal-stack
               cards:
@@ -576,9 +610,7 @@ cards:
                   card_mod:
                     style: |
                       ha-card {
-                        background: none;
                         border: none;
-                        font-style: italic;
                       }
                 - type: custom:mushroom-entity-card
                   entity: switch.prise_connectee_mystrom
@@ -593,10 +625,13 @@ cards:
                   card_mod:
                     style: |
                       ha-card {
-                        background: none;
                         border: none;
-                        font-style: italic;
                       }
+        card_mod:
+          style: |
+            ha-card {
+              border: none;
+            }
       - type: custom:popup-card
         entity: light.cuisine
         dismissable: true
@@ -614,9 +649,7 @@ cards:
               card_mod:
                 style: |
                   ha-card {
-                    background: none;
                     border: none;
-                    font-style: italic;
                   }
             - type: custom:mushroom-light-card
               entity: light.plan_de_travail
@@ -629,10 +662,13 @@ cards:
               card_mod:
                 style: |
                   ha-card {
-                    background: none;
                     border: none;
-                    font-style: italic;
                   }
+        card_mod:
+          style: |
+            ha-card {
+              border: none;
+            }
   - type: horizontal-stack
     cards:
       - type: custom:vertical-stack-in-card
@@ -640,14 +676,13 @@ cards:
           - type: custom:mushroom-template-card
             entity: light.le_couloir
             icon: mdi:globe-light
-            icon_color: |-
+            icon_color: |
               {% if is_state('light.le_couloir', 'on') %}
                 #FFAE0080
               {% else %}  
                 #0000
               {% endif %}
             primary: Couloir
-            secondary: ''
             layout: horizontal
             tap_action:
               action: more-info
@@ -655,24 +690,32 @@ cards:
               action: none
             hold_action:
               action: none
-            badge_icon: ''
-            badge_color: ''
+            badge_icon: |+
+
+            badge_color: |+
+
             card_mod:
               style:
                 mushroom-state-info$: |
                   .primary {
-                    font-size: 16px !important;
+                    font-size: 14px !important;
                     position: relative;
                     top: -50px;
                     left: -155px;
                     overflow: visible !important;
                     white-space: normal !important;
+                    background-color: #00000090;
+                    width: 52%;
+                    border-radius: 5px 5px 5px 5px;
                   }
                   .secondary {
                     position: relative;
                     overflow: visible !important;
-                    top: -52px;
+                    top: -49px;
                     left: -155px;
+                    background-color: #00000090;
+                    width: 82%;
+                    border-radius: 5px 5px 5px 5px;
                   }
                 mushroom-shape-icon$: |
                   .shape {
@@ -688,32 +731,36 @@ cards:
                   mushroom-badge-icon {
                     left: 60px;
                     top: 25px;
+                    
                   }
                   ha-card {
                     background: none;
-                    font-style: italic;
-                    --primary-text-color: white;
-                    --secondary-text-color: white;
                   }
           - type: custom:mushroom-chips-card
             chips:
-              - type: template
-                entity: light.le_couloir
-                tap_action:
-                  action: none
-                icon: mdi:globe-light
-                icon_color: |-
-                  {% if is_state(entity, 'on') %} 
-                   orange
-                  {% elif is_state(entity, 'off') %} 
-                   grey
-                  {% else %}
-                   grey
-                  {% endif %}
-                hold_action:
-                  action: none
-                double_tap_action:
-                  action: none
+              - type: conditional
+                conditions:
+                  - condition: state
+                    entity: light.le_couloir
+                    state: 'on'
+                chip:
+                  type: template
+                  entity: light.le_couloir
+                  tap_action:
+                    action: none
+                  icon: mdi:globe-light
+                  icon_color: |-
+                    {% if is_state(entity, 'on') %} 
+                     orange
+                    {% elif is_state(entity, 'off') %} 
+                     grey
+                    {% else %}
+                     grey
+                    {% endif %}
+                  hold_action:
+                    action: none
+                  double_tap_action:
+                    action: none
             card_mod:
               style:
                 .: |
@@ -726,7 +773,7 @@ cards:
         card_mod:
           style: |
             ha-card {
-              height: 178px;
+              height: 178px ;
               margin-left: auto;
               margin-right: auto;
               background-image: url(https://i.ibb.co/df4LfL3/couloir.png);
@@ -753,8 +800,6 @@ cards:
               action: none
             hold_action:
               action: none
-            badge_icon: ''
-            badge_color: ''
             tap_action:
               action: more-info
             entity: light.salle_de_bain_rdc
@@ -762,18 +807,24 @@ cards:
               style:
                 mushroom-state-info$: |
                   .primary {
-                    font-size: 16px !important;
+                    font-size: 14px !important;
                     position: relative;
                     top: -50px;
                     left: -155px;
                     overflow: visible !important;
                     white-space: normal !important;
+                    background-color: #00000090;
+                    width: 115%;
+                    border-radius: 5px 5px 5px 5px;
                   }
                   .secondary {
                     position: relative;
                     overflow: visible !important;
-                    top: -52px;
+                    top: -49px;
                     left: -155px;
+                    background-color: #00000090;
+                    width: 87%;
+                    border-radius: 5px 5px 5px 5px;
                   }
                 mushroom-shape-icon$: |
                   .shape {
@@ -792,27 +843,9 @@ cards:
                   }
                   ha-card {
                     background: none;
-                    font-style: italic;
-                    --primary-text-color: black;
-                    --secondary-text-color: black;
                   }
           - type: custom:mushroom-chips-card
-            chips:
-              - type: template
-                entity: light.la_chambre_d_ethan
-                tap_action:
-                  action: toggle
-                icon: mdi:vanity-light
-                icon_color: |-
-                  {% if is_state(entity, 'on') %} 
-                   orange
-                  {% elif is_state(entity, 'off') %} 
-                   grey
-                  {% else %}
-                   grey
-                  {% endif %}
-                hold_action:
-                  action: more-info
+            chips: []
             card_mod:
               style:
                 .: |
@@ -826,7 +859,7 @@ cards:
         card_mod:
           style: |
             ha-card {
-              height: 178px;
+              height: 178px ;
               margin-left: auto;
               margin-right: auto;
               background-image: url(https://i.ibb.co/F8ZqGGg/salle-de-bain-rdc.png);
@@ -837,7 +870,7 @@ cards:
         cards:
           - type: custom:mushroom-template-card
             icon: mdi:bed
-            icon_color: |-
+            icon_color: |
               {% if is_state('light.la_chambre_parentale', 'on') %}
                 #FFAE0080
               {% else %}  
@@ -852,8 +885,10 @@ cards:
               action: none
             hold_action:
               action: none
-            badge_icon: ''
-            badge_color: ''
+            badge_icon: |+
+
+            badge_color: |+
+
             entity: light.la_chambre_parentale
             tap_action:
               action: more-info
@@ -861,18 +896,24 @@ cards:
               style:
                 mushroom-state-info$: |
                   .primary {
-                    font-size: 16px !important;
+                    font-size: 14px !important;
                     position: relative;
                     top: -50px;
                     left: -155px;
                     overflow: visible !important;
                     white-space: normal !important;
+                    background-color: #00000090;
+                    width: 130%;
+                    border-radius: 5px 5px 5px 5px;
                   }
                   .secondary {
                     position: relative;
                     overflow: visible !important;
-                    top: -52px;
+                    top: -49px;
                     left: -155px;
+                    background-color: #00000090;
+                    width: 87%;
+                    border-radius: 5px 5px 5px 5px;
                   }
                 mushroom-shape-icon$: |
                   .shape {
@@ -891,29 +932,55 @@ cards:
                   }
                   ha-card {
                     background: none;
-                    font-style: italic;
-                    --primary-text-color: white;
-                    --secondary-text-color: white;
                   }
           - type: custom:mushroom-chips-card
             chips:
-              - type: template
-                entity: light.la_chambre_parentale
-                tap_action:
-                  action: none
-                icon: mdi:ceiling-light
-                icon_color: |-
-                  {% if is_state(entity, 'on') %} 
-                   orange
-                  {% elif is_state(entity, 'off') %} 
-                   grey
-                  {% else %}
-                   grey
-                  {% endif %}
-                hold_action:
-                  action: none
-                double_tap_action:
-                  action: none
+              - type: conditional
+                conditions:
+                  - condition: state
+                    entity: light.la_chambre_parentale
+                    state: 'on'
+                chip:
+                  type: template
+                  entity: light.la_chambre_parentale
+                  tap_action:
+                    action: none
+                  icon: mdi:ceiling-light
+                  icon_color: |-
+                    {% if is_state(entity, 'on') %} 
+                     orange
+                    {% elif is_state(entity, 'off') %} 
+                     grey
+                    {% else %}
+                     grey
+                    {% endif %}
+                  hold_action:
+                    action: none
+                  double_tap_action:
+                    action: none
+              - type: conditional
+                conditions:
+                  - condition: state
+                    entity: switch.prise_romain
+                    state: 'on'
+                chip:
+                  type: template
+                  entity: switch.prise_romain
+                  tap_action:
+                    action: none
+                  icon: mdi:power-socket-eu
+                  icon_color: |-
+                    {% if is_state(entity, 'on') %} 
+                     orange
+                    {% elif is_state(entity, 'off') %} 
+                     grey
+                    {% else %}
+                     grey
+                    {% endif %}
+                  hold_action:
+                    action: none
+                  double_tap_action:
+                    action: none
             card_mod:
               style:
                 .: |
@@ -927,7 +994,7 @@ cards:
         card_mod:
           style: |
             ha-card {
-              height: 178px;
+              height: 178px ;
               margin-left: auto;
               margin-right: auto;
               background-image: url(https://i.ibb.co/1JSvK9C/chambre-parentale.png);
@@ -943,72 +1010,39 @@ cards:
           show_brightness_control: true
           use_light_color: true
           show_color_control: false
-          name: ' Le couloir'
           collapsible_controls: true
           icon: mdi:globe-light
           show_color_temp_control: true
           card_mod:
             style: |
               ha-card {
-                background: none;
                 border: none;
-                font-style: italic;
               }
+        card_mod:
+          style: |
+            ha-card {
+              border: none;
+            }
       - type: custom:popup-card
         dismissable: true
         entity: salle_de_bain_rdc
         card:
           type: vertical-stack
           cards:
-            - icon: ''
-              type: custom:mushroom-light-card
+            - type: custom:mushroom-light-card
               show_brightness_control: true
               use_light_color: true
               show_color_control: false
-              name: ' '
               collapsible_controls: true
               card_mod:
                 style: |
                   ha-card {
-                    background: none;
                     border: none;
                   }
-                  mushroom-light-brightness-control {
-                    position: absolute;
-                    width: 65% !important;
-                    height: 20px;
-                    right: 10px;
-                  }
-                  mushroom-light-brightness-control:after {
-                    content: "{{ state_attr(config.entity, 'friendly_name') }}";
-                    position: relative;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    color: #000000;
-                    font-weight: bolder;
-                    top: -29px;
-                    right: 1%;
-                    width: 65%;
-                    height: 16px;
-                    font-size: 14px;
-                    pointer-events: none;
-                  }
-                  {% if states(config.entity) == 'off' %}
-                    mushroom-state-info:before {
-                      content: "{{ state_attr(config.entity, 'friendly_name') }}";
-                      font-size: 14px;
-                      color: var(--card-primary-text-color);
-                      font-weight: bolder;
-                    }
-                  {% else %}
-                  {% endif %}
         card_mod:
           style: |
             ha-card {
-              --ha-card-background: none;
-              font-style: italic;
-              --ha-card-border: none;
+              border: none;
             }
       - type: custom:popup-card
         dismissable: true
@@ -1028,9 +1062,7 @@ cards:
               card_mod:
                 style: |
                   ha-card {
-                    background: none;
                     border: none;
-                    font-style: italic;
                   }
             - type: custom:mushroom-entity-card
               entity: switch.prise_romain
@@ -1040,10 +1072,13 @@ cards:
               card_mod:
                 style: |
                   ha-card {
-                    background: none;
                     border: none;
-                    font-style: italic;
                   }
+        card_mod:
+          style: |
+            ha-card {
+              border: none;
+            }
   - type: horizontal-stack
     cards:
       - type: custom:vertical-stack-in-card
@@ -1053,7 +1088,7 @@ cards:
             icon_color: |
               {% if is_state('light.la_chambre_d_amis', 'on') %}
                 #FFAE0080
-              {% else %}
+              {% else %}  
                 #0000
               {% endif %}
             primary: Chambre d'amis
@@ -1065,8 +1100,10 @@ cards:
               action: none
             hold_action:
               action: none
-            badge_icon: ''
-            badge_color: ''
+            badge_icon: |+
+
+            badge_color: |+
+
             entity: light.la_chambre_d_amis
             tap_action:
               action: more-info
@@ -1074,18 +1111,24 @@ cards:
               style:
                 mushroom-state-info$: |
                   .primary {
-                    font-size: 16px !important;
+                    font-size: 14px !important;
                     position: relative;
                     top: -50px;
                     left: -155px;
                     overflow: visible !important;
                     white-space: normal !important;
+                    background-color: #00000090;
+                    width: 110%;
+                    border-radius: 5px 5px 5px 5px;
                   }
                   .secondary {
                     position: relative;
                     overflow: visible !important;
-                    top: -52px;
+                    top: -49px;
                     left: -155px;
+                    background-color: #00000090;
+                    width: 87%;
+                    border-radius: 5px 5px 5px 5px;
                   }
                 mushroom-shape-icon$: |
                   .shape {
@@ -1103,30 +1146,33 @@ cards:
                     top: 25px;
                   }
                   ha-card {
-                    background: #0000;
-                    font-style: italic;
-                    --primary-text-color: black;
-                    --secondary-text-color: black;
+                    background: none;
                   }
           - type: custom:mushroom-chips-card
             chips:
-              - type: template
-                entity: light.la_chambre_d_amis
-                tap_action:
-                  action: none
-                icon: mdi:ceiling-light
-                icon_color: |-
-                  {% if is_state(entity, 'on') %} 
-                   orange
-                  {% elif is_state(entity, 'off') %} 
-                   grey
-                  {% else %}
-                   grey
-                  {% endif %}
-                hold_action:
-                  action: none
-                double_tap_action:
-                  action: none
+              - type: conditional
+                conditions:
+                  - condition: state
+                    entity: light.la_chambre_d_amis
+                    state: 'on'
+                chip:
+                  type: template
+                  entity: light.la_chambre_d_amis
+                  tap_action:
+                    action: none
+                  icon: mdi:ceiling-light
+                  icon_color: |-
+                    {% if is_state(entity, 'on') %} 
+                     orange
+                    {% elif is_state(entity, 'off') %} 
+                     grey
+                    {% else %}
+                     grey
+                    {% endif %}
+                  hold_action:
+                    action: none
+                  double_tap_action:
+                    action: none
             card_mod:
               style:
                 .: |
@@ -1140,7 +1186,7 @@ cards:
         card_mod:
           style: |
             ha-card {
-              height: 178px;
+              height: 178px ;
               margin-left: auto;
               margin-right: auto;
               background-image: url(https://i.ibb.co/PTCWJ0d/chambredamis.png);
@@ -1154,10 +1200,10 @@ cards:
             icon_color: |
               {% if is_state('light.la_chambre_de_rox', 'on') %}
                 #FFAE0080
-              {% else %}
+              {% else %}  
                 #0000
               {% endif %}
-            primary: Chambre de Rox
+            primary: Chambre rox
             secondary: >-
               {{ states('sensor.thermometre_salon_temperature') }}°C/{{
               states('sensor.thermometre_salon_humidity') }}%
@@ -1166,8 +1212,10 @@ cards:
               action: none
             hold_action:
               action: none
-            badge_icon: ''
-            badge_color: ''
+            badge_icon: |+
+
+            badge_color: |+
+
             entity: light.la_chambre_de_rox
             tap_action:
               action: more-info
@@ -1175,18 +1223,24 @@ cards:
               style:
                 mushroom-state-info$: |
                   .primary {
-                    font-size: 16px !important;
+                    font-size: 14px !important;
                     position: relative;
                     top: -50px;
                     left: -155px;
                     overflow: visible !important;
                     white-space: normal !important;
+                    background-color: #00000090;
+                    width: 95%;
+                    border-radius: 5px 5px 5px 5px;
                   }
                   .secondary {
                     position: relative;
                     overflow: visible !important;
-                    top: -52px;
+                    top: -49px;
                     left: -155px;
+                    background-color: #00000090;
+                    width: 87%;
+                    border-radius: 5px 5px 5px 5px;
                   }
                 mushroom-shape-icon$: |
                   .shape {
@@ -1205,29 +1259,32 @@ cards:
                   }
                   ha-card {
                     background: none;
-                    font-style: italic;
-                    --primary-text-color: black;
-                    --secondary-text-color: black;
                   }
           - type: custom:mushroom-chips-card
             chips:
-              - type: template
-                entity: light.la_chambre_de_rox
-                tap_action:
-                  action: none
-                icon: mdi:ceiling-light
-                icon_color: |-
-                  {% if is_state(entity, 'on') %} 
-                   orange
-                  {% elif is_state(entity, 'off') %} 
-                   grey
-                  {% else %}
-                   grey
-                  {% endif %}
-                hold_action:
-                  action: none
-                double_tap_action:
-                  action: none
+              - type: conditional
+                conditions:
+                  - condition: state
+                    entity: light.la_chambre_de_rox
+                    state: 'on'
+                chip:
+                  type: template
+                  entity: light.la_chambre_de_rox
+                  tap_action:
+                    action: none
+                  icon: mdi:ceiling-light
+                  icon_color: |-
+                    {% if is_state(entity, 'on') %} 
+                     orange
+                    {% elif is_state(entity, 'off') %} 
+                     grey
+                    {% else %}
+                     grey
+                    {% endif %}
+                  hold_action:
+                    action: none
+                  double_tap_action:
+                    action: none
             card_mod:
               style:
                 .: |
@@ -1241,7 +1298,7 @@ cards:
         card_mod:
           style: |
             ha-card {
-              height: 178px;
+              height: 178px ;
               margin-left: auto;
               margin-right: auto;
               background-image: url(https://i.ibb.co/xSGC5pv/chambre-rox.png);
@@ -1268,8 +1325,6 @@ cards:
               action: none
             hold_action:
               action: none
-            badge_icon: ''
-            badge_color: ''
             tap_action:
               action: more-info
             entity: light.palier
@@ -1277,18 +1332,24 @@ cards:
               style:
                 mushroom-state-info$: |
                   .primary {
-                    font-size: 16px !important;
+                    font-size: 14px !important;
                     position: relative;
                     top: -50px;
                     left: -155px;
                     overflow: visible !important;
                     white-space: normal !important;
+                    background-color: #00000090;
+                    width: 45%;
+                    border-radius: 5px 5px 5px 5px;
                   }
                   .secondary {
                     position: relative;
                     overflow: visible !important;
-                    top: -52px;
+                    top: -49px;
                     left: -155px;
+                    background-color: #00000090;
+                    width: 87%;
+                    border-radius: 5px 5px 5px 5px;
                   }
                 mushroom-shape-icon$: |
                   .shape {
@@ -1307,31 +1368,32 @@ cards:
                   }
                   ha-card {
                     background: none;
-                    font-style: italic;
-                    --primary-text-color: black;
-                    --secondary-text-color: black;
                   }
           - type: custom:mushroom-chips-card
             chips:
-              - type: template
-                entity: light.placard_etage
-                tap_action:
-                  action: none
-                icon: mdi:vanity-light
-                icon_color: |-
-                  {% if is_state(entity, 'on') %} 
-                   orange
-                  {% elif is_state(entity, 'off') %} 
-                   grey
-                  {% else %}
-                   grey
-                  {% endif %}
-                hold_action:
-                  action: none
-                double_tap_action:
-                  action: none
-              - type: template
-                icon: mdi:vanity-light
+              - type: conditional
+                conditions:
+                  - condition: state
+                    entity: light.placard_etage
+                    state: 'on'
+                chip:
+                  type: template
+                  entity: light.placard_etage
+                  tap_action:
+                    action: none
+                  icon: mdi:vanity-light
+                  icon_color: |-
+                    {% if is_state(entity, 'on') %} 
+                     orange
+                    {% elif is_state(entity, 'off') %} 
+                     grey
+                    {% else %}
+                     grey
+                    {% endif %}
+                  hold_action:
+                    action: none
+                  double_tap_action:
+                    action: none
             card_mod:
               style:
                 .: |
@@ -1370,10 +1432,13 @@ cards:
               card_mod:
                 style: |
                   ha-card {
-                    background: none;
                     border: none;
-                    font-style: italic;
                   }
+        card_mod:
+          style: |
+            ha-card {
+              border: none;
+            }
       - type: custom:popup-card
         dismissable: true
         entity: light.la_chambre_de_rox
@@ -1385,17 +1450,20 @@ cards:
               show_brightness_control: true
               use_light_color: true
               show_color_control: false
-              name: ' La chambre de rox'
+              name: La chambre de rox
               collapsible_controls: true
               icon: mdi:ceiling-light
               show_color_temp_control: true
               card_mod:
                 style: |
                   ha-card {
-                    background: none;
                     border: none;
-                    font-style: italic;
                   }
+        card_mod:
+          style: |
+            ha-card {
+              border: none;
+            }
       - type: custom:popup-card
         entity: light.palier
         dismissable: true
@@ -1407,59 +1475,30 @@ cards:
               show_brightness_control: true
               use_light_color: true
               show_color_control: false
-              name: ' Placard étage'
+              name: Placard étage
               collapsible_controls: true
               show_color_temp_control: true
               card_mod:
                 style: |
                   ha-card {
-                    background: none;
                     border: none;
-                    font-style:italic;
                   }
             - type: custom:mushroom-light-card
               show_brightness_control: true
               layout: horizontal
               use_light_color: true
               show_color_control: false
-              name: ' '
               collapsible_controls: true
               card_mod:
                 style: |
                   ha-card {
-                    background: none !important;
-                    border: none !important;
+                    border: none;
                   }
-                  mushroom-light-brightness-control {
-                    position: absolute;
-                    width: 65% !important;
-                    height: 20px;
-                    right: 10px;
-                  }
-                  mushroom-light-brightness-control:after {
-                    content: "{{ state_attr(config.entity, 'friendly_name') }}";
-                    position: relative;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    color: #000000;
-                    font-weight: bolder;
-                    top: -29px;
-                    right: 1%;
-                    width: 65%;
-                    height: 16px;
-                    font-size: 14px;
-                    pointer-events: none;
-                  }
-                  {% if states(config.entity) == 'off' %}
-                    mushroom-state-info:before {
-                      content: "{{ state_attr(config.entity, 'friendly_name') }}";
-                      font-size: 14px;
-                      color: var(--card-primary-text-color);
-                      font-weight: bolder;
-                    }
-                  {% else %}
-                  {% endif %}
+        card_mod:
+          style: |
+            ha-card {
+              border: none;
+            }
   - type: horizontal-stack
     cards:
       - type: custom:vertical-stack-in-card
@@ -1482,8 +1521,6 @@ cards:
               action: none
             hold_action:
               action: none
-            badge_icon: ''
-            badge_color: ''
             tap_action:
               action: more-info
             entity: light.salle_de_bain_etage
@@ -1491,18 +1528,24 @@ cards:
               style:
                 mushroom-state-info$: |
                   .primary {
-                    font-size: 16px !important;
+                    font-size: 14px !important;
                     position: relative;
                     top: -50px;
                     left: -155px;
                     overflow: visible !important;
                     white-space: normal !important;
+                    background-color: #00000090;
+                    width: 130%;
+                    border-radius: 5px 5px 5px 5px;
                   }
                   .secondary {
                     position: relative;
                     overflow: visible !important;
-                    top: -52px;
+                    top: -49px;
                     left: -155px;
+                    background-color: #00000090;
+                    width: 87%;
+                    border-radius: 5px 5px 5px 5px;
                   }
                 mushroom-shape-icon$: |
                   .shape {
@@ -1521,25 +1564,9 @@ cards:
                   }
                   ha-card {
                     background: none;
-                    font-style: italic;
-                    --primary-text-color: black;
-                    --secondary-text-color: black;
                   }
           - type: custom:mushroom-chips-card
-            chips:
-              - type: template
-                entity: light.la_chambre_d_ethan
-                tap_action:
-                  action: toggle
-                icon: mdi:vanity-light
-                icon_color: |-
-                  {% if is_state('light.la_chambre_d_ethan', 'on') %} 
-                   orange
-                  {% else %} 
-                   grey
-                  {% endif %}
-                hold_action:
-                  action: more-info
+            chips: []
             card_mod:
               style:
                 .: |
@@ -1570,7 +1597,7 @@ cards:
               {% else %}  
                 #0000
               {% endif %}
-            primary: Chambre d'Ethan
+            primary: Chambre d'ethan
             secondary: >-
               {{ states('sensor.thermometre_salon_temperature') }}°C/{{
               states('sensor.thermometre_salon_humidity') }}%
@@ -1579,27 +1606,33 @@ cards:
               action: none
             hold_action:
               action: none
-            badge_icon: ''
-            badge_color: ''
+            badge_icon: |+
+
+            badge_color: |+
+
             entity: light.la_chambre_d_ethan
-            tap_action:
-              action: more-info
             card_mod:
               style:
                 mushroom-state-info$: |
                   .primary {
-                    font-size: 16px !important;
+                    font-size: 14px !important;
                     position: relative;
                     top: -50px;
                     left: -155px;
                     overflow: visible !important;
                     white-space: normal !important;
+                    background-color: #00000090;
+                    width: 115%;
+                    border-radius: 5px 5px 5px 5px;
                   }
                   .secondary {
                     position: relative;
                     overflow: visible !important;
-                    top: -52px;
+                    top: -49px;
                     left: -155px;
+                    background-color: #00000090;
+                    width: 87%;
+                    border-radius: 5px 5px 5px 5px;
                   }
                 mushroom-shape-icon$: |
                   .shape {
@@ -1618,27 +1651,34 @@ cards:
                   }
                   ha-card {
                     background: none;
-                    font-style: italic;
-                    --primary-text-color: white;
-                    --secondary-text-color: white;
                   }
+            tap_action:
+              action: more-info
           - type: custom:mushroom-chips-card
             chips:
-              - type: template
-                entity: light.la_chambre_d_ethan
-                tap_action:
-                  action: none
-                icon: mdi:ceiling-light
-                icon_color: |-
-                  {% if is_state('light.la_chambre_d_ethan', 'on') %} 
-                   orange
-                  {% else %} 
-                   grey
-                  {% endif %}
-                hold_action:
-                  action: none
-                double_tap_action:
-                  action: none
+              - type: conditional
+                conditions:
+                  - condition: state
+                    entity: light.la_chambre_d_ethan
+                    state: 'on'
+                chip:
+                  type: template
+                  entity: light.la_chambre_d_ethan
+                  tap_action:
+                    action: none
+                  icon: mdi:ceiling-light
+                  icon_color: |-
+                    {% if is_state(entity, 'on') %} 
+                     orange
+                    {% elif is_state(entity, 'off') %} 
+                     grey
+                    {% else %}
+                     grey
+                    {% endif %}
+                  hold_action:
+                    action: none
+                  double_tap_action:
+                    action: none
             card_mod:
               style:
                 .: |
@@ -1669,7 +1709,7 @@ cards:
               {% else %}  
                 #0000
               {% endif %}
-            primary: Chambre de Nathan
+            primary: Chambre nathan
             secondary: >-
               {{ states('sensor.thermometre_salon_temperature') }}°C/{{
               states('sensor.thermometre_salon_humidity') }}%
@@ -1678,8 +1718,10 @@ cards:
               action: none
             hold_action:
               action: none
-            badge_icon: ''
-            badge_color: ''
+            badge_icon: |+
+
+            badge_color: |+
+
             entity: light.la_chambre_de_nathan
             tap_action:
               action: more-info
@@ -1687,18 +1729,24 @@ cards:
               style:
                 mushroom-state-info$: |
                   .primary {
-                    font-size: 16px !important;
+                    font-size: 14px !important;
                     position: relative;
                     top: -50px;
                     left: -155px;
                     overflow: visible !important;
                     white-space: normal !important;
+                    background-color: #00000090;
+                    width: 115%;
+                    border-radius: 5px 5px 5px 5px;
                   }
                   .secondary {
                     position: relative;
                     overflow: visible !important;
-                    top: -52px;
+                    top: -49px;
                     left: -155px;
+                    background-color: #00000090;
+                    width: 85%;
+                    border-radius: 5px 5px 5px 5px;
                   }
                 mushroom-shape-icon$: |
                   .shape {
@@ -1717,50 +1765,70 @@ cards:
                   }
                   ha-card {
                     background: none;
-                    font-style: italic;
-                    --primary-text-color:  white;
-                    --secondary-text-color:   white;
                   }
           - type: custom:mushroom-chips-card
             chips:
-              - type: template
-                entity: light.la_chambre_de_nathan
-                tap_action:
-                  action: none
-                icon: mdi:ceiling-light
-                icon_color: |-
-                  {% if is_state('light.la_chambre_de_nathan', 'on') %} 
-                   orange
-                  {% else %} 
-                   grey
-                  {% endif %}
-                hold_action:
-                  action: none
-                double_tap_action:
-                  action: none
-              - type: template
-                entity: media_player.tele_nathan_2
-                icon: mdi:play-pause
-                icon_color: |-
-                  {% if is_state('media_player.tele_nathan_2', 'on') %} 
-                    #03A9F4
-                  {% else %}
-                   grey
-                  {% endif %}
-                tap_action:
-                  action: none
-                hold_action:
-                  action: none
-                double_tap_action:
-                  action: none
-              - type: template
-                icon: mdi:school
-                icon_color: |-
-                  {% if is_state('sensor.pronote_NOM PRENOM', 'on') %} 
-                   orange
-                  {% else %} 
-                   grey
-                  {% endif %}
+              - type: conditional
+                conditions:
+                  - condition: state
+                    entity: light.la_chambre_de_nathan
+                    state: 'on'
+                chip:
+                  type: template
+                  entity: light.la_chambre_de_nathan
+                  tap_action:
+                    action: none
+                  icon: mdi:ceiling-light
+                  icon_color: |-
+                    {% if is_state(entity, 'on') %} 
+                     orange
+                    {% elif is_state(entity, 'off') %} 
+                     grey
+                    {% else %}
+                     grey
+                    {% endif %}
+                  hold_action:
+                    action: none
+                  double_tap_action:
+                    action: none
+              - type: conditional
+                conditions:
+                  - condition: state
+                    entity: media_player.tele_nathan_2
+                    state: 'on'
+                chip:
+                  type: template
+                  entity: media_player.tele_nathan_2
+                  icon: mdi:play-pause
+                  icon_color: |-
+                    {% if is_state('media_player.tele_nathan_2', 'on') %} 
+                      orange
+                    {% else %}
+                     grey
+                    {% endif %}
+                  tap_action:
+                    action: none
+                  hold_action:
+                    action: none
+                  double_tap_action:
+                    action: none
+              - type: conditional
+                conditions:
+                  - condition: state
+                    entity: binary_sensor.workday_sensor
+                    state: 'on'
+                chip:
+                  type: template
+                  icon: mdi:school
+                  icon_color: |-
+                    {% if is_state(entity, 'on') %} 
+                     orange
+                    {% elif is_state(entity, 'off') %} 
+                     grey
+                    {% else %}
+                     grey
+                    {% endif %}
+                  entity: binary_sensor.workday_sensor
             card_mod:
               style:
                 .: |
@@ -1787,31 +1855,7 @@ cards:
         card:
           type: vertical-stack
           cards:
-            - entities:
-                - entities:
-                    - entity: sensor.capteur_ouverture_porte_d_entree_battery
-                    - entity: sensor.thermometre_salon_battery
-                  head:
-                    type: section
-                    label: Batterie capteurs/thermometres
-                  type: custom:fold-entity-row
-              type: entities
-              card_mod:
-                style: |
-                  :host {
-                    --divider-color: #0000;
-                  }
-                  ha-card {
-                   color: white;
-                   background: none;
-                   border: none;
-                   font-style: italic;
-                  }
-                   .card-header {
-                   font-size: 26px;
-                  }
-            - icon: ''
-              type: custom:mushroom-light-card
+            - type: custom:mushroom-light-card
               show_brightness_control: true
               layout: horizontal
               use_light_color: true
@@ -1823,38 +1867,12 @@ cards:
                   ha-card {
                     background: none;
                     border: none;
-                    font-style: italic;
                   }
-                  mushroom-light-brightness-control {
-                    position: absolute;
-                    width: 65% !important;
-                    height: 20px;
-                    right: 10px;
-                  }
-                  mushroom-light-brightness-control:after {
-                    content: "{{ state_attr(config.entity, 'friendly_name') }}";
-                    position: relative;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    color: #000000;
-                    font-weight: bolder;
-                    top: -29px;
-                    right: 1%;
-                    width: 65%;
-                    height: 16px;
-                    font-size: 14px;
-                    pointer-events: none;
-                  }
-                  {% if states(config.entity) == 'off' %}
-                    mushroom-state-info:before {
-                      content: "{{ state_attr(config.entity, 'friendly_name') }}";
-                      font-size: 14px;
-                      color: var(--card-primary-text-color);
-                      font-weight: bolder;
-                    }
-                  {% else %}
-                  {% endif %}
+        card_mod:
+          style: |
+            ha-card {
+              border: none;
+            }
       - type: custom:popup-card
         dismissable: true
         entity: light.la_chambre_d_ethan
@@ -1873,10 +1891,13 @@ cards:
               card_mod:
                 style: |
                   ha-card {
-                    background: none;
                     border: none;
-                    font-style: italic;
                   }
+        card_mod:
+          style: |
+            ha-card {
+              border: none;
+            }
       - type: custom:popup-card
         dismissable: true
         entity: light.la_chambre_de_nathan
@@ -1895,9 +1916,7 @@ cards:
               card_mod:
                 style: |
                   ha-card {
-                    background: none;
                     border: none;
-                    font-style: italic;
                   }
             - type: custom:mushroom-media-player-card
               entity: media_player.tele_nathan_2
@@ -1908,9 +1927,7 @@ cards:
               card_mod:
                 style: |
                   ha-card {
-                    background: none;
                     border: none;
-                    font-style: italic;
                   }
             - type: custom:tabbed-card
               title: menu cantine nathan
@@ -3091,3 +3108,8 @@ cards:
                                 tr:nth-child(n+2) > td:nth-child(2) {
                                   text-align: center;
                                 }
+        card_mod:
+          style: |
+            ha-card {
+              border: none;
+            }
