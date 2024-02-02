@@ -6,6 +6,7 @@ update:<br>
 28/01/2024: nettoyage du code[terminer]<br>
 31/01/2024: maintenant le background animé de la carte meteo change en foction de l'état du sensor et ajout du background animé sur la carte horloge (les gif ou images peuvent être changer dans background-image: url(l'url de l'image);[terminer]<br>
 01/02/2024: redaction d'un tuto d'installation[terminer]<br>
+02/02/2024: meilleur optimisation et nettoyage du code , remplacement chip-card par des chip-card-conditionel , ajout d'un fond pour les informations primaires et secondaires pour une meilleur visibilitée sur le background de la carte[terminer]<br> 
 <br>
 update en cours:<br>
 01/01/2024: résolution des problemes de ressources rencontré pour certain apareils [en cours]<br>
