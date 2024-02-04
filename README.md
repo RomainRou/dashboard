@@ -5,7 +5,7 @@ un tuto pour l'installation est dispo en bas de page<br>
 update:<br>
 28/01/2024: nettoyage du code[terminer]<br>
 31/01/2024: maintenant le background animé de la carte meteo change en foction de l'état du sensor et ajout du background animé sur la carte horloge (les gif ou images peuvent être changer dans background-image: url(l'url de l'image);<br>
-<b> &#x26A0; Attention il faut modifier la ligne 68 avec le nom de votre ville pour que le changement d'images sois pris en compte</b>[terminer]<br>
+<b> &#x26A0; <U>Attention il faut modifier la ligne 68 avec le nom de votre ville pour que le changement d'images sois pris en compte</U></b>[terminer]<br>
 01/02/2024: redaction d'un tuto d'installation[terminer]<br>
 02/02/2024: meilleur optimisation et nettoyage du code , remplacement chip-card par des chip-card-conditionel , ajout d'un fond pour les informations primaires et secondaires pour une meilleur visibilitée sur le background de la carte[terminer]<br> 
 <br>
