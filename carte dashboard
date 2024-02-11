@@ -1,22 +1,23 @@
 type: vertical-stack
 cards:
-  - type: horizontal-stack
+  - type: horizontal-stack #première ligne de carte
     cards:
       - type: custom:vertical-stack-in-card
         cards:
+            #carte meteo france, les entités pour permettre le changement de background est a changer aussi ligne 68
           - type: custom:mushroom-template-card
-            entity: weather.chilleurs_aux_bois
+            entity: weather.VOTRE VILLE #entité avec meteo france
             icon: mdi:theme-light-dark
-            icon_color: |
+            icon_color: | 
               {% if is_state('binary_sensor.il_fait_nuit', 'off') %}
-                #80808080
+                #80808080 
               {% else %}  
                 #FFAE0080
               {% endif %}
             primary: Meteo
-            secondary: >-
-              {{ states('sensor.chilleurs_aux_bois_temperature') }}°C/{{
-              states('sensor.chilleurs_aux_bois_humidity') }}%
+            secondary: >- #sensor a modifier en fonction de la ville
+              {{ states('sensor.VOTRE VILLE_temperature') }}°C/{{
+              states('sensor.VOTRE VILLE_humidity') }}%
             layout: horizontal
             tap_action:
               action: more-info
@@ -28,14 +29,13 @@ cards:
               style:
                 mushroom-state-info$: |
                   .primary {
-                    font-size: 16px !important;
                     position: relative;
                     top: -50px;
                     left: -155px;
                     overflow: visible !important;
                     white-space: normal !important;
-                    background-color: #00000090;
-                    width: 20%;
+                    background-color: #00000090; 
+                    width: 20%;   
                     border-radius: 5px 5px 5px 5px;
                   }
                   .secondary {
@@ -65,8 +65,12 @@ cards:
                   ha-card {
                     height: 153px;
                     margin: auto;
-                    background-image: url('{% if is_state("weather.chilleurs_aux_bois", "sunny") %}https://i.pinimg.com/originals/d8/a2/ee/d8a2eee27b91f50078645085e4057f3c.gif{% elif is_state("weather.chilleurs_aux_bois", "partlycloudy") %}https://i.gifer.com/g1vA.gif{% elif is_state("weather.chilleurs_aux_bois", "cloudy") %}https://i.gifer.com/g1vA.gif{% elif is_state("weather.chilleurs_aux_bois", "mostlycloudy") %}https://i.gifer.com/Lx0q.gif{% elif is_state("weather.chilleurs_aux_bois", "clear-night") %}https://i.gifer.com/IrS.gif{% elif is_state("weather.chilleurs_aux_bois", "fog") %}https://i.gifer.com/8AC8.gif{% elif is_state("weather.chilleurs_aux_bois", "rainy") %}https://i.gifer.com/FEuz.gif{% endif %}');
+                    background-image: url('{% if is_state("weather.VOTRE VILLE", "sunny") %}https://i.pinimg.com/originals/d8/a2/ee/d8a2eee27b91f50078645085e4057f3c.gif{% elif is_state("weather.VOTRE VILLE", "partlycloudy") %}https://i.gifer.com/g1vA.gif{% elif is_state("weather.VOTRE VILLE", "cloudy") %}https://i.gifer.com/g1vA.gif{% elif is_state("weather.VOTRE VILLE", "mostlycloudy") %}https://i.gifer.com/Lx0q.gif{% elif is_state("weather.VOTRE VILLE", "clear-night") %}https://i.gifer.com/IrS.gif{% elif is_state("weather.VOTRE VILLE", "fog") %}https://i.gifer.com/8AC8.gif{% elif is_state("weather.VOTRE VILLE", "rainy") %}https://i.gifer.com/FEuz.gif{% endif %}');
+                    background-size: cover;
+                    background-position: center;
+                    display: flex;
                   }
+      #carte date et heure
       - type: custom:digital-clock
         dateFormat:
           weekday: short
@@ -78,35 +82,43 @@ cards:
         card_mod:
           style: |
             ha-card {
-              margin: auto;
-              background: url() center/cover;
-              filter: opacity(100%);
-              font: italic 30px Days One;
-              text-shadow: 20px 20px 20px black;
-              border: none;
+              height: 153px ;
+              margin-left: auto;
+              margin-right: auto;
               background-image: url(https://i.gifer.com/fxvT.gif);
+              background-size: cover;
+              background-position: center;
+              filter: opacity(100%);
+              font-family: Days One;
+              font-size: 30px;
+              text-shadow: 20px 20px 20px black;
+              font-style: italic;
             }
+      #carte popup meteo
       - type: custom:popup-card
         dismissable: true
-        entity: weather.chilleurs_aux_bois
+        entity: weather.VOTRE VILLE #entité avec météo france
         card:
           type: custom:meteofrance-weather-card
-          entity: weather.chilleurs_aux_bois
+          entity: weather.VOTRE VILLE #entité avec météo france
           details: true
           forecast: true
           hourly_forecast: false
           current: true
-          rainChanceEntity: sensor.chilleurs_aux_bois_rain_chance
-          uvEntity: sensor.chilleurs_aux_bois_uv
-          cloudCoverEntity: sensor.chilleurs_aux_bois_cloud_cover
-          freezeChanceEntity: sensor.chilleurs_aux_bois_freeze_chance
-          snowChanceEntity: sensor.chilleurs_aux_bois_snow_chance
-          alertEntity: sensor.45_weather_alert
-          rainForecastEntity: sensor.chilleurs_aux_bois_next_rain
+          rainChanceEntity: sensor.VOTRE VILLE_rain_chance #entité avec météo france
+          uvEntity: sensor.VOTRE VILLE_uv #entité avec météo france
+          cloudCoverEntity: sensor.VOTRE VILLE_cloud_cover #entité avec météo france
+          freezeChanceEntity: sensor.VOTRE VILLE_freeze_chance #entité avec météo france
+          snowChanceEntity: sensor.VOTRE VILLE_snow_chance #entité avec météo france
+          alertEntity: sensor.45_weather_alert #entité avec météo france
+          rainForecastEntity: sensor.VOTRE VILLE_next_rain #entité avec météo france
+        title: Meteo
+  #2 eme ligne de cartes
   - type: horizontal-stack
     cards:
       - type: custom:vertical-stack-in-card
         cards:
+          #carte salon
           - type: custom:mushroom-template-card
             entity: light.le_salon
             icon: mdi:sofa
@@ -131,7 +143,6 @@ cards:
               style:
                 mushroom-state-info$: |
                   .primary {
-                    font-size: 14px !important;
                     position: relative;
                     top: -50px;
                     left: -155px;
@@ -233,18 +244,20 @@ cards:
           style: |
             ha-card {
               height: 178px ;
-              margin-left: auto;
-              margin-right: auto;
+              margin: auto;
               background-image: url(https://i.ibb.co/NjM7Dd6/salon.png);
               background-size: cover;
               background-position: center;
             }
       - type: custom:vertical-stack-in-card
         cards:
+          #carte salle a manger
           - type: custom:mushroom-template-card
             icon: mdi:silverware-variant
-            icon_color: |
-              {% if is_state('light.la_salle_a_manger', 'on') %}
+            icon_color: >-
+              {% if is_state('light.la_salle_a_manger', 'on') or
+              is_state('switch.prise_connectee_mystrom', 'on') or
+              is_state('switch.prise_salle_a_manger', 'on') %}
                 #FFAE0080
               {% else %}  
                 #0000
@@ -262,11 +275,11 @@ cards:
             badge_color: |+
 
             entity: light.la_salle_a_manger
+            secondary: ''
             card_mod:
               style:
                 mushroom-state-info$: |
                   .primary {
-                    font-size: 14px !important;
                     position: relative;
                     top: -50px;
                     left: -155px;
@@ -394,6 +407,7 @@ cards:
             }
       - type: custom:vertical-stack-in-card
         cards:
+          #carte cuisine
           - type: custom:mushroom-template-card
             entity: light.cuisine
             icon: mdi:pot-steam
@@ -419,7 +433,6 @@ cards:
               style:
                 mushroom-state-info$: |
                   .primary {
-                    font-size: 14px !important;
                     position: relative;
                     top: -50px;
                     left: -155px;
@@ -454,6 +467,7 @@ cards:
                   ha-card {
                     background: none;
                   }
+            secondary: ''
           - type: custom:mushroom-chips-card
             chips:
               - type: conditional
@@ -522,8 +536,9 @@ cards:
               background-size: cover;
               background-position: center;
             }
+      #carte popup salon      
       - type: custom:popup-card
-        entity: light.le_salon
+        entity: light.le_salon #cette entité dois etre la meme que la carte salon
         dismissable: true
         card:
           type: vertical-stack
@@ -536,47 +551,19 @@ cards:
               collapsible_controls: true
               icon: mdi:ceiling-light
               show_color_temp_control: true
-              card_mod:
-                style: |
-                  ha-card {
-                    border: none;
-                    }
             - type: custom:mushroom-alarm-control-panel-card
               states:
                 - armed_away
                 - armed_night
               entity: alarm_control_panel.alarmo
-              card_mod:
-                style: |
-                  ha-card {
-                    border: none;
-                    }
             - type: custom:mushroom-media-player-card
               entity: media_player.samsung_7_series_65
               name: télé salon
-              card_mod:
-                style: |
-                  ha-card {
-                    border: none;
-                    }
-            - type: custom:webrtc-camera
-              url: hass://supervisor?entity_id=camera.lsc_ptz_camera
-              intersection: 0.75
-              mode: webrtc,mse,mp4,mjpeg
-              camera_view: live
-              card_mod:
-                style: |
-                  ha-card {
-                   border: none;
-                  }
         size: normal
-        card_mod:
-          style: |
-            ha-card {
-              border: none;
-              }
+        title: La salon
+      #carte popup salle a manger
       - type: custom:popup-card
-        entity: light.la_salle_a_manger
+        entity: light.la_salle_a_manger #cette entité dois etre la meme que la carte salle a manger
         dismissable: true
         card:
           type: vertical-stack
@@ -590,11 +577,6 @@ cards:
               collapsible_controls: true
               icon: mdi:ceiling-light
               show_color_temp_control: true
-              card_mod:
-                style: |
-                  ha-card {
-                    border: none;
-                  }
             - type: horizontal-stack
               cards:
                 - type: custom:mushroom-entity-card
@@ -607,11 +589,6 @@ cards:
                     action: none
                   tap_action:
                     action: toggle
-                  card_mod:
-                    style: |
-                      ha-card {
-                        border: none;
-                      }
                 - type: custom:mushroom-entity-card
                   entity: switch.prise_connectee_mystrom
                   icon: mdi:power-socket-fr
@@ -622,16 +599,8 @@ cards:
                     action: none
                   double_tap_action:
                     action: none
-                  card_mod:
-                    style: |
-                      ha-card {
-                        border: none;
-                      }
-        card_mod:
-          style: |
-            ha-card {
-              border: none;
-            }
+        title: La salle a manger
+      #carte popup cuisine  
       - type: custom:popup-card
         entity: light.cuisine
         dismissable: true
@@ -646,11 +615,6 @@ cards:
               name: ' La cuisine'
               collapsible_controls: true
               show_color_temp_control: true
-              card_mod:
-                style: |
-                  ha-card {
-                    border: none;
-                  }
             - type: custom:mushroom-light-card
               entity: light.plan_de_travail
               show_brightness_control: true
@@ -659,20 +623,13 @@ cards:
               name: ' Le plan de travail'
               collapsible_controls: true
               show_color_temp_control: true
-              card_mod:
-                style: |
-                  ha-card {
-                    border: none;
-                  }
-        card_mod:
-          style: |
-            ha-card {
-              border: none;
-            }
+        title: La cuisine
+  #3 eme ligne de cartes      
   - type: horizontal-stack
     cards:
       - type: custom:vertical-stack-in-card
         cards:
+          #carte couloir
           - type: custom:mushroom-template-card
             entity: light.le_couloir
             icon: mdi:globe-light
@@ -698,7 +655,6 @@ cards:
               style:
                 mushroom-state-info$: |
                   .primary {
-                    font-size: 14px !important;
                     position: relative;
                     top: -50px;
                     left: -155px;
@@ -731,11 +687,11 @@ cards:
                   mushroom-badge-icon {
                     left: 60px;
                     top: 25px;
-                    
                   }
                   ha-card {
                     background: none;
                   }
+            secondary: ''
           - type: custom:mushroom-chips-card
             chips:
               - type: conditional
@@ -782,6 +738,7 @@ cards:
             }
       - type: custom:vertical-stack-in-card
         cards:
+          #carte salle de bain
           - type: custom:mushroom-template-card
             icon: mdi:shower
             icon_color: |-
@@ -807,7 +764,6 @@ cards:
               style:
                 mushroom-state-info$: |
                   .primary {
-                    font-size: 14px !important;
                     position: relative;
                     top: -50px;
                     left: -155px;
@@ -868,6 +824,7 @@ cards:
             }
       - type: custom:vertical-stack-in-card
         cards:
+          #carte chambre parentale
           - type: custom:mushroom-template-card
             icon: mdi:bed
             icon_color: |
@@ -896,7 +853,6 @@ cards:
               style:
                 mushroom-state-info$: |
                   .primary {
-                    font-size: 14px !important;
                     position: relative;
                     top: -50px;
                     left: -155px;
@@ -1001,6 +957,7 @@ cards:
               background-size: cover;
               background-position: center;
             }
+      #carte popu couloir       
       - type: custom:popup-card
         dismissable: true
         entity: light.le_couloir
@@ -1013,16 +970,7 @@ cards:
           collapsible_controls: true
           icon: mdi:globe-light
           show_color_temp_control: true
-          card_mod:
-            style: |
-              ha-card {
-                border: none;
-              }
-        card_mod:
-          style: |
-            ha-card {
-              border: none;
-            }
+      #carte popup salle de bain    
       - type: custom:popup-card
         dismissable: true
         entity: salle_de_bain_rdc
@@ -1034,16 +982,7 @@ cards:
               use_light_color: true
               show_color_control: false
               collapsible_controls: true
-              card_mod:
-                style: |
-                  ha-card {
-                    border: none;
-                  }
-        card_mod:
-          style: |
-            ha-card {
-              border: none;
-            }
+     #carte popup chambre parentale         
       - type: custom:popup-card
         dismissable: true
         entity: light.la_chambre_parentale
@@ -1059,30 +998,17 @@ cards:
               collapsible_controls: true
               icon: mdi:ceiling-light
               show_color_temp_control: true
-              card_mod:
-                style: |
-                  ha-card {
-                    border: none;
-                  }
+              card_mod: null
             - type: custom:mushroom-entity-card
               entity: switch.prise_romain
               icon: mdi:power-socket-fr
               tap_action:
                 action: toggle
-              card_mod:
-                style: |
-                  ha-card {
-                    border: none;
-                  }
-        card_mod:
-          style: |
-            ha-card {
-              border: none;
-            }
   - type: horizontal-stack
     cards:
       - type: custom:vertical-stack-in-card
         cards:
+          #carte chambre d'amis
           - type: custom:mushroom-template-card
             icon: mdi:bed
             icon_color: |
@@ -1111,7 +1037,6 @@ cards:
               style:
                 mushroom-state-info$: |
                   .primary {
-                    font-size: 14px !important;
                     position: relative;
                     top: -50px;
                     left: -155px;
@@ -1195,6 +1120,7 @@ cards:
             }
       - type: custom:vertical-stack-in-card
         cards:
+          #carte chambre rox
           - type: custom:mushroom-template-card
             icon: mdi:bed
             icon_color: |
@@ -1223,7 +1149,6 @@ cards:
               style:
                 mushroom-state-info$: |
                   .primary {
-                    font-size: 14px !important;
                     position: relative;
                     top: -50px;
                     left: -155px;
@@ -1307,6 +1232,7 @@ cards:
             }
       - type: custom:vertical-stack-in-card
         cards:
+          #carte palier
           - type: custom:mushroom-template-card
             icon: mdi:stairs
             icon_color: |
@@ -1332,7 +1258,6 @@ cards:
               style:
                 mushroom-state-info$: |
                   .primary {
-                    font-size: 14px !important;
                     position: relative;
                     top: -50px;
                     left: -155px;
@@ -1414,6 +1339,7 @@ cards:
               background-size: cover;
               background-position: center;
             }
+      #carte popup chambre d'amis      
       - type: custom:popup-card
         dismissable: true
         entity: light.la_chambre_d_amis
@@ -1429,16 +1355,8 @@ cards:
               collapsible_controls: true
               icon: mdi:ceiling-light
               show_color_temp_control: true
-              card_mod:
-                style: |
-                  ha-card {
-                    border: none;
-                  }
-        card_mod:
-          style: |
-            ha-card {
-              border: none;
-            }
+        title: La chambre d’amis
+      #carte popup chambre rox  
       - type: custom:popup-card
         dismissable: true
         entity: light.la_chambre_de_rox
@@ -1454,16 +1372,8 @@ cards:
               collapsible_controls: true
               icon: mdi:ceiling-light
               show_color_temp_control: true
-              card_mod:
-                style: |
-                  ha-card {
-                    border: none;
-                  }
-        card_mod:
-          style: |
-            ha-card {
-              border: none;
-            }
+        title: La chambre de rox
+      #carte popup palier  
       - type: custom:popup-card
         entity: light.palier
         dismissable: true
@@ -1478,31 +1388,18 @@ cards:
               name: Placard étage
               collapsible_controls: true
               show_color_temp_control: true
-              card_mod:
-                style: |
-                  ha-card {
-                    border: none;
-                  }
             - type: custom:mushroom-light-card
               show_brightness_control: true
               layout: horizontal
               use_light_color: true
               show_color_control: false
               collapsible_controls: true
-              card_mod:
-                style: |
-                  ha-card {
-                    border: none;
-                  }
-        card_mod:
-          style: |
-            ha-card {
-              border: none;
-            }
+        title: Palier
   - type: horizontal-stack
     cards:
       - type: custom:vertical-stack-in-card
         cards:
+         #carte salle de bain etage
           - type: custom:mushroom-template-card
             icon: mdi:shower
             icon_color: |
@@ -1528,7 +1425,6 @@ cards:
               style:
                 mushroom-state-info$: |
                   .primary {
-                    font-size: 14px !important;
                     position: relative;
                     top: -50px;
                     left: -155px;
@@ -1589,6 +1485,7 @@ cards:
             }
       - type: custom:vertical-stack-in-card
         cards:
+          #carte chambre ethan
           - type: custom:mushroom-template-card
             icon: mdi:bed
             icon_color: |
@@ -1615,7 +1512,6 @@ cards:
               style:
                 mushroom-state-info$: |
                   .primary {
-                    font-size: 14px !important;
                     position: relative;
                     top: -50px;
                     left: -155px;
@@ -1701,10 +1597,12 @@ cards:
             }
       - type: custom:vertical-stack-in-card
         cards:
+          #carte chambre nathan
           - type: custom:mushroom-template-card
             icon: mdi:bed
-            icon_color: |
-              {% if is_state('light.la_chambre_de_nathan', 'on') %}
+            icon_color: >-
+              {% if is_state('light.la_chambre_de_nathan', 'on') or
+              is_state('remote.tele_nathan', 'on') %}
                 #FFAE0080
               {% else %}  
                 #0000
@@ -1729,7 +1627,6 @@ cards:
               style:
                 mushroom-state-info$: |
                   .primary {
-                    font-size: 14px !important;
                     position: relative;
                     top: -50px;
                     left: -155px;
@@ -1794,14 +1691,14 @@ cards:
               - type: conditional
                 conditions:
                   - condition: state
-                    entity: media_player.tele_nathan_2
+                    entity: remote.tele_nathan
                     state: 'on'
                 chip:
                   type: template
-                  entity: media_player.tele_nathan_2
+                  entity: media_player.tele_nathan
                   icon: mdi:play-pause
                   icon_color: |-
-                    {% if is_state('media_player.tele_nathan_2', 'on') %} 
+                    {% if is_state('remote.tele_nathan', 'on') %} 
                       orange
                     {% else %}
                      grey
@@ -1849,6 +1746,7 @@ cards:
               background-size: cover;
               background-position: center;
             }
+     #carte popup salle de bain etage       
       - type: custom:popup-card
         dismissable: true
         entity: salle_de_bain_etage
@@ -1862,17 +1760,8 @@ cards:
               show_color_control: false
               name: ' '
               collapsible_controls: true
-              card_mod:
-                style: |
-                  ha-card {
-                    background: none;
-                    border: none;
-                  }
-        card_mod:
-          style: |
-            ha-card {
-              border: none;
-            }
+        title: Salle de bain etage
+     #carte chambre ethan   
       - type: custom:popup-card
         dismissable: true
         entity: light.la_chambre_d_ethan
@@ -1888,16 +1777,8 @@ cards:
               name: ' La chambre d''ethan'
               collapsible_controls: true
               show_color_temp_control: true
-              card_mod:
-                style: |
-                  ha-card {
-                    border: none;
-                  }
-        card_mod:
-          style: |
-            ha-card {
-              border: none;
-            }
+        title: La chambre d’ethan
+      #carte popup chambre nathan
       - type: custom:popup-card
         dismissable: true
         entity: light.la_chambre_de_nathan
@@ -1913,22 +1794,13 @@ cards:
               name: ' La chambre de nathan'
               collapsible_controls: true
               show_color_temp_control: true
-              card_mod:
-                style: |
-                  ha-card {
-                    border: none;
-                  }
             - type: custom:mushroom-media-player-card
               entity: media_player.tele_nathan_2
               volume_controls: []
               media_controls:
                 - on_off
               collapsible_controls: true
-              card_mod:
-                style: |
-                  ha-card {
-                    border: none;
-                  }
+            #carte pronote penser a changer le NOM PRENOM si vous utiliser pronote
             - type: custom:tabbed-card
               title: menu cantine nathan
               styles:
@@ -3108,8 +2980,4 @@ cards:
                                 tr:nth-child(n+2) > td:nth-child(2) {
                                   text-align: center;
                                 }
-        card_mod:
-          style: |
-            ha-card {
-              border: none;
-            }
+        title: La chambre de nathan
