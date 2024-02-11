@@ -1,0 +1,28 @@
+dashboard2024:
+  modes:
+    dark:
+      ha-card-border-width: 0px #taille bordure cartes
+      ha-card-background-color: "#00000000" #couleur base carte
+      mush-card-primary-font-size: 14px #taille text info primaire
+      mush-card-primary-color: orange #couleur texte info primaire carte
+      mush-card-secondary-color: orange #couleur texte info secondaire carte
+      card-mod-theme: test
+      car-mod-card-yaml: |
+      card-mod-card: |
+      card-mod-root: |
+      card-mod-info-yaml: |
+      card-mod-row: |
+      card-mod-badge-yaml: |
+    light:
+      ha-card-border-width: 0px #taille bordure cartes
+      ha-card-background-color: "#00000000" #couleur base carte
+      mush-card-primary-font-size: 14px #taille text info primaire
+      mush-card-primary-color: orange #couleur texte info primaire carte
+      mush-card-secondary-color: orange #couleur texte info secondaire carte
+      card-mod-theme: test
+      car-mod-card-yaml: |
+      card-mod-card: |
+      card-mod-root-yaml: |
+      card-mod-info-yaml: |
+      card-mod-row: |
+      card-mod-badge-yaml: |
