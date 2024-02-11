@@ -8,7 +8,9 @@ update:<br>
 <b> &#x26A0; <U>Attention il faut modifier la ligne 68 avec le nom de votre ville pour que le changement d'images sois pris en compte</U></b>[terminer]<br>
 01/02/2024: redaction d'un tuto d'installation[terminer]<br>
 02/02/2024: meilleur optimisation et nettoyage du code , remplacement chip-card par des chip-card-conditionel , ajout d'un fond pour les informations primaires et secondaires pour une meilleur visibilitée sur le background de la carte[terminer]<br> 
-<br>
+11/02/2024: modification les icones chip ne s'affiche que si l'entité est allumé, externalisation de certain morceau de code du dashboard <br>
+<U><b> &#x26A0;  Attention le fichier dashboard est a placer ici a l'aide de file editor ou studio code server /homeassistant/themes/dashboard 2024/dashboard2024.yaml ,il se peut que le dossier themes et dashboard 2024 ne sois pas créé rajouté le et placer le fichier dashboard2024.yaml a l'interieur, et changer le theme en dashboard 2024 pour cela faite modifier tableau cliquer sur le crayon , dans configuration de lma vue dans theme mettre dashboard 2024</U>[terminer]
+<br><br>
 update en cours:<br>
 01/01/2024: résolution des problemes de ressources rencontré pour certain apareils [en cours]<br>
 <br>
