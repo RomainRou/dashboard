@@ -9,10 +9,11 @@ update:<br>
 01/02/2024: redaction d'un tuto d'installation[terminer]<br>
 02/02/2024: meilleur optimisation et nettoyage du code , remplacement chip-card par des chip-card-conditionel , ajout d'un fond pour les informations primaires et secondaires pour une meilleur visibilitée sur le background de la carte[terminer]<br> 
 11/02/2024: modification et externalisation de certain morceau de code du dashboard <br>
-<U><b> &#x26A0;  Attention le fichier dashboard est a placer ici a l'aide de file editor ou studio code server /homeassistant/themes/dashboard 2024/dashboard2024.yaml ,il se peut que le dossier themes et dashboard 2024 ne sois pas créé rajouté le et placer le fichier dashboard2024.yaml a l'interieur, et changer le theme en dashboard 2024 pour cela faite modifier tableau cliquer sur le crayon , dans configuration de lma vue dans theme mettre dashboard 2024</U>[terminer]
+<U><b> &#x26A0;  Attention le fichier dashboard est a placer ici a l'aide de file editor ou studio code server /homeassistant/themes/dashboard 2024/dashboard2024.yaml ,il se peut que le dossier themes et dashboard 2024 ne sois pas créé rajouté le et placer le fichier dashboard2024.yaml a l'interieur, et changer le theme en dashboard 2024 pour cela faite modifier tableau cliquer sur le crayon , dans configuration de lma vue dans theme mettre dashboard 2024</U>[terminer]<br>
+23/02/2024: remplacement des background info primaires et secondaires par de simple ombres sous le text pour une meilleur adaptabilitée de l'affichage des different devices (tel,tablette,pc,etc...) et en cas de changement de background [terminer] 
 <br><br>
 update en cours:<br>
-01/01/2024: résolution des problemes de ressources rencontré pour certain apareils [en cours]<br>
+01/01/2024: résolution des problemes de ressources rencontré pour certain apareils (passage du maximum de parametres de cartes en version theme plutot quand carte modifiée) [en cours]<br>
 <br>
 Le code des cartes est dans le fichier carte dashboard
 pour le sensor "il fait nuit" le lien pour la création https://www.sigalou-domotique.fr/je-voudrais-savoir-si-nous-sommes-le-jour-ou-la-nuit
