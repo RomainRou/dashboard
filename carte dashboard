@@ -34,18 +34,14 @@ cards:
                     left: -155px;
                     overflow: visible !important;
                     white-space: normal !important;
-                    background-color: #00000090; 
-                    width: 20%;   
-                    border-radius: 5px 5px 5px 5px;
+                    text-shadow: 1px 1px 0px  #000000 ;
                   }
                   .secondary {
                     position: relative;
                     overflow: visible !important;
                     top: -49px;
                     left: -155px;
-                    background-color: #00000090;
-                    width: 35%;
-                    border-radius: 5px 5px 5px 5px;
+                    text-shadow: 1px 1px 0px  #000000 ;
                   }
                 mushroom-shape-icon$: |
                   .shape {
@@ -148,18 +144,14 @@ cards:
                     left: -155px;
                     overflow: visible !important;
                     white-space: normal !important;
-                    background-color: #00000090;
-                    width: 44%;
-                    border-radius: 5px 5px 5px 5px;
+                    text-shadow: 1px 1px 0px  #000000 ;
                   }
                   .secondary {
                     position: relative;
                     overflow: visible !important;
                     top: -49px;
                     left: -155px;
-                    background-color: #00000090;
-                    width: 78%;
-                    border-radius: 5px 5px 5px 5px;
+                    text-shadow: 1px 1px 0px  #000000 ;
                   }
                 mushroom-shape-icon$: |
                   .shape {
@@ -285,16 +277,14 @@ cards:
                     left: -155px;
                     overflow: visible !important;
                     white-space: normal !important;
-                    background-color: #00000090;
-                    width: 110%;
-                    border-radius: 5px 5px 5px 5px;
+                    text-shadow: 1px 1px 0px  #000000 ;
                   }
                   .secondary {
                     position: relative;
                     overflow: visible !important;
                     top: -49px;
                     left: -155px;
-                    border-radius: 5px 5px 5px 5px;
+                    text-shadow: 1px 1px 0px  #000000 ;
                   }
                 mushroom-shape-icon$: |
                   .shape {
@@ -438,16 +428,14 @@ cards:
                     left: -155px;
                     overflow: visible !important;
                     white-space: normal !important;
-                    background-color: #00000090;
-                    width: 55%;   
-                    border-radius: 5px 5px 5px 5px;
+                    text-shadow: 1px 1px 0px  #000000 ;
                   }
                   .secondary {
                     position: relative;
                     overflow: visible !important;
                     top: -49px;
                     left: -155px;
-                    border-radius: 5px 5px 5px 5px;
+                    text-shadow: 1px 1px 0px  #000000 ;
                   }
                 mushroom-shape-icon$: |
                   .shape {
@@ -660,18 +648,14 @@ cards:
                     left: -155px;
                     overflow: visible !important;
                     white-space: normal !important;
-                    background-color: #00000090;
-                    width: 52%;
-                    border-radius: 5px 5px 5px 5px;
+                    text-shadow: 1px 1px 0px  #000000 ;
                   }
                   .secondary {
                     position: relative;
                     overflow: visible !important;
                     top: -49px;
                     left: -155px;
-                    background-color: #00000090;
-                    width: 82%;
-                    border-radius: 5px 5px 5px 5px;
+                    text-shadow: 1px 1px 0px  #000000 ;
                   }
                 mushroom-shape-icon$: |
                   .shape {
@@ -769,18 +753,14 @@ cards:
                     left: -155px;
                     overflow: visible !important;
                     white-space: normal !important;
-                    background-color: #00000090;
-                    width: 115%;
-                    border-radius: 5px 5px 5px 5px;
+                    text-shadow: 1px 1px 0px  #000000 ;
                   }
                   .secondary {
                     position: relative;
                     overflow: visible !important;
                     top: -49px;
                     left: -155px;
-                    background-color: #00000090;
-                    width: 87%;
-                    border-radius: 5px 5px 5px 5px;
+                    text-shadow: 1px 1px 0px  #000000 ;
                   }
                 mushroom-shape-icon$: |
                   .shape {
@@ -858,18 +838,14 @@ cards:
                     left: -155px;
                     overflow: visible !important;
                     white-space: normal !important;
-                    background-color: #00000090;
-                    width: 130%;
-                    border-radius: 5px 5px 5px 5px;
+                    text-shadow: 1px 1px 0px  #000000 ;
                   }
                   .secondary {
                     position: relative;
                     overflow: visible !important;
                     top: -49px;
                     left: -155px;
-                    background-color: #00000090;
-                    width: 87%;
-                    border-radius: 5px 5px 5px 5px;
+                    text-shadow: 1px 1px 0px  #000000 ;
                   }
                 mushroom-shape-icon$: |
                   .shape {
@@ -1042,18 +1018,14 @@ cards:
                     left: -155px;
                     overflow: visible !important;
                     white-space: normal !important;
-                    background-color: #00000090;
-                    width: 110%;
-                    border-radius: 5px 5px 5px 5px;
+                    text-shadow: 1px 1px 0px  #000000 ;
                   }
                   .secondary {
                     position: relative;
                     overflow: visible !important;
                     top: -49px;
                     left: -155px;
-                    background-color: #00000090;
-                    width: 87%;
-                    border-radius: 5px 5px 5px 5px;
+                    text-shadow: 1px 1px 0px  #000000 ;
                   }
                 mushroom-shape-icon$: |
                   .shape {
@@ -1154,18 +1126,14 @@ cards:
                     left: -155px;
                     overflow: visible !important;
                     white-space: normal !important;
-                    background-color: #00000090;
-                    width: 95%;
-                    border-radius: 5px 5px 5px 5px;
+                    text-shadow: 1px 1px 0px  #000000 ;
                   }
                   .secondary {
                     position: relative;
                     overflow: visible !important;
                     top: -49px;
                     left: -155px;
-                    background-color: #00000090;
-                    width: 87%;
-                    border-radius: 5px 5px 5px 5px;
+                    text-shadow: 1px 1px 0px  #000000 ;
                   }
                 mushroom-shape-icon$: |
                   .shape {
@@ -1263,18 +1231,14 @@ cards:
                     left: -155px;
                     overflow: visible !important;
                     white-space: normal !important;
-                    background-color: #00000090;
-                    width: 45%;
-                    border-radius: 5px 5px 5px 5px;
+                    text-shadow: 1px 1px 0px  #000000 ;
                   }
                   .secondary {
                     position: relative;
                     overflow: visible !important;
                     top: -49px;
                     left: -155px;
-                    background-color: #00000090;
-                    width: 87%;
-                    border-radius: 5px 5px 5px 5px;
+                    text-shadow: 1px 1px 0px  #000000 ;
                   }
                 mushroom-shape-icon$: |
                   .shape {
@@ -1430,18 +1394,14 @@ cards:
                     left: -155px;
                     overflow: visible !important;
                     white-space: normal !important;
-                    background-color: #00000090;
-                    width: 130%;
-                    border-radius: 5px 5px 5px 5px;
+                    text-shadow: 1px 1px 0px  #000000 ;
                   }
                   .secondary {
                     position: relative;
                     overflow: visible !important;
                     top: -49px;
                     left: -155px;
-                    background-color: #00000090;
-                    width: 87%;
-                    border-radius: 5px 5px 5px 5px;
+                    text-shadow: 1px 1px 0px  #000000 ;
                   }
                 mushroom-shape-icon$: |
                   .shape {
@@ -1517,18 +1477,14 @@ cards:
                     left: -155px;
                     overflow: visible !important;
                     white-space: normal !important;
-                    background-color: #00000090;
-                    width: 115%;
-                    border-radius: 5px 5px 5px 5px;
+                    text-shadow: 1px 1px 0px  #000000 ;
                   }
                   .secondary {
                     position: relative;
                     overflow: visible !important;
                     top: -49px;
                     left: -155px;
-                    background-color: #00000090;
-                    width: 87%;
-                    border-radius: 5px 5px 5px 5px;
+                    text-shadow: 1px 1px 0px  #000000 ;
                   }
                 mushroom-shape-icon$: |
                   .shape {
@@ -1632,18 +1588,14 @@ cards:
                     left: -155px;
                     overflow: visible !important;
                     white-space: normal !important;
-                    background-color: #00000090;
-                    width: 115%;
-                    border-radius: 5px 5px 5px 5px;
+                    text-shadow: 1px 1px 0px  #000000 ;
                   }
                   .secondary {
                     position: relative;
                     overflow: visible !important;
                     top: -49px;
                     left: -155px;
-                    background-color: #00000090;
-                    width: 85%;
-                    border-radius: 5px 5px 5px 5px;
+                    text-shadow: 1px 1px 0px  #000000 ;
                   }
                 mushroom-shape-icon$: |
                   .shape {
