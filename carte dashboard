@@ -2,29 +2,31 @@ type: vertical-stack
 cards:
   - type: horizontal-stack #première ligne de carte
     cards:
-      - type: custom:vertical-stack-in-card
+      - type: custom:vertical-stack-in-card 
         cards:
-            #carte meteo france, les entités pour permettre le changement de background est a changer aussi ligne 68
+            #carte meteo france, les entités pour permettre le changement de background sont a changer aussi ligne 66
           - type: custom:mushroom-template-card
-            entity: weather.VOTRE VILLE #entité avec meteo france
+            entity: weather.VOTRE VILLE
             icon: mdi:theme-light-dark
-            icon_color: | 
+            icon_color: |
               {% if is_state('binary_sensor.il_fait_nuit', 'off') %}
                 #80808080 
               {% else %}  
                 #FFAE0080
               {% endif %}
             primary: Meteo
-            secondary: >- #sensor a modifier en fonction de la ville
-              {{ states('sensor.VOTRE VILLE_temperature') }}°C/{{
-              states('sensor.VOTRE VILLE_humidity') }}%
+            secondary: |- #sensor a modifier en fonction de votre ville
+              {{ states('sensor.VOTRE VILLE_temperature') }}°C
+              {{ states('sensor.VOTRE VILLE_humidity') }}%
             layout: horizontal
             tap_action:
-              action: more-info
+              action: navigate
+              navigation_path: '#meteo'
             double_tap_action:
               action: none
             hold_action:
               action: none
+            multiline_secondary: true
             card_mod:
               style:
                 mushroom-state-info$: |
@@ -66,7 +68,6 @@ cards:
                     background-position: center;
                     display: flex;
                   }
-      #carte date et heure
       - type: custom:digital-clock
         dateFormat:
           weekday: short
@@ -90,31 +91,10 @@ cards:
               text-shadow: 20px 20px 20px black;
               font-style: italic;
             }
-      #carte popup meteo
-      - type: custom:popup-card
-        dismissable: true
-        entity: weather.VOTRE VILLE #entité avec météo france
-        card:
-          type: custom:meteofrance-weather-card
-          entity: weather.VOTRE VILLE #entité avec météo france
-          details: true
-          forecast: true
-          hourly_forecast: false
-          current: true
-          rainChanceEntity: sensor.VOTRE VILLE_rain_chance #entité avec météo france
-          uvEntity: sensor.VOTRE VILLE_uv #entité avec météo france
-          cloudCoverEntity: sensor.VOTRE VILLE_cloud_cover #entité avec météo france
-          freezeChanceEntity: sensor.VOTRE VILLE_freeze_chance #entité avec météo france
-          snowChanceEntity: sensor.VOTRE VILLE_snow_chance #entité avec météo france
-          alertEntity: sensor.45_weather_alert #entité avec météo france
-          rainForecastEntity: sensor.VOTRE VILLE_next_rain #entité avec météo france
-        title: Meteo
-  #2 eme ligne de cartes
   - type: horizontal-stack
     cards:
       - type: custom:vertical-stack-in-card
         cards:
-          #carte salon
           - type: custom:mushroom-template-card
             entity: light.le_salon
             icon: mdi:sofa
@@ -125,16 +105,18 @@ cards:
                 #0000
               {% endif %}
             primary: Salon
-            secondary: >-
-              {{ states('sensor.thermometre_salon_temperature') }}°C/{{
-              states('sensor.thermometre_salon_humidity') }}%
+            secondary: |-
+              {{ states('sensor.salon_temperature') }}°C
+              {{ states('sensor.salon_humidity') }}%
             layout: horizontal
             tap_action:
-              action: more-info
+              action: navigate
+              navigation_path: '#salon'
             double_tap_action:
               action: none
             hold_action:
               action: none
+            multiline_secondary: true
             card_mod:
               style:
                 mushroom-state-info$: |
@@ -200,7 +182,7 @@ cards:
                 chip:
                   type: template
                   entity: media_player.samsung_7_series_65
-                  icon: mdi:play-pause
+                  icon: mdi:television
                   icon_color: |-
                     {% if is_state('media_player.samsung_7_series_65', 'on') %} 
                       orange
@@ -222,12 +204,27 @@ cards:
                   tap_action:
                     action: none
                   content_info: none
+              - type: conditional
+                conditions:
+                  - condition: state
+                    entity: alarm_control_panel.alarmo
+                    state: armed_night
+                chip:
+                  type: alarm-control-panel
+                  entity: alarm_control_panel.alarmo
+                  tap_action:
+                    action: none
+                  hold_action:
+                    action: none
+                  double_tap_action:
+                    action: none
+                  content_info: none
             card_mod:
               style:
                 .: |
                   ha-card {
                     width: 66px;
-                    margin-left: 85%;
+                    margin-left: 70%;
                     top: -170px;
                     background: none;
                     --chip-border-width: 0;
@@ -243,12 +240,10 @@ cards:
             }
       - type: custom:vertical-stack-in-card
         cards:
-          #carte salle a manger
           - type: custom:mushroom-template-card
             icon: mdi:silverware-variant
             icon_color: >-
               {% if is_state('light.la_salle_a_manger', 'on') or
-              is_state('switch.prise_connectee_mystrom', 'on') or
               is_state('switch.prise_salle_a_manger', 'on') %}
                 #FFAE0080
               {% else %}  
@@ -257,7 +252,8 @@ cards:
             primary: Salle a manger
             layout: horizontal
             tap_action:
-              action: more-info
+              action: navigate
+              navigation_path: '#salle_a_manger'
             double_tap_action:
               action: none
             hold_action:
@@ -268,6 +264,7 @@ cards:
 
             entity: light.la_salle_a_manger
             secondary: ''
+            multiline_secondary: true
             card_mod:
               style:
                 mushroom-state-info$: |
@@ -397,7 +394,6 @@ cards:
             }
       - type: custom:vertical-stack-in-card
         cards:
-          #carte cuisine
           - type: custom:mushroom-template-card
             entity: light.cuisine
             icon: mdi:pot-steam
@@ -410,7 +406,8 @@ cards:
             primary: Cuisine
             layout: horizontal
             tap_action:
-              action: more-info
+              action: navigate
+              navigation_path: '#cuisine'
             double_tap_action:
               action: none
             hold_action:
@@ -419,6 +416,8 @@ cards:
 
             badge_color: |+
 
+            secondary: ''
+            multiline_secondary: true
             card_mod:
               style:
                 mushroom-state-info$: |
@@ -455,7 +454,6 @@ cards:
                   ha-card {
                     background: none;
                   }
-            secondary: ''
           - type: custom:mushroom-chips-card
             chips:
               - type: conditional
@@ -524,100 +522,10 @@ cards:
               background-size: cover;
               background-position: center;
             }
-      #carte popup salon      
-      - type: custom:popup-card
-        entity: light.le_salon #cette entité dois etre la meme que la carte salon
-        dismissable: true
-        card:
-          type: vertical-stack
-          cards:
-            - type: custom:mushroom-light-card
-              entity: light.le_salon
-              show_brightness_control: true
-              use_light_color: true
-              show_color_control: false
-              collapsible_controls: true
-              icon: mdi:ceiling-light
-              show_color_temp_control: true
-            - type: custom:mushroom-alarm-control-panel-card
-              states:
-                - armed_away
-                - armed_night
-              entity: alarm_control_panel.alarmo
-            - type: custom:mushroom-media-player-card
-              entity: media_player.samsung_7_series_65
-              name: télé salon
-        size: normal
-        title: La salon
-      #carte popup salle a manger
-      - type: custom:popup-card
-        entity: light.la_salle_a_manger #cette entité dois etre la meme que la carte salle a manger
-        dismissable: true
-        card:
-          type: vertical-stack
-          cards:
-            - type: custom:mushroom-light-card
-              entity: light.la_salle_a_manger
-              show_brightness_control: true
-              use_light_color: true
-              show_color_control: false
-              name: ' La salle a manger'
-              collapsible_controls: true
-              icon: mdi:ceiling-light
-              show_color_temp_control: true
-            - type: horizontal-stack
-              cards:
-                - type: custom:mushroom-entity-card
-                  entity: switch.prise_salle_a_manger
-                  icon: mdi:power-socket-fr
-                  name: Prise salle à manger
-                  double_tap_action:
-                    action: none
-                  hold_action:
-                    action: none
-                  tap_action:
-                    action: toggle
-                - type: custom:mushroom-entity-card
-                  entity: switch.prise_connectee_mystrom
-                  icon: mdi:power-socket-fr
-                  name: Prise mystrom
-                  tap_action:
-                    action: toggle
-                  hold_action:
-                    action: none
-                  double_tap_action:
-                    action: none
-        title: La salle a manger
-      #carte popup cuisine  
-      - type: custom:popup-card
-        entity: light.cuisine
-        dismissable: true
-        card:
-          type: vertical-stack
-          cards:
-            - type: custom:mushroom-light-card
-              entity: light.cuisine
-              show_brightness_control: true
-              use_light_color: true
-              show_color_control: false
-              name: ' La cuisine'
-              collapsible_controls: true
-              show_color_temp_control: true
-            - type: custom:mushroom-light-card
-              entity: light.plan_de_travail
-              show_brightness_control: true
-              use_light_color: true
-              show_color_control: false
-              name: ' Le plan de travail'
-              collapsible_controls: true
-              show_color_temp_control: true
-        title: La cuisine
-  #3 eme ligne de cartes      
   - type: horizontal-stack
     cards:
       - type: custom:vertical-stack-in-card
         cards:
-          #carte couloir
           - type: custom:mushroom-template-card
             entity: light.le_couloir
             icon: mdi:globe-light
@@ -630,7 +538,8 @@ cards:
             primary: Couloir
             layout: horizontal
             tap_action:
-              action: more-info
+              action: navigate
+              navigation_path: '#couloir'
             double_tap_action:
               action: none
             hold_action:
@@ -639,6 +548,8 @@ cards:
 
             badge_color: |+
 
+            secondary: ''
+            multiline_secondary: true
             card_mod:
               style:
                 mushroom-state-info$: |
@@ -675,7 +586,6 @@ cards:
                   ha-card {
                     background: none;
                   }
-            secondary: ''
           - type: custom:mushroom-chips-card
             chips:
               - type: conditional
@@ -722,7 +632,6 @@ cards:
             }
       - type: custom:vertical-stack-in-card
         cards:
-          #carte salle de bain
           - type: custom:mushroom-template-card
             icon: mdi:shower
             icon_color: |-
@@ -732,18 +641,21 @@ cards:
                 #0000
               {% endif %}
             primary: Salle de bain rdc
-            secondary: >-
-              {{ states('sensor.thermometre_salle_de_bain_bas_temperature')
-              }}°C/{{ states('sensor.thermometre_salle_de_bain_bas_humidity')
-              }}%
+            secondary: |-
+              {{ states('sensor.salle_de_bain_bas_temperature') }}°C
+              {{ states('sensor.salle_de_bain_bas_humidity') }}%
             layout: horizontal
             double_tap_action:
               action: none
             hold_action:
               action: none
             tap_action:
-              action: more-info
+              action: navigate
+              navigation_path: '#sdb_rdc'
             entity: light.salle_de_bain_rdc
+            badge_icon: ''
+            badge_color: ''
+            multiline_secondary: true
             card_mod:
               style:
                 mushroom-state-info$: |
@@ -804,19 +716,18 @@ cards:
             }
       - type: custom:vertical-stack-in-card
         cards:
-          #carte chambre parentale
           - type: custom:mushroom-template-card
             icon: mdi:bed
             icon_color: |
-              {% if is_state('light.la_chambre_parentale', 'on') %}
+              {% if is_state('switch.chambre_parentale', 'on') %}
                 #FFAE0080
               {% else %}  
                 #0000
               {% endif %}
             primary: Chambre parentale
-            secondary: >-
-              {{ states('sensor.thermometre_salon_temperature') }}°C/{{
-              states('sensor.thermometre_salon_humidity') }}%
+            secondary: |-
+              {{ states('sensor.chambre_parentale_temperature') }}°C
+              {{ states('sensor.chambre_parentale_humidity') }}%
             layout: horizontal
             double_tap_action:
               action: none
@@ -826,9 +737,11 @@ cards:
 
             badge_color: |+
 
-            entity: light.la_chambre_parentale
+            entity: switch.chambre_parentale
             tap_action:
-              action: more-info
+              action: navigate
+              navigation_path: '#chambre_parentale'
+            multiline_secondary: true
             card_mod:
               style:
                 mushroom-state-info$: |
@@ -933,58 +846,10 @@ cards:
               background-size: cover;
               background-position: center;
             }
-      #carte popu couloir       
-      - type: custom:popup-card
-        dismissable: true
-        entity: light.le_couloir
-        card:
-          type: custom:mushroom-light-card
-          entity: light.le_couloir
-          show_brightness_control: true
-          use_light_color: true
-          show_color_control: false
-          collapsible_controls: true
-          icon: mdi:globe-light
-          show_color_temp_control: true
-      #carte popup salle de bain    
-      - type: custom:popup-card
-        dismissable: true
-        entity: salle_de_bain_rdc
-        card:
-          type: vertical-stack
-          cards:
-            - type: custom:mushroom-light-card
-              show_brightness_control: true
-              use_light_color: true
-              show_color_control: false
-              collapsible_controls: true
-     #carte popup chambre parentale         
-      - type: custom:popup-card
-        dismissable: true
-        entity: light.la_chambre_parentale
-        card:
-          type: vertical-stack
-          cards:
-            - type: custom:mushroom-light-card
-              entity: light.la_chambre_parentale
-              show_brightness_control: true
-              use_light_color: true
-              show_color_control: false
-              name: ' La chambre parentale'
-              collapsible_controls: true
-              icon: mdi:ceiling-light
-              show_color_temp_control: true
-              card_mod: null
-            - type: custom:mushroom-entity-card
-              entity: switch.prise_romain
-              icon: mdi:power-socket-fr
-              tap_action:
-                action: toggle
   - type: horizontal-stack
     cards:
       - type: custom:vertical-stack-in-card
         cards:
-          #carte chambre d'amis
           - type: custom:mushroom-template-card
             icon: mdi:bed
             icon_color: |
@@ -994,9 +859,9 @@ cards:
                 #0000
               {% endif %}
             primary: Chambre d'amis
-            secondary: >-
-              {{ states('sensor.thermometre_salon_temperature') }}°C/{{
-              states('sensor.thermometre_salon_humidity') }}%
+            secondary: |-
+              {{ states('sensor.chambre_damis_temperature') }}°C
+              {{ states('sensor.chambre_damis_humidity') }}%
             layout: horizontal
             double_tap_action:
               action: none
@@ -1008,7 +873,9 @@ cards:
 
             entity: light.la_chambre_d_amis
             tap_action:
-              action: more-info
+              action: navigate
+              navigation_path: '#chambre_d_amis'
+            multiline_secondary: true
             card_mod:
               style:
                 mushroom-state-info$: |
@@ -1092,7 +959,6 @@ cards:
             }
       - type: custom:vertical-stack-in-card
         cards:
-          #carte chambre rox
           - type: custom:mushroom-template-card
             icon: mdi:bed
             icon_color: |
@@ -1102,9 +968,9 @@ cards:
                 #0000
               {% endif %}
             primary: Chambre rox
-            secondary: >-
-              {{ states('sensor.thermometre_salon_temperature') }}°C/{{
-              states('sensor.thermometre_salon_humidity') }}%
+            secondary: |-
+              {{ states('sensor.chambre_rox_temperature') }}°C
+              {{ states('sensor.chambre_rox_humidity') }}%
             layout: horizontal
             double_tap_action:
               action: none
@@ -1116,7 +982,9 @@ cards:
 
             entity: light.la_chambre_de_rox
             tap_action:
-              action: more-info
+              action: navigate
+              navigation_path: '#chambre_rox'
+            multiline_secondary: true
             card_mod:
               style:
                 mushroom-state-info$: |
@@ -1200,7 +1068,6 @@ cards:
             }
       - type: custom:vertical-stack-in-card
         cards:
-          #carte palier
           - type: custom:mushroom-template-card
             icon: mdi:stairs
             icon_color: |
@@ -1210,18 +1077,21 @@ cards:
                 #0000
               {% endif %}
             primary: Palier
-            secondary: >-
-              {{ states('sensor.thermometre_salle_de_bain_bas_temperature')
-              }}°C/{{ states('sensor.thermometre_salle_de_bain_bas_humidity')
-              }}%
+            secondary: |-
+              {{ states('sensor.thermometre_salle_de_bain_bas_temperature') }}°C
+              {{ states('sensor.thermometre_salle_de_bain_bas_humidity') }}%
             layout: horizontal
             double_tap_action:
               action: none
             hold_action:
               action: none
             tap_action:
-              action: more-info
+              action: navigate
+              navigation_path: '#palier'
             entity: light.palier
+            badge_icon: ''
+            badge_color: ''
+            multiline_secondary: true
             card_mod:
               style:
                 mushroom-state-info$: |
@@ -1303,67 +1173,10 @@ cards:
               background-size: cover;
               background-position: center;
             }
-      #carte popup chambre d'amis      
-      - type: custom:popup-card
-        dismissable: true
-        entity: light.la_chambre_d_amis
-        card:
-          type: vertical-stack
-          cards:
-            - type: custom:mushroom-light-card
-              entity: light.la_chambre_d_amis
-              show_brightness_control: true
-              use_light_color: true
-              show_color_control: false
-              name: ' La chambre d''amis'
-              collapsible_controls: true
-              icon: mdi:ceiling-light
-              show_color_temp_control: true
-        title: La chambre d’amis
-      #carte popup chambre rox  
-      - type: custom:popup-card
-        dismissable: true
-        entity: light.la_chambre_de_rox
-        card:
-          type: vertical-stack
-          cards:
-            - type: custom:mushroom-light-card
-              entity: light.la_chambre_de_rox
-              show_brightness_control: true
-              use_light_color: true
-              show_color_control: false
-              name: La chambre de rox
-              collapsible_controls: true
-              icon: mdi:ceiling-light
-              show_color_temp_control: true
-        title: La chambre de rox
-      #carte popup palier  
-      - type: custom:popup-card
-        entity: light.palier
-        dismissable: true
-        card:
-          type: vertical-stack
-          cards:
-            - type: custom:mushroom-light-card
-              entity: light.placard_etage
-              show_brightness_control: true
-              use_light_color: true
-              show_color_control: false
-              name: Placard étage
-              collapsible_controls: true
-              show_color_temp_control: true
-            - type: custom:mushroom-light-card
-              show_brightness_control: true
-              layout: horizontal
-              use_light_color: true
-              show_color_control: false
-              collapsible_controls: true
-        title: Palier
   - type: horizontal-stack
     cards:
       - type: custom:vertical-stack-in-card
         cards:
-         #carte salle de bain etage
           - type: custom:mushroom-template-card
             icon: mdi:shower
             icon_color: |
@@ -1373,18 +1186,19 @@ cards:
                 #0000
               {% endif %}
             primary: Salle de bain étage
-            secondary: >-
-              {{ states('sensor.thermometre_salle_de_bain_bas_temperature')
-              }}°C/{{ states('sensor.thermometre_salle_de_bain_bas_humidity')
-              }}%
+            secondary: |-
+              {{ states('sensor.thermometre_salle_de_bain_bas_temperature') }}°C
+              {{ states('sensor.thermometre_salle_de_bain_bas_humidity') }}%
             layout: horizontal
             double_tap_action:
               action: none
             hold_action:
               action: none
             tap_action:
-              action: more-info
+              action: navigate
+              navigation_path: '#sdb_etage'
             entity: light.salle_de_bain_etage
+            multiline_secondary: true
             card_mod:
               style:
                 mushroom-state-info$: |
@@ -1421,6 +1235,8 @@ cards:
                   ha-card {
                     background: none;
                   }
+            badge_icon: ''
+            badge_color: ''
           - type: custom:mushroom-chips-card
             chips: []
             card_mod:
@@ -1445,7 +1261,6 @@ cards:
             }
       - type: custom:vertical-stack-in-card
         cards:
-          #carte chambre ethan
           - type: custom:mushroom-template-card
             icon: mdi:bed
             icon_color: |
@@ -1455,9 +1270,9 @@ cards:
                 #0000
               {% endif %}
             primary: Chambre d'ethan
-            secondary: >-
-              {{ states('sensor.thermometre_salon_temperature') }}°C/{{
-              states('sensor.thermometre_salon_humidity') }}%
+            secondary: |-
+              {{ states('sensor.chambre_ethan_temperature') }}°C
+              {{ states('sensor.chambre_ethan_humidity') }}%
             layout: horizontal
             double_tap_action:
               action: none
@@ -1468,6 +1283,10 @@ cards:
             badge_color: |+
 
             entity: light.la_chambre_d_ethan
+            tap_action:
+              action: navigate
+              navigation_path: '#chambre_ethan'
+            multiline_secondary: true
             card_mod:
               style:
                 mushroom-state-info$: |
@@ -1504,8 +1323,6 @@ cards:
                   ha-card {
                     background: none;
                   }
-            tap_action:
-              action: more-info
           - type: custom:mushroom-chips-card
             chips:
               - type: conditional
@@ -1553,7 +1370,6 @@ cards:
             }
       - type: custom:vertical-stack-in-card
         cards:
-          #carte chambre nathan
           - type: custom:mushroom-template-card
             icon: mdi:bed
             icon_color: >-
@@ -1564,9 +1380,9 @@ cards:
                 #0000
               {% endif %}
             primary: Chambre nathan
-            secondary: >-
-              {{ states('sensor.thermometre_salon_temperature') }}°C/{{
-              states('sensor.thermometre_salon_humidity') }}%
+            secondary: |-
+              {{ states('sensor.chambre_nathan_temperature') }}°C
+              {{ states('sensor.chambre_nathan_humidity') }}%
             layout: horizontal
             double_tap_action:
               action: none
@@ -1578,7 +1394,9 @@ cards:
 
             entity: light.la_chambre_de_nathan
             tap_action:
-              action: more-info
+              action: navigate
+              navigation_path: '#chambre_nathan'
+            multiline_secondary: true
             card_mod:
               style:
                 mushroom-state-info$: |
@@ -1647,8 +1465,8 @@ cards:
                     state: 'on'
                 chip:
                   type: template
-                  entity: media_player.tele_nathan
-                  icon: mdi:play-pause
+                  entity: media_player.tele_nathan_2
+                  icon: mdi:television
                   icon_color: |-
                     {% if is_state('remote.tele_nathan', 'on') %} 
                       orange
@@ -1666,6 +1484,9 @@ cards:
                   - condition: state
                     entity: binary_sensor.workday_sensor
                     state: 'on'
+                  - condition: state
+                    entity: binary_sensor.vacances_scolaires_aujourdhui
+                    state: 'off'
                 chip:
                   type: template
                   icon: mdi:school
@@ -1683,7 +1504,7 @@ cards:
                 .: |
                   ha-card {
                     width: 66px;
-                    margin-left: 85%;
+                    margin-left: 70%;
                     top: -170px;
                     background: none;
                     --chip-border-width: 0;
@@ -1698,1238 +1519,1441 @@ cards:
               background-size: cover;
               background-position: center;
             }
-     #carte popup salle de bain etage       
-      - type: custom:popup-card
-        dismissable: true
-        entity: salle_de_bain_etage
-        card:
-          type: vertical-stack
-          cards:
-            - type: custom:mushroom-light-card
-              show_brightness_control: true
-              layout: horizontal
-              use_light_color: true
-              show_color_control: false
-              name: ' '
-              collapsible_controls: true
-        title: Salle de bain etage
-     #carte chambre ethan   
-      - type: custom:popup-card
-        dismissable: true
-        entity: light.la_chambre_d_ethan
-        card:
-          type: vertical-stack
-          cards:
-            - icon: mdi:ceiling-light
-              type: custom:mushroom-light-card
-              entity: light.la_chambre_d_ethan
-              show_brightness_control: true
-              use_light_color: true
-              show_color_control: false
-              name: ' La chambre d''ethan'
-              collapsible_controls: true
-              show_color_temp_control: true
-        title: La chambre d’ethan
-      #carte popup chambre nathan
-      - type: custom:popup-card
-        dismissable: true
-        entity: light.la_chambre_de_nathan
-        card:
-          type: vertical-stack
-          cards:
-            - icon: mdi:ceiling-light
-              type: custom:mushroom-light-card
-              entity: light.la_chambre_de_nathan
-              show_brightness_control: true
-              use_light_color: true
-              show_color_control: false
-              name: ' La chambre de nathan'
-              collapsible_controls: true
-              show_color_temp_control: true
-            - type: custom:mushroom-media-player-card
-              entity: media_player.tele_nathan_2
-              volume_controls: []
-              media_controls:
-                - on_off
-              collapsible_controls: true
-            #carte pronote penser a changer le NOM PRENOM si vous utiliser pronote
-            - type: custom:tabbed-card
-              title: menu cantine nathan
-              styles:
-                '--mdc-typography-button-font-size': 11px
-                '--mdc-theme-primary': white
-                '--mdc-tab-text-label-color-default': grey
-                background: rgb(54, 54, 54, 0.3)
-                border: solid 1px rgb(40, 40, 40)
-                border-top-left-radius: 10px
-                border-top-right-radius: 10px
-                border-bottom-left-radius: 10px
-                border-bottom-right-radius: 10px
-                font-style: italic
-              tabs:
-                - attributes:
-                    isMinWidthIndicator: true
-                    label: 📆 Emploi du temps du jour
-                  card:
-                    type: markdown
-                    content: >-
-                      <div>{% set items =
-                      state_attr('sensor.pronote_NOM PRENOM_timetable_today','lessons')
-                      %}{{as_timestamp(items[0].start_at) | int
-                      |timestamp_custom('%d/%m/%Y', true)}}</div> 
-                        <table>   
-                          {% for i in range(0,items | count, 1) %}  
-                        <tr>  
-                          {%- if items[i].canceled != True -%}  
-                          <td width='12%'>
-                            <mark>{{ items[i].start_time}}</mark>
-                          </td>  
-                          <td width='12%'>
-                            <mark>{{items[i].end_time }}</mark>
-                          </td>
-                          <td>{{ items[i].lesson }} {% else %}
+  #les cartes pop-up
+  - type: vertical-stack
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: custom:bubble-card
+            card_type: pop-up
+            hash: '#meteo'
+          - type: vertical-stack
+            cards:
+              - type: custom:meteofrance-weather-card
+                entity: weather.VOTRE VILLE #entité avec météo france
+                details: true
+                forecast: true
+                hourly_forecast: false
+                current: true
+                rainChanceEntity: sensor.VOTRE VILLE_rain_chance #entité avec météo france
+                uvEntity: sensor.VOTRE VILLE_uv #entité avec météo france
+                cloudCoverEntity: sensor.VOTRE VILLE_cloud_cover #entité avec météo france
+                freezeChanceEntity: sensor.VOTRE VILLE_freeze_chance #entité avec météo france
+                snowChanceEntity: sensor.VOTRE VILLE_snow_chance #entité avec météo france
+                alertEntity: sensor.45_weather_alert #entité avec météo france
+                rainForecastEntity: sensor.VOTRE VILLE_next_rain #entité avec météo france
+      - type: vertical-stack
+        cards:
+          - type: custom:bubble-card
+            card_type: pop-up
+            hash: '#salon'
+          - type: vertical-stack
+            cards:
+              - type: custom:mushroom-light-card
+                entity: light.le_salon
+                show_brightness_control: true
+                use_light_color: true
+                show_color_control: false
+                collapsible_controls: true
+                icon: mdi:ceiling-light
+                show_color_temp_control: true
+              - type: custom:mushroom-alarm-control-panel-card
+                states:
+                  - armed_away
+                  - armed_night
+                entity: alarm_control_panel.alarmo
+              - type: custom:mushroom-media-player-card
+                entity: media_player.samsung_7_series_65
+                name: télé salon
+                size: normal
+                title: La salon
+      - type: vertical-stack
+        cards:
+          - type: custom:bubble-card
+            card_type: pop-up
+            hash: '#salle_a_manger'
+          - type: vertical-stack
+            cards:
+              - type: custom:mushroom-light-card
+                entity: light.la_salle_a_manger
+                show_brightness_control: true
+                use_light_color: true
+                show_color_control: false
+                name: ' La salle a manger'
+                collapsible_controls: true
+                icon: mdi:ceiling-light
+                show_color_temp_control: true
+              - type: horizontal-stack
+                cards:
+                  - type: custom:mushroom-entity-card
+                    entity: switch.salle_a_manger
+                    icon: mdi:power-socket-fr
+                    name: Prise salle à manger
+                    double_tap_action:
+                      action: none
+                    hold_action:
+                      action: none
+                    tap_action:
+                      action: toggle
+      - type: vertical-stack
+        cards:
+          - type: custom:bubble-card
+            card_type: pop-up
+            hash: '#cuisine'
+          - type: vertical-stack
+            cards:
+              - type: custom:mushroom-light-card
+                entity: light.cuisine
+                show_brightness_control: true
+                use_light_color: true
+                show_color_control: false
+                name: ' La cuisine'
+                collapsible_controls: true
+                show_color_temp_control: true
+              - type: custom:mushroom-light-card
+                entity: light.plan_de_travail
+                show_brightness_control: true
+                use_light_color: true
+                show_color_control: false
+                name: ' Le plan de travail'
+                collapsible_controls: true
+                show_color_temp_control: true
+                title: La cuisine
+      - type: vertical-stack
+        cards:
+          - type: custom:bubble-card
+            card_type: pop-up
+            hash: '#couloir'
+          - type: vertical-stack
+            cards:
+              - type: custom:mushroom-light-card
+                entity: light.le_couloir
+                show_brightness_control: true
+                use_light_color: true
+                show_color_control: false
+                name: ' Le couloir'
+                collapsible_controls: true
+                show_color_temp_control: true
+      - type: vertical-stack
+        cards:
+          - type: custom:bubble-card
+            card_type: pop-up
+            hash: '#sdb_rdc'
+          - type: vertical-stack
+            cards:
+              - type: custom:mushroom-light-card
+                show_brightness_control: true
+                use_light_color: true
+                show_color_control: false
+                collapsible_controls: true
+      - type: vertical-stack
+        cards:
+          - type: custom:bubble-card
+            card_type: pop-up
+            hash: '#chambre_parentale'
+          - type: vertical-stack
+            cards:
+              - type: custom:mushroom-light-card
+                entity: switch.chambre_parentale
+                show_brightness_control: true
+                use_light_color: true
+                show_color_control: false
+                name: ' La chambre parentale'
+                collapsible_controls: true
+                icon: mdi:ceiling-light
+                show_color_temp_control: true
+                card_mod: null
+              - type: custom:mushroom-entity-card
+                entity: switch.prise_romain
+                icon: mdi:power-socket-fr
+                tap_action:
+                  action: toggle
+      - type: vertical-stack
+        cards:
+          - type: custom:bubble-card
+            card_type: pop-up
+            hash: '#chambre_d_amis'
+          - type: vertical-stack
+            cards:
+              - type: custom:mushroom-light-card
+                entity: light.la_chambre_d_amis
+                show_brightness_control: true
+                use_light_color: true
+                show_color_control: false
+                name: ' La chambre d''amis'
+                collapsible_controls: true
+                icon: mdi:ceiling-light
+                show_color_temp_control: true
+                title: La chambre d’amis
+      - type: vertical-stack
+        cards:
+          - type: custom:bubble-card
+            card_type: pop-up
+            hash: '#chambre_rox'
+          - type: vertical-stack
+            cards:
+              - type: custom:mushroom-light-card
+                entity: light.la_chambre_de_rox
+                show_brightness_control: true
+                use_light_color: true
+                show_color_control: false
+                name: La chambre de rox
+                collapsible_controls: true
+                icon: mdi:ceiling-light
+                show_color_temp_control: true
+                title: La chambre de rox
+      - type: vertical-stack
+        cards:
+          - type: custom:bubble-card
+            card_type: pop-up
+            hash: '#palier'
+          - type: vertical-stack
+            cards:
+              - type: custom:mushroom-light-card
+                entity: light.placard_etage
+                show_brightness_control: true
+                use_light_color: true
+                show_color_control: false
+                name: Placard étage
+                collapsible_controls: true
+                show_color_temp_control: true
+              - type: custom:mushroom-light-card
+                show_brightness_control: true
+                layout: horizontal
+                use_light_color: true
+                show_color_control: false
+                collapsible_controls: true
+                title: Palier
+      - type: vertical-stack
+        cards:
+          - type: custom:bubble-card
+            card_type: pop-up
+            hash: '#sdb_etage'
+          - type: vertical-stack
+            cards:
+              - type: custom:mushroom-light-card
+                show_brightness_control: true
+                layout: horizontal
+                use_light_color: true
+                show_color_control: false
+                name: ' '
+                collapsible_controls: true
+                title: Salle de bain etage
+      - type: vertical-stack
+        cards:
+          - type: custom:bubble-card
+            card_type: pop-up
+            hash: '#chambre_ethan'
+          - type: vertical-stack
+            cards:
+              - icon: mdi:ceiling-light
+                type: custom:mushroom-light-card
+                entity: light.la_chambre_d_ethan
+                show_brightness_control: true
+                use_light_color: true
+                show_color_control: false
+                name: ' La chambre d''ethan'
+                collapsible_controls: true
+                show_color_temp_control: true
+                title: La chambre d’ethan
+      - type: vertical-stack
+        cards:
+          - type: custom:bubble-card
+            card_type: pop-up
+            hash: '#chambre_nathan'
+          - type: vertical-stack
+            cards:
+              - icon: mdi:ceiling-light
+                type: custom:mushroom-light-card
+                entity: light.la_chambre_de_nathan
+                show_brightness_control: true
+                use_light_color: true
+                show_color_control: false
+                name: ' La chambre de nathan'
+                collapsible_controls: true
+                show_color_temp_control: true
+              - type: custom:mushroom-media-player-card
+                entity: media_player.tele_nathan_2
+                volume_controls: []
+                media_controls:
+                  - on_off
+                collapsible_controls: true
+              - type: custom:tabbed-card
+                styles:
+                  '--mdc-typography-button-font-size': 11px
+                  '--mdc-theme-primary': white
+                  '--mdc-tab-text-label-color-default': grey
+                  background: rgb(54, 54, 54, 0.3)
+                  border: solid 1px rgb(40, 40, 40)
+                  border-top-left-radius: 10px
+                  border-top-right-radius: 10px
+                  border-bottom-left-radius: 10px
+                  border-bottom-right-radius: 10px
+                  font-style: italic
+                tabs:
+                  - attributes:
+                      isMinWidthIndicator: true
+                      label: 📆 Emploi du temps du jour
+                    card:
+                      type: markdown
+                      content: >-
+                        <div>{% set items =
+                        state_attr('sensor.pronote_NOM PRENOM_timetable_today','lessons')
+                        %}{{as_timestamp(items[0].start_at) | int
+                        |timestamp_custom('%d/%m/%Y', true)}}</div> 
+                          <table>   
+                            {% for i in range(0,items | count, 1) %}  
+                          <tr>  
+                            {%- if items[i].canceled != True -%}  
                             <td width='12%'>
-                              <del>{{ items[i].start_time }}</del>
-                            </td> 
+                              <mark>{{ items[i].start_time}}</mark>
+                            </td>  
                             <td width='12%'>
-                              <del>{{ items[i].end_time}}</del>
+                              <mark>{{items[i].end_time }}</mark>
                             </td>
+                            <td>{{ items[i].lesson }} {% else %}
+                              <td width='12%'>
+                                <del>{{ items[i].start_time }}</del>
+                              </td> 
+                              <td width='12%'>
+                                <del>{{ items[i].end_time}}</del>
+                              </td>
+                              <td>
+                                {{ items[i].lesson }} &emsp;{%- endif -%} / {{items[i].teacher_name}}{% if items[i].status!= None %} 
+                                <br><span>{{ items[i].status }}</span>
+                              </td>
+                                {% endif %} <td width='12%'>
+                                <h1>{{items[i].classroom}}</h1>
+                              </td>
+                              <td>{{items[i].classroom}}</td>
+                            </tr> {% endfor %} 
+                            </table> 
+                      card_mod:
+                        style:
+                          .: |
+                            ha-card ha-markdown {
+                              padding:0px
+                            }
+                            ha-card ha-markdown.no-header {
+                              padding:0px
+                            }
+                            ha-markdown {
+                                overflow-y: auto;
+                                border-bottom-left-radius: 10px; 
+                                border-bottom-right-radius: 10px;
+                                border-top-left-radius: 10px; 
+                                border-top-right-radius: 10px;
+                              }
+                          ha-markdown$: |
+                            div {
+                                background-color:rgb(54, 54, 54, 0.3);
+                                padding: 5px 5px;
+                                color:white;
+                                font-weight:normal;
+                                font-size:1em;
+                                border-top-left-radius: 10px; 
+                                text-align: center;
+                            }
+                            table{
+                              border-collapse: collapse;
+                              font-size: 0.7em;
+                              font-family: Roboto;
+                              width: 100%;
+                              outline: 0px solid #393c3d;
+                              margin-top:5px
+                            } caption {
+                                font-weight: bold;
+                                font-size: 1.2em;
+                            } td {
+                                padding: 5px 8px 5px 8px;
+                                text-align: center;
+                                border-bottom: 0px solid #1c2020;
+                            }
+                            tr {
+                                border-bottom: 0px solid #1c2020;
+                            }
+
+                            tr:nth-of-type(even) {
+                                background-color: rgb(54, 54, 54, 0.3);
+                            }
+                            tr:last-of-type {
+                                border-bottom: transparent;          }
+                            mark {
+                                background: transparent;
+                                color: white;
+                                border-radius: 5px;
+                                padding: 5px;
+                                border: solid grey 2px;
+                            }
+                            del {
+                                background: transparent;
+                                color: #ff4f4f;
+                                border-radius: 5px;
+                                padding: 5px;
+                                border: solid #ff4f4f 2px;
+                                }
+                            h1 {
+                                background: white;
+                                color: black;
+                                border-radius: 5px;
+                                padding: 5px;
+                                font-size: 0.7em;
+                                font-weight:normal;
+                                text-align: center; 
+                                border: solid #E5E2E1 2px;
+                            }
+                            class {
+                                background: #00E199;
+                                color: #222627;
+                                border-radius: 10px;
+                                padding: 5px;
+                            }
+                            span {
+                                background: transparent;
+                                color: #ff4f4f;
+                                border-radius: 5px;
+                                padding: 5px;
+                                fonty-size: 1em;
+                                border: solid #ff4f4f 2px;
+                            }
+                            tr:nth-child(n+2) > td:nth-child(2) {
+                              text-align: center;
+                            }
+                  - attributes:
+                      isMinWidthIndicator: true
+                      label: 📆 Prochain Emploi du temps
+                    card:
+                      type: markdown
+                      content: >-
+                        <div>{% set items =
+                        state_attr('sensor.pronote_NOM PRENOM_timetable_next_day','lessons')
+                        %}{{as_timestamp(items[0].start_at) | int
+                        |timestamp_custom('%d/%m/%Y', true)}}</div> 
+                          <table>   
+                            {% for i in range(0,items | count, 1) %}  
+                          <tr>  
+                            {%- if items[i].canceled != True -%}  
+                            <td width='12%'>
+                              <mark>{{ items[i].start_time}}</mark>
+                            </td>  
+                            <td width='12%'>
+                              <mark>{{items[i].end_time }}</mark>
+                            </td>
+                            <td>{{ items[i].lesson }} {% else %}
+                              <td width='12%'>
+                                <del>{{ items[i].start_time }}</del>
+                              </td> 
+                              <td width='12%'>
+                                <del>{{ items[i].end_time}}</del>
+                              </td>
+                              <td>
+                                {{ items[i].lesson }} &emsp;{%- endif -%} / {{items[i].teacher_name}}{% if items[i].status!= None %} 
+                                <br><span>{{ items[i].status }}</span>
+                              </td> 
+                                {% endif %} <td width='12%'>
+                                <h1>{{items[i].classroom }}</h1>
+                              </td> 
+                            </tr> {% endfor %} 
+                            </table> 
+                      card_mod:
+                        style:
+                          .: |
+                            ha-card ha-markdown {
+                              padding:0px
+                            }
+                            ha-card ha-markdown.no-header {
+                              padding:0px
+                            }
+                            ha-markdown {
+                                overflow-y: auto;
+                                border-bottom-left-radius: 10px; 
+                                border-bottom-right-radius: 10px;
+                                border-top-left-radius: 10px; 
+                                border-top-right-radius: 10px;
+                              }
+                          ha-markdown$: |
+                            div {
+                                background-color:rgb(54, 54, 54, 0.3);
+                                padding: 5px 5px;
+                                color:white;
+                                font-weight:normal;
+                                font-size:1em;
+                                border-top-left-radius: 10px; 
+                                text-align: center;
+                            }
+                            table{
+                              border-collapse: collapse;
+                              font-size: 0.7em;
+                              font-family: Roboto;
+                              width: 100%;
+                              outline: 0px solid #393c3d;
+                              margin-top:5px
+                            } caption {
+                                font-weight: bold;
+                                font-size: 1.2em;
+                            } td {
+                                padding: 5px 8px 5px 8px;
+                                text-align: center;
+                                border-bottom: 0px solid #1c2020;
+                            }
+                            tr {
+                                border-bottom: 0px solid #1c2020;
+                            }
+
+                            tr:nth-of-type(even) {
+                                background-color: rgb(54, 54, 54, 0.3);
+                            }
+                            tr:last-of-type {
+                                border-bottom: transparent;          }
+                            mark {
+                                background: transparent;
+                                color: white;
+                                border-radius: 5px;
+                                padding: 5px;
+                                border: solid grey 2px;
+                            }
+                            del {
+                                background: transparent;
+                                color: #ff4f4f;
+                                border-radius: 5px;
+                                padding: 5px;
+                                border: solid #ff4f4f 2px;
+                                }
+                            h1 {
+                                background: white;
+                                color: black;
+                                border-radius: 5px;
+                                padding: 5px;
+                                font-size: 0.7em;
+                                font-weight:normal;
+                                text-align: center; 
+                                border: solid #E5E2E1 2px;
+                            }
+                            class {
+                                background: #00E199;
+                                color: #222627;
+                                border-radius: 10px;
+                                padding: 5px;
+                            }
+                            span {
+                                background: transparent;
+                                color: #ff4f4f;
+                                border-radius: 5px;
+                                padding: 5px;
+                                fonty-size: 1em;
+                                border: solid #ff4f4f 2px;
+                            }
+                            tr:nth-child(n+2) > td:nth-child(2) {
+                              text-align: center;
+                            }
+                  - attributes:
+                      isMinWidthIndicator: true
+                      label: ❌ Absences et sorties
+                    card:
+                      type: markdown
+                      content: |-
+                        <table>
+                          {% set items=state_attr('sensor.pronote_NOM PRENOM_absences','absences') %} {% for i in range(0, items | count, 1) %} 
+                          <tr> 
+                            {%- if items[i].justified == True -%} 
                             <td>
-                              {{ items[i].lesson }} &emsp;{%- endif -%} / {{items[i].teacher_name}}{% if items[i].status!= None %} 
-                              <br><span>{{ items[i].status }}</span>
-                            </td>
-                              {% endif %} <td width='12%'>
-                              <h1>{{items[i].classroom}}</h1>
-                            </td>
-                            <td>{{items[i].classroom}}</td>
-                          </tr> {% endfor %} 
-                          </table> 
-                    card_mod:
-                      style:
-                        .: |
-                          ha-card ha-markdown {
-                            padding:0px
-                          }
-                          ha-card ha-markdown.no-header {
-                            padding:0px
-                          }
-                          ha-markdown {
-                              overflow-y: auto;
-                              border-bottom-left-radius: 10px; 
-                              border-bottom-right-radius: 10px;
-                              border-top-left-radius: 10px; 
-                              border-top-right-radius: 10px;
-                            }
-                        ha-markdown$: |
-                          div {
-                              background-color:rgb(54, 54, 54, 0.3);
-                              padding: 5px 5px;
-                              color:white;
-                              font-weight:normal;
-                              font-size:1em;
-                              border-top-left-radius: 10px; 
-                              text-align: center;
-                          }
-                          table{
-                            border-collapse: collapse;
-                            font-size: 0.7em;
-                            font-family: Roboto;
-                            width: 100%;
-                            outline: 0px solid #393c3d;
-                            margin-top:5px
-                          } caption {
-                              font-weight: bold;
-                              font-size: 1.2em;
-                          } td {
-                              padding: 5px 8px 5px 8px;
-                              text-align: center;
-                              border-bottom: 0px solid #1c2020;
-                          }
-                          tr {
-                              border-bottom: 0px solid #1c2020;
-                          }
-
-                          tr:nth-of-type(even) {
-                              background-color: rgb(54, 54, 54, 0.3);
-                          }
-                          tr:last-of-type {
-                              border-bottom: transparent;          }
-                          mark {
-                              background: transparent;
-                              color: white;
-                              border-radius: 5px;
-                              padding: 5px;
-                              border: solid grey 2px;
-                          }
-                          del {
-                              background: transparent;
-                              color: #ff4f4f;
-                              border-radius: 5px;
-                              padding: 5px;
-                              border: solid #ff4f4f 2px;
-                              }
-                          h1 {
-                              background: white;
-                              color: black;
-                              border-radius: 5px;
-                              padding: 5px;
-                              font-size: 0.7em;
-                              font-weight:normal;
-                              text-align: center; 
-                              border: solid #E5E2E1 2px;
-                          }
-                          class {
-                              background: #00E199;
-                              color: #222627;
-                              border-radius: 10px;
-                              padding: 5px;
-                          }
-                          span {
-                              background: transparent;
-                              color: #ff4f4f;
-                              border-radius: 5px;
-                              padding: 5px;
-                              fonty-size: 1em;
-                              border: solid #ff4f4f 2px;
-                          }
-                          tr:nth-child(n+2) > td:nth-child(2) {
-                            text-align: center;
-                          }
-                - attributes:
-                    isMinWidthIndicator: true
-                    label: 📆 Prochain Emploi du temps
-                  card:
-                    type: markdown
-                    content: >-
-                      <div>{% set items =
-                      state_attr('sensor.pronote_NOM PRENOM_timetable_next_day','lessons')
-                      %}{{as_timestamp(items[0].start_at) | int
-                      |timestamp_custom('%d/%m/%Y', true)}}</div> 
-                        <table>   
-                          {% for i in range(0,items | count, 1) %}  
-                        <tr>  
-                          {%- if items[i].canceled != True -%}  
-                          <td width='12%'>
-                            <mark>{{ items[i].start_time}}</mark>
-                          </td>  
-                          <td width='12%'>
-                            <mark>{{items[i].end_time }}</mark>
-                          </td>
-                          <td>{{ items[i].lesson }} {% else %}
-                            <td width='12%'>
-                              <del>{{ items[i].start_time }}</del>
+                              <mark>{{ items[i].from.strftime("%d/%m") }}</mark>
                             </td> 
-                            <td width='12%'>
-                              <del>{{ items[i].end_time}}</del>
-                            </td>
+                              {% else %} 
+                            <td width='10%'>
+                              <span>{{ items[i].from.strftime("%d/%m") }} {%-endif-%}</span> 
                             <td>
-                              {{ items[i].lesson }} &emsp;{%- endif -%} / {{items[i].teacher_name}}{% if items[i].status!= None %} 
-                              <br><span>{{ items[i].status }}</span>
-                            </td> 
-                              {% endif %} <td width='12%'>
-                              <h1>{{items[i].classroom }}</h1>
-                            </td> 
-                          </tr> {% endfor %} 
-                          </table> 
-                    card_mod:
-                      style:
-                        .: |
-                          ha-card ha-markdown {
-                            padding:0px
-                          }
-                          ha-card ha-markdown.no-header {
-                            padding:0px
-                          }
-                          ha-markdown {
-                              overflow-y: auto;
-                              border-bottom-left-radius: 10px; 
-                              border-bottom-right-radius: 10px;
-                              border-top-left-radius: 10px; 
-                              border-top-right-radius: 10px;
+                              <h1>{{ items[i].hours }}</h1>
+                            </td>
+                            <td>{{ items[i].reason }} {% endfor %}</td>
+                          </tr>
+                        </table>
+                      card_mod:
+                        style:
+                          .: |
+                            ha-card ha-markdown {
+                              padding:0px;
                             }
-                        ha-markdown$: |
-                          div {
-                              background-color:rgb(54, 54, 54, 0.3);
-                              padding: 5px 5px;
-                              color:white;
-                              font-weight:normal;
-                              font-size:1em;
-                              border-top-left-radius: 10px; 
-                              text-align: center;
-                          }
-                          table{
-                            border-collapse: collapse;
-                            font-size: 0.7em;
-                            font-family: Roboto;
-                            width: 100%;
-                            outline: 0px solid #393c3d;
-                            margin-top:5px
-                          } caption {
-                              font-weight: bold;
-                              font-size: 1.2em;
-                          } td {
-                              padding: 5px 8px 5px 8px;
-                              text-align: center;
-                              border-bottom: 0px solid #1c2020;
-                          }
-                          tr {
-                              border-bottom: 0px solid #1c2020;
-                          }
-
-                          tr:nth-of-type(even) {
-                              background-color: rgb(54, 54, 54, 0.3);
-                          }
-                          tr:last-of-type {
-                              border-bottom: transparent;          }
-                          mark {
-                              background: transparent;
-                              color: white;
-                              border-radius: 5px;
-                              padding: 5px;
-                              border: solid grey 2px;
-                          }
-                          del {
-                              background: transparent;
-                              color: #ff4f4f;
-                              border-radius: 5px;
-                              padding: 5px;
-                              border: solid #ff4f4f 2px;
+                            ha-card ha-markdown.no-header {
+                              padding:0px;
+                            }
+                            ha-markdown {
+                                max-height: 205px;
+                                overflow-y: auto;
+                                border-bottom-left-radius: 10px; 
+                                border-bottom-right-radius: 10px;
+                                border-top-left-radius: 10px;  
                               }
-                          h1 {
-                              background: white;
-                              color: black;
-                              border-radius: 5px;
-                              padding: 5px;
-                              font-size: 0.7em;
-                              font-weight:normal;
-                              text-align: center; 
-                              border: solid #E5E2E1 2px;
-                          }
-                          class {
-                              background: #00E199;
-                              color: #222627;
-                              border-radius: 10px;
-                              padding: 5px;
-                          }
-                          span {
-                              background: transparent;
-                              color: #ff4f4f;
-                              border-radius: 5px;
-                              padding: 5px;
-                              fonty-size: 1em;
-                              border: solid #ff4f4f 2px;
-                          }
-                          tr:nth-child(n+2) > td:nth-child(2) {
-                            text-align: center;
-                          }
-                - attributes:
-                    isMinWidthIndicator: true
-                    label: ❌ Absences et sorties
-                  card:
-                    type: markdown
-                    content: |-
-                      <table>
-                        {% set items=state_attr('sensor.pronote_NOM PRENOM_absences','absences') %} {% for i in range(0, items | count, 1) %} 
-                        <tr> 
-                          {%- if items[i].justified == True -%} 
-                          <td>
-                            <mark>{{ items[i].from.strftime("%d/%m") }}</mark>
-                          </td> 
-                            {% else %} 
-                          <td width='10%'>
-                            <span>{{ items[i].from.strftime("%d/%m") }} {%-endif-%}</span> 
-                          <td>
-                            <h1>{{ items[i].hours }}</h1>
-                          </td>
-                          <td>{{ items[i].reason }} {% endfor %}</td>
-                        </tr>
-                      </table>
-                    card_mod:
-                      style:
-                        .: |
-                          ha-card ha-markdown {
-                            padding:0px;
-                          }
-                          ha-card ha-markdown.no-header {
-                            padding:0px;
-                          }
-                          ha-markdown {
-                              max-height: 205px;
-                              overflow-y: auto;
-                              border-bottom-left-radius: 10px; 
-                              border-bottom-right-radius: 10px;
-                              border-top-left-radius: 10px;  
+                          ha-markdown$: |
+                            div {
+                                background-color: rgb(54, 54, 54, 0.3);
+                                padding: 5px 5px;
+                                color:white;
+                                font-weight:normal;
+                                font-size:1em;
+                                border-top-left-radius: 10px; 
+                                text-align:center;
                             }
-                        ha-markdown$: |
-                          div {
-                              background-color: rgb(54, 54, 54, 0.3);
-                              padding: 5px 5px;
-                              color:white;
-                              font-weight:normal;
-                              font-size:1em;
-                              border-top-left-radius: 10px; 
-                              text-align:center;
-                          }
-                          table{
-                            border-collapse: collapse;
-                            font-family: Roboto;
-                            outline: 0px solid #393c3d;
-                            margin-top:0px;
-                            font-size:0.7em;
-                            width: 100%;
-                          } 
-                          caption {
-                              font-weight: bold;
-                              font-size: 0.7em;
-                          } 
-                          td {
-                              padding: 5px 8px 5px 8px;
-                              border-bottom: 0px solid #1c2020;
-                              text-align: center;
-                          }
-                          tr {
-                              border-bottom: 0px solid #1c2020;
-                          }
-                          tr:nth-of-type(even) {
-                              background-color: rgb(54, 54, 54, 0.3);
-                          }
-                          tr:last-of-type {
-                              border-bottom: transparent;
-                          }
-                          mark {
-                              background:transparent;
-                              color: white;
-                              border-radius: 5px;
-                              padding: 5px;
-                              border: solid grey 2px;
-                          }
-                          h1 {
-                              background: transparent;
-                              color: #ffa14f ;
-                              border-radius: 5px
-                              padding: 5px;
-                              font-size: 0.9em;
-                              font-weight: normal;
-                              text-align: center;
-                          }
-                          span {
-                              background: transparent;
-                              color: #ff4f4f;
-                              border-radius: 5px;
-                              padding: 5px;
-                              border: solid #ff4f4f 2px;
-                          }
-                          tr:nth-child(n+2) > td:nth-child(2) {
-                            text-align: left;
-                          }
-                - attributes:
-                    isMinWidthIndicator: true
-                    label: 📗Devoirs
-                  card:
-                    type: markdown
-                    content: |-
-                      <table>
-                          <tbody>
-                              {% set items = state_attr('sensor.pronote_NOM PRENOM_homework','homework') %}
-                              {%-for i in range(0, items | count, 1) -%}
-                              <tr>
-                                  <td>
-                                  {%- if items[i].done == true -%}
-                                      <mark>
-                                       {{items[i].date.strftime("%d/%m")}}</td>
-                                      </mark>
-                                  {%- else -%}
-                                      <span>
-                                      {{items[i].date.strftime("%d/%m")}}
-                                      </span>
-                                  {% endif %}</td>              
-                                  <td>{{items[i].subject}}</td>
-                                  <td>{{items[i].description}}</td>
-                              </tr>
-                              {% endfor %}
-                        </tbody>
-                      </table>
-                    card_mod:
-                      style:
-                        .: |
-                          ha-card ha-markdown {
-                            padding:0px
-                          }
-                          ha-card ha-markdown.no-header {
-                            padding:0px
-                          }
-                          ha-markdown {
-                              overflow-y: auto;
-                              border-bottom-left-radius: 10px; 
-                              border-bottom-right-radius: 10px;
-                              border-top-left-radius: 10px; 
-                              border-top-right-radius: 10px;
-                            }
-                        ha-markdown$: |
-                          div {
-                              background-color:rgb(54, 54, 54, 0.3);
-                              padding: 5px 5px;
-                              color:white;
-                              font-weight:normal;
-                              font-size:1em;
-                              border-top-left-radius: 10px; 
-                              text-align: center;
-                               
-                          }
-                          table{
-                            border-collapse: collapse;
-                            font-size: 0.7em;
-                            font-family: Roboto;
-                            width: 100%;
-                            outline: 0px solid #393c3d;
-                            margin-top: 0px;
-                          } caption {
-                              text-align: center;
-                              font-weight: bold;
-                              font-size: 1em;
-                          } td {
-                              padding: 5px 8px 5px 8px;
-                              text-align: center;
-                              border-bottom: 0px solid #1c2020;
-                          }
-                          tr {
-                              border-bottom: 0px solid #1c2020;
-                          }
-
-                          tr:nth-of-type(even) {
-                              background-color: rgb(54, 54, 54, 0.3);
-                          }
-                          tr:last-of-type {
-                              border-bottom: transparent;
-                          }
-                          mark {
-                              background: transparent;
-                              color: white;
-                              border-radius: 5px;
-                              padding: 5px;
-                              border: solid #51ff4f  2px;
-                          }
-                          span {
-                              background: transparent;
-                              color: white;
-                              border-radius: 5px;
-                              padding: 5px;
-                              border: solid #ff4f4f 2px;
-                          }
-                          span {
-                              padding: 5px;
-                          }
-                          tr:nth-child(n+2) > td:nth-child(2) {
-                            text-align: center;
-                          }
-                - attributes:
-                    isMinWidthIndicator: true
-                    label: 📝Evaluations
-                  card:
-                    type: markdown
-                    content: |-
-                      <div>
-                        ✅très bonne maitrise,🟩bonne maitrise,🟧maitrise fragile,🟥maitrise insufisante,🚫absent,❌dispensé
-                      </div> 
-                      <table>
-                        {% set items = state_attr('sensor.pronote_NOM PRENOM_evaluations','evaluations')%}  {% for i in range(0, items | count, 1) %} 
-                        <tr> 
-                          <td width='15%'>
-                            <mark> {{ items[i].date.strftime("%d/%m") }} 
-                          </td> 
-                          <td width='40%'> {{ items[i].subject }} 
-                          </td> 
-                          <td width='25%'>
-                            {% set acquisitions = items[i].acquisitions %}{% for j in range(0,acquisitions|count,1) %}{% if acquisitions[j].level == 'Très bonne maîtrise' %}✅ {% elif acquisitions[j].level == 'Maîtrise satisfaisante' %}🟩{% elif acquisitions[j].level == 'Maîtrise fragile'  %}🟧{% elif acquisitions[j].level == 'Maîtrise insuffisante'  %}🟥{% elif acquisitions[j].level == 'Absent'  %}🚫{% elif acquisitions[j].level == 'Dispensé'  %}❌{% else %}?{% endif %}{% endfor %}
-                          </td>
-                          <td width='20%'>
-                            <h1>
-                              {{items[i].name}}
-                            </h1>
-                          </td> 
-                        </tr> 
-                        {% endfor %}
-                      </table>
-                    card_mod:
-                      style:
-                        .: |
-                          ha-card ha-markdown {
-                            padding:0px
-                          }
-                          ha-card ha-markdown.no-header {
-                            padding:0px
-                          }
-                          ha-markdown {
-                              overflow-y: auto;
-                              border-bottom-left-radius: 10px; 
-                              border-bottom-right-radius: 10px;
-                              border-top-left-radius: 10px; 
-                              border-top-right-radius: 10px;
-                          }
-                        ha-markdown$: |
-                          div{
-                              background-color: rgb(54, 54, 54, 0.3);
-                              padding: 5px 5px;
-                              color:white;
-                              font-weight:normal;
-                              text-align: center;
-                              font-size:1em; 
-                              border-top-left-radius: 10px; 
-                              }
-                          table{
+                            table{
                               border-collapse: collapse;
                               font-family: Roboto;
                               outline: 0px solid #393c3d;
+                              margin-top:0px;
                               font-size:0.7em;
                               width: 100%;
-                              }
-                          td {
-                              padding: 5px 8px 5px 8px;
-                              border-bottom: 0px solid #1c2020;
-                              text-align: center;
-                              }
-                          tr {
-                              line-height: 4px;
-                              margin-top:0px;
-                              background-color:transparent;
-                              }
-                          tr:nth-of-type(even) {
-                              background-color: rgb(54, 54, 54, 0.3);
-                              }
-                          tr:last-of-type {
-                              border-bottom: transparent;
-                              }
-                            h1{
-                              font-size: 1em;
-                              }
-                          mark {
-                              background: transparent;
-                              color: white;
-                              border-radius: 5px;
-                              padding: 5px;
-                              border: solid grey 2px;
-                              }
-                          span {
-                              background: #EC4B34;
-                              color: #222627;
-                              border-radius: 10px;
-                              padding: 5px;
-                              }
-                          span {
-                              padding: 5px;
-                              }
-                          tr:nth-child(n+2) > td:nth-child(2) {
-                            text-align: center;
-                              }
-                - attributes:
-                    isMinWidthIndicator: true
-                    label: 🗞️Informations
-                  card:
-                    type: markdown
-                    content: |-
-                      <table>
-                          <tbody>
-                              {% set items = state_attr('sensor.pronote_NOM PRENOM_information_and_surveys','information_and_surveys') %}
-                              {%-for i in range(0, items | count, 1) -%}
-                              <tr> 
-                                  <td><span>{{items[i].author}} / {{items[i].category}} :</span>
-                                  {{items[i].content}}</td>
-                              </tr>
-                              {% endfor %}
-                        </tbody>
-                      </table>
-                    card_mod:
-                      style:
-                        .: |
-                          ha-card ha-markdown {
-                            padding:0px
-                          }
-                          ha-card ha-markdown.no-header {
-                            padding:0px
-                          }
-                          ha-markdown {
-                              overflow-y: auto;
-                              border-bottom-left-radius: 10px; 
-                              border-bottom-right-radius: 10px;
-                              border-top-left-radius: 10px; 
-                              border-top-right-radius: 10px;
+                            } 
+                            caption {
+                                font-weight: bold;
+                                font-size: 0.7em;
+                            } 
+                            td {
+                                padding: 5px 8px 5px 8px;
+                                border-bottom: 0px solid #1c2020;
+                                text-align: center;
                             }
-                        ha-markdown$: |
-                          div {
-                              background-color:rgb(54, 54, 54, 0.3);
-                              padding: 5px 5px;
-                              color:white;
-                              font-weight:normal;
-                              font-size:1em;
-                              border-top-left-radius: 10px; 
-                              text-align: center;
-                               
-                          }
-                          mark {
-                              background: #00BD81;
-                              color: #222627;
-                              border-radius: 5px;
-                              padding: 5px;
-                              border: solid #005f41 2px;
-                              font-size: 1.2em;
-                              }
-                          h2 {
-                              background: #2471A3;
-                              color: white;
-                              border-radius: 5px;
-                              padding: 5px;
-                              border: solid #A9CCE3 2px;
-                              font-size: 1em;
-                              text-align: center;
-                              margin-left: 10%;
-                              margin-right: 10%;
-                              }
-                          table{
-                            border-collapse: collapse;
-                            font-size: 0.85em;
-                            font-family: Roboto;
-                            width: auto;
-                            outline: 0px solid #393c3d;
-                            margin-top: 0px;
-                          } caption {
-                              text-align: center;
-                              font-weight: bold;
-                              font-size: 1em;
-                          } td {
-                              padding: 5px 8px 5px 8px;
+                            tr {
+                                border-bottom: 0px solid #1c2020;
+                            }
+                            tr:nth-of-type(even) {
+                                background-color: rgb(54, 54, 54, 0.3);
+                            }
+                            tr:last-of-type {
+                                border-bottom: transparent;
+                            }
+                            mark {
+                                background:transparent;
+                                color: white;
+                                border-radius: 5px;
+                                padding: 5px;
+                                border: solid grey 2px;
+                            }
+                            h1 {
+                                background: transparent;
+                                color: #ffa14f ;
+                                border-radius: 5px
+                                padding: 5px;
+                                font-size: 0.9em;
+                                font-weight: normal;
+                                text-align: center;
+                            }
+                            span {
+                                background: transparent;
+                                color: #ff4f4f;
+                                border-radius: 5px;
+                                padding: 5px;
+                                border: solid #ff4f4f 2px;
+                            }
+                            tr:nth-child(n+2) > td:nth-child(2) {
                               text-align: left;
-                              border-bottom: 0px solid #1c2020;
-                          }
-                          tr {
-                              border-bottom: 0px solid #1c2020;
-                          }
+                            }
+                  - attributes:
+                      isMinWidthIndicator: true
+                      label: 📗Devoirs
+                    card:
+                      type: markdown
+                      content: |-
+                        <table>
+                            <tbody>
+                                {% set items = state_attr('sensor.pronote_NOM PRENOM_homework','homework') %}
+                                {%-for i in range(0, items | count, 1) -%}
+                                <tr>
+                                    <td>
+                                    {%- if items[i].done == true -%}
+                                        <mark>
+                                         {{items[i].date.strftime("%d/%m")}}</td>
+                                        </mark>
+                                    {%- else -%}
+                                        <span>
+                                        {{items[i].date.strftime("%d/%m")}}
+                                        </span>
+                                    {% endif %}</td>              
+                                    <td>{{items[i].subject}}</td>
+                                    <td>{{items[i].description}}</td>
+                                </tr>
+                                {% endfor %}
+                          </tbody>
+                        </table>
+                      card_mod:
+                        style:
+                          .: |
+                            ha-card ha-markdown {
+                              padding:0px
+                            }
+                            ha-card ha-markdown.no-header {
+                              padding:0px
+                            }
+                            ha-markdown {
+                                overflow-y: auto;
+                                border-bottom-left-radius: 10px; 
+                                border-bottom-right-radius: 10px;
+                                border-top-left-radius: 10px; 
+                                border-top-right-radius: 10px;
+                              }
+                          ha-markdown$: |
+                            div {
+                                background-color:rgb(54, 54, 54, 0.3);
+                                padding: 5px 5px;
+                                color:white;
+                                font-weight:normal;
+                                font-size:1em;
+                                border-top-left-radius: 10px; 
+                                text-align: center;
+                                 
+                            }
+                            table{
+                              border-collapse: collapse;
+                              font-size: 0.7em;
+                              font-family: Roboto;
+                              width: 100%;
+                              outline: 0px solid #393c3d;
+                              margin-top: 0px;
+                            } caption {
+                                text-align: center;
+                                font-weight: bold;
+                                font-size: 1em;
+                            } td {
+                                padding: 5px 8px 5px 8px;
+                                text-align: center;
+                                border-bottom: 0px solid #1c2020;
+                            }
+                            tr {
+                                border-bottom: 0px solid #1c2020;
+                            }
 
-                          tr:nth-of-type(even) {
-                              background-color: rgb(54, 54, 54, 0.3);
-                          }
-                          tr:last-of-type {
-                              border-bottom: transparent;
-                          }
-                          mark {
-                              background: #009767;
-                              color: #222627;
-                              border-radius: 5px;
-                              padding: 5px;
-                          }
-                          span {
-                              background: #2471A3;
-                              color: white;
-                              border-radius: 5px;
-                              padding: 5px;
-                              border: solid #A9CCE3 2px;
-                              font-size: 1em;
+                            tr:nth-of-type(even) {
+                                background-color: rgb(54, 54, 54, 0.3);
+                            }
+                            tr:last-of-type {
+                                border-bottom: transparent;
+                            }
+                            mark {
+                                background: transparent;
+                                color: white;
+                                border-radius: 5px;
+                                padding: 5px;
+                                border: solid #51ff4f  2px;
+                            }
+                            span {
+                                background: transparent;
+                                color: white;
+                                border-radius: 5px;
+                                padding: 5px;
+                                border: solid #ff4f4f 2px;
+                            }
+                            span {
+                                padding: 5px;
+                            }
+                            tr:nth-child(n+2) > td:nth-child(2) {
                               text-align: center;
-                              vertical-align: center;
-                              height: auto;
-                              padding: 5px;
-                              display: block;
-                          }
-                          span {
-                              padding: 5px;
-                          }
-                - attributes:
-                    isMinWidthIndicator: true
-                    label: 🍖Menu cantine
-                  card:
-                    type: custom:tabbed-card
-                    title: menu cantine nathan
-                    styles:
-                      '--mdc-typography-button-font-size': 10px
-                      '--mdc-theme-primary': white
-                      '--mdc-tab-text-label-color-default': grey
-                      background: rgb(54, 54, 54, 0.3)
-                      border: solid 1px rgb(40, 40, 40)
-                      border-top-left-radius: 10px
-                      border-top-right-radius: 10px
-                      border-bottom-left-radius: 10px
-                      border-bottom-right-radius: 10px
-                    tabs:
-                      - attributes:
-                          isMinWidthIndicator: true
-                          label: 🥗Entrées
-                        card:
-                          type: markdown
-                          content: >-
-                            <table>
-                                <tbody>
-                            {% set items =
-                            state_attr('sensor.pronote_NOM PRENOM_menus','menus')
-                            %} {% for i in range(0, items | count, 1) %}
-                              {% if items[i].is_lunch == True %}
-                              <tr>
-                              <td width='11%'>      
-                              <mark>  
-                              {{ items[i].date | as_datetime | as_timestamp | timestamp_custom('%d/%m') }}
-                              </mark>
-                              </td>
-                              <td width='70%'> 
-                                {% for entry in items[i].first_meal %}
-                                 {{ entry.name }}
+                            }
+                  - attributes:
+                      isMinWidthIndicator: true
+                      label: 📝Evaluations
+                    card:
+                      type: markdown
+                      content: |-
+                        <div>
+                          ✅très bonne maitrise,🟩bonne maitrise,🟧maitrise fragile,🟥maitrise insufisante,🚫absent,❌dispensé
+                        </div> 
+                        <table>
+                          {% set items = state_attr('sensor.pronote_NOM PRENOM_evaluations','evaluations')%}  {% for i in range(0, items | count, 1) %} 
+                          <tr> 
+                            <td width='15%'>
+                              <mark> {{ items[i].date.strftime("%d/%m") }} 
+                            </td> 
+                            <td width='40%'> {{ items[i].subject }} 
+                            </td> 
+                            <td width='25%'>
+                              {% set acquisitions = items[i].acquisitions %}{% for j in range(0,acquisitions|count,1) %}{% if acquisitions[j].level == 'Très bonne maîtrise' %}✅ {% elif acquisitions[j].level == 'Maîtrise satisfaisante' %}🟩{% elif acquisitions[j].level == 'Maîtrise fragile'  %}🟧{% elif acquisitions[j].level == 'Maîtrise insuffisante'  %}🟥{% elif acquisitions[j].level == 'Absent'  %}🚫{% elif acquisitions[j].level == 'Dispensé'  %}❌{% else %}?{% endif %}{% endfor %}
+                            </td>
+                            <td width='20%'>
+                              <h1>
+                                {{items[i].name}}
+                              </h1>
+                            </td> 
+                          </tr> 
+                          {% endfor %}
+                        </table>
+                      card_mod:
+                        style:
+                          .: |
+                            ha-card ha-markdown {
+                              padding:0px
+                            }
+                            ha-card ha-markdown.no-header {
+                              padding:0px
+                            }
+                            ha-markdown {
+                                overflow-y: auto;
+                                border-bottom-left-radius: 10px; 
+                                border-bottom-right-radius: 10px;
+                                border-top-left-radius: 10px; 
+                                border-top-right-radius: 10px;
+                            }
+                          ha-markdown$: |
+                            div{
+                                background-color: rgb(54, 54, 54, 0.3);
+                                padding: 5px 5px;
+                                color:white;
+                                font-weight:normal;
+                                text-align: center;
+                                font-size:1em; 
+                                border-top-left-radius: 10px; 
+                                }
+                            table{
+                                border-collapse: collapse;
+                                font-family: Roboto;
+                                outline: 0px solid #393c3d;
+                                font-size:0.7em;
+                                width: 100%;
+                                }
+                            td {
+                                padding: 5px 8px 5px 8px;
+                                border-bottom: 0px solid #1c2020;
+                                text-align: center;
+                                }
+                            tr {
+                                line-height: 4px;
+                                margin-top:0px;
+                                background-color:transparent;
+                                }
+                            tr:nth-of-type(even) {
+                                background-color: rgb(54, 54, 54, 0.3);
+                                }
+                            tr:last-of-type {
+                                border-bottom: transparent;
+                                }
+                              h1{
+                                font-size: 1em;
+                                }
+                            mark {
+                                background: transparent;
+                                color: white;
+                                border-radius: 5px;
+                                padding: 5px;
+                                border: solid grey 2px;
+                                }
+                            span {
+                                background: #EC4B34;
+                                color: #222627;
+                                border-radius: 10px;
+                                padding: 5px;
+                                }
+                            span {
+                                padding: 5px;
+                                }
+                            tr:nth-child(n+2) > td:nth-child(2) {
+                              text-align: center;
+                                }
+                  - attributes:
+                      isMinWidthIndicator: true
+                      label: 🗞️Informations
+                    card:
+                      type: markdown
+                      content: |-
+                        <table>
+                            <tbody>
+                                {% set items = state_attr('sensor.pronote_NOM PRENOM_information_and_surveys','information_and_surveys') %}
+                                {%-for i in range(0, items | count, 1) -%}
+                                <tr> 
+                                    <td><span>{{items[i].author}} / {{items[i].category}} :</span>
+                                    {{items[i].content}}</td>
+                                </tr>
                                 {% endfor %}
-                              </td>
-                              </td>
-                                {% endif %}
-                            {% endfor %}
-                              </tbody>
-                            </table>
-                          card_mod:
-                            style:
-                              .: |
-                                ha-card ha-markdown {
-                                  padding:0px
+                          </tbody>
+                        </table>
+                      card_mod:
+                        style:
+                          .: |
+                            ha-card ha-markdown {
+                              padding:0px
+                            }
+                            ha-card ha-markdown.no-header {
+                              padding:0px
+                            }
+                            ha-markdown {
+                                overflow-y: auto;
+                                border-bottom-left-radius: 10px; 
+                                border-bottom-right-radius: 10px;
+                                border-top-left-radius: 10px; 
+                                border-top-right-radius: 10px;
+                              }
+                          ha-markdown$: |
+                            div {
+                                background-color:rgb(54, 54, 54, 0.3);
+                                padding: 5px 5px;
+                                color:white;
+                                font-weight:normal;
+                                font-size:1em;
+                                border-top-left-radius: 10px; 
+                                text-align: center;
+                                 
+                            }
+                            mark {
+                                background: #00BD81;
+                                color: #222627;
+                                border-radius: 5px;
+                                padding: 5px;
+                                border: solid #005f41 2px;
+                                font-size: 1.2em;
                                 }
-                                ha-card ha-markdown.no-header {
-                                  padding:0px
+                            h2 {
+                                background: #2471A3;
+                                color: white;
+                                border-radius: 5px;
+                                padding: 5px;
+                                border: solid #A9CCE3 2px;
+                                font-size: 1em;
+                                text-align: center;
+                                margin-left: 10%;
+                                margin-right: 10%;
                                 }
-                                 ha-markdown {
-                                    overflow-y: auto;
-                                    border-top-left-radius:10px;
-                                    border-top-right-radius:10px;
-                                    border-bottom-left-radius:10px;
-                                  }
-                              ha-markdown$: |
-                                div {
-                                    background-color:rgb(54, 54, 54, 0.3);
-                                    padding: 5px 5px;
-                                    color:white;
-                                    font-weight:normal;
-                                    font-size:1em;
-                                    border-top-left-radius: 10px; 
-                                    text-align: center;
-                                }table{
-                                  border-collapse: collapse;
-                                  font-family: Roboto;
-                                  width: 100%;
-                                  outline: 0px solid #393c3d;
-                                  margin-top: 0px;
-                                  text-align: center;
-                                } caption {
-                                    text-align: center;
-                                    font-weight: bold;
-                                    font-size: 1em;
-                                } td {
-                                    padding: 5px 8px 5px 8px;
-                                    text-align: center;
-                                    border-bottom: 0px solid #1c2020;
-                                    margin-top: 0px;
-                                    font-size: 0.9em;
-                                }
-                                tr {
-                                    border-bottom: 0px solid #1c2020;
-                                }
+                            table{
+                              border-collapse: collapse;
+                              font-size: 0.85em;
+                              font-family: Roboto;
+                              width: auto;
+                              outline: 0px solid #393c3d;
+                              margin-top: 0px;
+                            } caption {
+                                text-align: center;
+                                font-weight: bold;
+                                font-size: 1em;
+                            } td {
+                                padding: 5px 8px 5px 8px;
+                                text-align: left;
+                                border-bottom: 0px solid #1c2020;
+                            }
+                            tr {
+                                border-bottom: 0px solid #1c2020;
+                            }
 
-                                tr:nth-of-type(even) {
-                                    background-color: rgb(54, 54, 54, 0.3);
-                                }
-                                tr:last-of-type {
-                                    border-bottom: transparent; 
-                                }
-                                mark {
-                                      background: transparent;
-                                      color: white;
-                                      border-radius: 5px;
-                                      padding: 5px;
-                                      border: solid grey 2px;
-                                      font-weight: normal;
-                                      font-size: 0.8em;
-                                      }
-                                span {
-                                    background: transparent;
-                                    color: white;
-                                    border-radius: 5px;
-                                    padding: 5px;
-                                }
-                                tr:nth-child(n+2) > td:nth-child(2) {
-                                  text-align: center;
-                                }
-                      - attributes:
-                          isMinWidthIndicator: true
-                          label: 🍖Plats principal
-                        card:
-                          type: markdown
-                          content: >-
-                            <table>
-                                <tbody>
-                            {% set items =
-                            state_attr('sensor.pronote_NOM PRENOM_menus','menus')
-                            %}
-
-                            {% for i in range(0, items | count, 1) %}
-                              {% if items[i].is_lunch == True %}
-                              <tr>
-                              <td width='11%'>      
-                              <mark>  
-                              {{ items[i].date | as_datetime | as_timestamp | timestamp_custom('%d/%m') }}
-                              </mark>
-                              </td>
-                              <td width='70%'> 
-                                {% for main in items[i].main_meal %}
-                                  {{ main.name }}
-                                {% endfor %}
-                              </td>
-                                {% endif %}
-                            {% endfor %}
-                              </tbody>
-                            </table>
-                          card_mod:
-                            style:
-                              .: |
-                                ha-card ha-markdown {
-                                  padding:0px
-                                }
-                                ha-card ha-markdown.no-header {
-                                  padding:0px
-                                }
-                                 ha-markdown {
-                                    overflow-y: auto;
-                                  }
-                              ha-markdown$: |
-                                div {
-                                    background-color:rgb(54, 54, 54, 0.3);
-                                    padding: 5px 5px;
-                                    color:white;
-                                    font-weight:normal;
-                                    font-size:1em;
-                                    border-top-left-radius: 10px; 
-                                    text-align: center;
-                                }
-                                table{
-                                  border-collapse: collapse;
-                                  font-family: Roboto;
-                                  width: 100%;
-                                  outline: 0px solid #393c3d;
-                                  margin-top: 5px;
-                                } caption {
-                                    text-align: center;
-                                    font-weight: bold;
-                                    font-size: 1em;
-                                } td {
-                                    padding: 5px 8px 5px 8px;
-                                    text-align: center;
-                                    border-bottom: 0px solid #1c2020;
-                                    margin-top: 5px;
-                                    font-size: 0.9em;
-                                }
-                                tr {
-                                    border-bottom: 0px solid #1c2020;
-                                }
-
-                                tr:nth-of-type(even) {
-                                    background-color: rgb(54, 54, 54, 0.3);
-                                }
-                                tr:last-of-type {
-                                    border-bottom: transparent;          }
-                                mark {
-                                      background: transparent;
-                                      color: white;
-                                      border-radius: 5px;
-                                      padding: 5px;
-                                      border: solid grey 2px;
-                                      font-size: 0.8em;
-                                      font-weight: normal;
-                                      }
-                                span {
-                                    background: #EC4B34;
-                                    color: #222627;
-                                    border-radius: 5px;
-                                    padding: 5px;
-                                }
-                                tr:nth-child(n+2) > td:nth-child(2) {
-                                  text-align: center;
-                                }
-                      - attributes:
-                          isMinWidthIndicator: true
-                          label: 🍟Accompagnements
-                        card:
-                          type: markdown
-                          content: >-
-                            <table>
-                                <tbody>
-                            {% set items =
-                            state_attr('sensor.pronote_NOM PRENOM_menus','menus')
-                            %}
-
-                            {% for i in range(0, items | count, 1) %}
-                              {% if items[i].is_lunch == True %}
-                              <tr>
-                              <td width='11%'>      
-                              <mark>  
-                              {{ items[i].date | as_datetime | as_timestamp | timestamp_custom('%d/%m') }}
-                              </mark>
-                              </td>
-                              <td width='70%'>
-                                {% if items[i].side_meal %}
-                                  {% for side in items[i].side_meal %}
-                                    {{ side.name }}
+                            tr:nth-of-type(even) {
+                                background-color: rgb(54, 54, 54, 0.3);
+                            }
+                            tr:last-of-type {
+                                border-bottom: transparent;
+                            }
+                            mark {
+                                background: #009767;
+                                color: #222627;
+                                border-radius: 5px;
+                                padding: 5px;
+                            }
+                            span {
+                                background: #2471A3;
+                                color: white;
+                                border-radius: 5px;
+                                padding: 5px;
+                                border: solid #A9CCE3 2px;
+                                font-size: 1em;
+                                text-align: center;
+                                vertical-align: center;
+                                height: auto;
+                                padding: 5px;
+                                display: block;
+                            }
+                            span {
+                                padding: 5px;
+                            }
+                  - attributes:
+                      isMinWidthIndicator: true
+                      label: 🍖Menu cantine
+                    card:
+                      type: custom:tabbed-card
+                      title: menu cantine nathan
+                      styles:
+                        '--mdc-typography-button-font-size': 10px
+                        '--mdc-theme-primary': white
+                        '--mdc-tab-text-label-color-default': grey
+                        background: rgb(54, 54, 54, 0.3)
+                        border: solid 1px rgb(40, 40, 40)
+                        border-top-left-radius: 10px
+                        border-top-right-radius: 10px
+                        border-bottom-left-radius: 10px
+                        border-bottom-right-radius: 10px
+                      tabs:
+                        - attributes:
+                            isMinWidthIndicator: true
+                            label: 🥗Entrées
+                          card:
+                            type: markdown
+                            content: >-
+                              <table>
+                                  <tbody>
+                              {% set items =
+                              state_attr('sensor.pronote_NOM PRENOM_menus','menus')
+                              %} {% for i in range(0, items | count, 1) %}
+                                {% if items[i].is_lunch == True %}
+                                <tr>
+                                <td width='11%'>      
+                                <mark>  
+                                {{ items[i].date | as_datetime | as_timestamp | timestamp_custom('%d/%m') }}
+                                </mark>
+                                </td>
+                                <td width='70%'> 
+                                  {% for entry in items[i].first_meal %}
+                                   {{ entry.name }}
                                   {% endfor %}
-                                {% else %}
-                                  PAS_DISPO
-                                {% endif %}
-                              </td>
-                                {% endif %}
-                            {% endfor %}
-                              </tbody>
-                            </table>
-                          card_mod:
-                            style:
-                              .: |
-                                ha-card ha-markdown {
-                                  padding:0px
-                                }
-                                ha-card ha-markdown.no-header {
-                                  padding:0px
-                                }
-                                 ha-markdown {
-                                    overflow-y: auto;
+                                </td>
+                                </td>
+                                  {% endif %}
+                              {% endfor %}
+                                </tbody>
+                              </table>
+                            card_mod:
+                              style:
+                                .: |
+                                  ha-card ha-markdown {
+                                    padding:0px
                                   }
-                              ha-markdown$: |
-                                div {
-                                    background-color:rgb(54, 54, 54, 0.3);
-                                    padding: 5px 5px;
-                                    color:white;
-                                    font-weight:normal;
-                                    font-size:1em;
-                                    border-top-left-radius: 10px; 
+                                  ha-card ha-markdown.no-header {
+                                    padding:0px
+                                  }
+                                   ha-markdown {
+                                      overflow-y: auto;
+                                      border-top-left-radius:10px;
+                                      border-top-right-radius:10px;
+                                      border-bottom-left-radius:10px;
+                                    }
+                                ha-markdown$: |
+                                  div {
+                                      background-color:rgb(54, 54, 54, 0.3);
+                                      padding: 5px 5px;
+                                      color:white;
+                                      font-weight:normal;
+                                      font-size:1em;
+                                      border-top-left-radius: 10px; 
+                                      text-align: center;
+                                  }table{
+                                    border-collapse: collapse;
+                                    font-family: Roboto;
+                                    width: 100%;
+                                    outline: 0px solid #393c3d;
+                                    margin-top: 0px;
                                     text-align: center;
-                                }
-                                table{
-                                  border-collapse: collapse;
-                                  font-family: Roboto;
-                                  width: 100%;
-                                  outline: 0px solid #393c3d;
-                                  margin-top: 5px;
-                                } caption {
-                                    text-align: center;
-                                    font-weight: bold;
-                                    font-size: 1em;
-                                } td {
-                                    padding: 5px 8px 5px 8px;
-                                    text-align: center;
-                                    border-bottom: 0px solid #1c2020;
-                                    margin-top: 5px;
-                                    font-size: 0.9em;
-                                }
-                                tr {
-                                    border-bottom: 0px solid #1c2020;
-                                }
+                                  } caption {
+                                      text-align: center;
+                                      font-weight: bold;
+                                      font-size: 1em;
+                                  } td {
+                                      padding: 5px 8px 5px 8px;
+                                      text-align: center;
+                                      border-bottom: 0px solid #1c2020;
+                                      margin-top: 0px;
+                                      font-size: 0.9em;
+                                  }
+                                  tr {
+                                      border-bottom: 0px solid #1c2020;
+                                  }
 
-                                tr:nth-of-type(even) {
-                                    background-color: rgb(54, 54, 54, 0.3);
-                                }
-                                tr:last-of-type {
-                                    border-bottom: transparent;          }
-                                mark {
+                                  tr:nth-of-type(even) {
+                                      background-color: rgb(54, 54, 54, 0.3);
+                                  }
+                                  tr:last-of-type {
+                                      border-bottom: transparent; 
+                                  }
+                                  mark {
+                                        background: transparent;
+                                        color: white;
+                                        border-radius: 5px;
+                                        padding: 5px;
+                                        border: solid grey 2px;
+                                        font-weight: normal;
+                                        font-size: 0.8em;
+                                        }
+                                  span {
                                       background: transparent;
                                       color: white;
                                       border-radius: 5px;
                                       padding: 5px;
-                                      border: solid grey 2px;
-                                      font-size: 0.8em;
-                                      font-weight: normal;
-                                      }
-                                span {
-                                    background: #EC4B34;
-                                    color: #222627;
-                                    border-radius: 5px;
-                                    padding: 5px;
-                                }
-                                tr:nth-child(n+2) > td:nth-child(2) {
-                                  text-align: center;
-                                }
-                      - attributes:
-                          isMinWidthIndicator: true
-                          label: 🧀Fromages
-                        card:
-                          type: markdown
-                          content: >-
-                            <table>
-                                <tbody>
-                            {% set items =
-                            state_attr('sensor.pronote_NOM PRENOM_menus','menus')
-                            %}
-
-                            {% for i in range(0, items | count, 1) %}
-                              {% if items[i].is_lunch == True %}
-                              <tr>
-                              <td width='11%'>      
-                              <mark>  
-                              {{ items[i].date | as_datetime | as_timestamp | timestamp_custom('%d/%m') }}
-                              </mark>
-                              </td>
-                              <td width='70%'>
-                                {% for cheese in items[i].cheese %}
-                                  {{ cheese.name }}
-                                {% endfor %}
-                              </td>
-                                {% endif %}
-                            {% endfor %}
-                              </tbody>
-                            </table>
-                          card_mod:
-                            style:
-                              .: |
-                                ha-card ha-markdown {
-                                  padding:0px
-                                }
-                                ha-card ha-markdown.no-header {
-                                  padding:0px
-                                }
-                                 ha-markdown {
-                                    overflow-y: auto;
                                   }
-                              ha-markdown$: |
-                                div {
-                                    background-color:rgb(54, 54, 54, 0.3);
-                                    padding: 5px 5px;
-                                    color:white;
-                                    font-weight:normal;
-                                    font-size:1em;
-                                    border-top-left-radius: 10px; 
+                                  tr:nth-child(n+2) > td:nth-child(2) {
                                     text-align: center;
-                                }
-                                table{
-                                  border-collapse: collapse;
-                                  font-family: Roboto;
-                                  width: 100%;
-                                  outline: 0px solid #393c3d;
-                                  margin-top: 5px;
-                                } caption {
-                                    text-align: center;
-                                    font-weight: bold;
-                                    font-size: 1em;
-                                } td {
-                                    padding: 5px 8px 5px 8px;
-                                    text-align: center;
-                                    border-bottom: 0px solid #1c2020;
-                                    margin-top: 5px;
-                                    font-size: 0.9em;
-                                }
-                                tr {
-                                    border-bottom: 0px solid #1c2020;
-                                }
+                                  }
+                        - attributes:
+                            isMinWidthIndicator: true
+                            label: 🍖Plats principal
+                          card:
+                            type: markdown
+                            content: >-
+                              <table>
+                                  <tbody>
+                              {% set items =
+                              state_attr('sensor.pronote_NOM PRENOM_menus','menus')
+                              %}
 
-                                tr:nth-of-type(even) {
-                                    background-color: rgb(54, 54, 54, 0.3);
-                                }
-                                tr:last-of-type {
-                                    border-bottom: transparent;          }
-                                mark {
-                                      background: transparent;
-                                      color: white;
+                              {% for i in range(0, items | count, 1) %}
+                                {% if items[i].is_lunch == True %}
+                                <tr>
+                                <td width='11%'>      
+                                <mark>  
+                                {{ items[i].date | as_datetime | as_timestamp | timestamp_custom('%d/%m') }}
+                                </mark>
+                                </td>
+                                <td width='70%'> 
+                                  {% for main in items[i].main_meal %}
+                                    {{ main.name }}
+                                  {% endfor %}
+                                </td>
+                                  {% endif %}
+                              {% endfor %}
+                                </tbody>
+                              </table>
+                            card_mod:
+                              style:
+                                .: |
+                                  ha-card ha-markdown {
+                                    padding:0px
+                                  }
+                                  ha-card ha-markdown.no-header {
+                                    padding:0px
+                                  }
+                                   ha-markdown {
+                                      overflow-y: auto;
+                                    }
+                                ha-markdown$: |
+                                  div {
+                                      background-color:rgb(54, 54, 54, 0.3);
+                                      padding: 5px 5px;
+                                      color:white;
+                                      font-weight:normal;
+                                      font-size:1em;
+                                      border-top-left-radius: 10px; 
+                                      text-align: center;
+                                  }
+                                  table{
+                                    border-collapse: collapse;
+                                    font-family: Roboto;
+                                    width: 100%;
+                                    outline: 0px solid #393c3d;
+                                    margin-top: 5px;
+                                  } caption {
+                                      text-align: center;
+                                      font-weight: bold;
+                                      font-size: 1em;
+                                  } td {
+                                      padding: 5px 8px 5px 8px;
+                                      text-align: center;
+                                      border-bottom: 0px solid #1c2020;
+                                      margin-top: 5px;
+                                      font-size: 0.9em;
+                                  }
+                                  tr {
+                                      border-bottom: 0px solid #1c2020;
+                                  }
+
+                                  tr:nth-of-type(even) {
+                                      background-color: rgb(54, 54, 54, 0.3);
+                                  }
+                                  tr:last-of-type {
+                                      border-bottom: transparent;          }
+                                  mark {
+                                        background: transparent;
+                                        color: white;
+                                        border-radius: 5px;
+                                        padding: 5px;
+                                        border: solid grey 2px;
+                                        font-size: 0.8em;
+                                        font-weight: normal;
+                                        }
+                                  span {
+                                      background: #EC4B34;
+                                      color: #222627;
                                       border-radius: 5px;
                                       padding: 5px;
-                                      border: solid grey 2px;
-                                      font-size: 0.8em;
-                                      font-weight: normal;
-                                      }
-                                span {
-                                    background: #EC4B34;
-                                    color: #222627;
-                                    border-radius: 5px;
-                                    padding: 5px;
-                                }
-                                tr:nth-child(n+2) > td:nth-child(2) {
-                                  text-align: center;
-                                }
-                      - attributes:
-                          isMinWidthIndicator: true
-                          label: 🍦Desserts
-                        card:
-                          type: markdown
-                          content: >-
-                            <table>
-                                <tbody>
-                            {% set items =
-                            state_attr('sensor.pronote_NOM PRENOM_menus','menus')
-                            %} {% for i in range(0, items | count, 1) %}
-                              {% if items[i].is_lunch == True %}
-                              <tr>
-                              <td width='11%'>      
-                              <mark>  
-                              {{ items[i].date | as_datetime | as_timestamp | timestamp_custom('%d/%m') }}
-                              </mark>
-                              </td>
-                              <td width='70%'>
-                                {% for dessert in items[i].dessert %}
-                                  {{ dessert.name }}
-                                {% endfor %}
-                              </td>
-                                {% endif %}
-                            {% endfor %}
-                              </tbody>
-                            </table>
-                          card_mod:
-                            style:
-                              .: |
-                                ha-card ha-markdown {
-                                  padding:0px
-                                }
-                                ha-card ha-markdown.no-header {
-                                  padding:0px
-                                }
-                                 ha-markdown {
-                                    overflow-y: auto;
                                   }
-                              ha-markdown$: |
-                                div {
-                                    background-color:rgb(54, 54, 54, 0.3);
-                                    padding: 5px 5px;
-                                    color:white;
-                                    font-weight:normal;
-                                    font-size:1em;
-                                    border-top-left-radius: 10px; 
+                                  tr:nth-child(n+2) > td:nth-child(2) {
                                     text-align: center;
-                                }
-                                table{
-                                  border-collapse: collapse;
-                                  font-family: Roboto;
-                                  width: 100%;
-                                  outline: 0px solid #393c3d;
-                                  margin-top: 5px;
-                                } caption {
-                                    text-align: center;
-                                    font-weight: bold;
-                                    font-size: 1em;
-                                } td {
-                                    padding: 5px 8px 5px 8px;
-                                    text-align: center;
-                                    border-bottom: 0px solid #1c2020;
-                                    margin-top: 5px;
-                                    font-size: 0.9em;
-                                }
-                                tr {
-                                    border-bottom: 0px solid #1c2020;
-                                }
+                                  }
+                        - attributes:
+                            isMinWidthIndicator: true
+                            label: 🍟Accompagnements
+                          card:
+                            type: markdown
+                            content: >-
+                              <table>
+                                  <tbody>
+                              {% set items =
+                              state_attr('sensor.pronote_NOM PRENOM_menus','menus')
+                              %}
 
-                                tr:nth-of-type(even) {
-                                    background-color: rgb(54, 54, 54, 0.3);
-                                }
-                                tr:last-of-type {
-                                    border-bottom: transparent;          }
-                                mark {
-                                      background: transparent;
-                                      color: white;
+                              {% for i in range(0, items | count, 1) %}
+                                {% if items[i].is_lunch == True %}
+                                <tr>
+                                <td width='11%'>      
+                                <mark>  
+                                {{ items[i].date | as_datetime | as_timestamp | timestamp_custom('%d/%m') }}
+                                </mark>
+                                </td>
+                                <td width='70%'>
+                                  {% if items[i].side_meal %}
+                                    {% for side in items[i].side_meal %}
+                                      {{ side.name }}
+                                    {% endfor %}
+                                  {% else %}
+                                    PAS_DISPO
+                                  {% endif %}
+                                </td>
+                                  {% endif %}
+                              {% endfor %}
+                                </tbody>
+                              </table>
+                            card_mod:
+                              style:
+                                .: |
+                                  ha-card ha-markdown {
+                                    padding:0px
+                                  }
+                                  ha-card ha-markdown.no-header {
+                                    padding:0px
+                                  }
+                                   ha-markdown {
+                                      overflow-y: auto;
+                                    }
+                                ha-markdown$: |
+                                  div {
+                                      background-color:rgb(54, 54, 54, 0.3);
+                                      padding: 5px 5px;
+                                      color:white;
+                                      font-weight:normal;
+                                      font-size:1em;
+                                      border-top-left-radius: 10px; 
+                                      text-align: center;
+                                  }
+                                  table{
+                                    border-collapse: collapse;
+                                    font-family: Roboto;
+                                    width: 100%;
+                                    outline: 0px solid #393c3d;
+                                    margin-top: 5px;
+                                  } caption {
+                                      text-align: center;
+                                      font-weight: bold;
+                                      font-size: 1em;
+                                  } td {
+                                      padding: 5px 8px 5px 8px;
+                                      text-align: center;
+                                      border-bottom: 0px solid #1c2020;
+                                      margin-top: 5px;
+                                      font-size: 0.9em;
+                                  }
+                                  tr {
+                                      border-bottom: 0px solid #1c2020;
+                                  }
+
+                                  tr:nth-of-type(even) {
+                                      background-color: rgb(54, 54, 54, 0.3);
+                                  }
+                                  tr:last-of-type {
+                                      border-bottom: transparent;          }
+                                  mark {
+                                        background: transparent;
+                                        color: white;
+                                        border-radius: 5px;
+                                        padding: 5px;
+                                        border: solid grey 2px;
+                                        font-size: 0.8em;
+                                        font-weight: normal;
+                                        }
+                                  span {
+                                      background: #EC4B34;
+                                      color: #222627;
                                       border-radius: 5px;
                                       padding: 5px;
-                                      border: solid grey 2px;
-                                      font-size: 0.8em;
-                                      font-weight: normal;
-                                      }
-                                span {
-                                    background: #EC4B34;
-                                    color: #222627;
-                                    border-radius: 5px;
-                                    padding: 5px;
-                                }
-                                tr:nth-child(n+2) > td:nth-child(2) {
-                                  text-align: center;
-                                }
-                                tr:nth-child(n+2) > td:nth-child(2) {
-                                  text-align: center;
-                                }
-        title: La chambre de nathan
+                                  }
+                                  tr:nth-child(n+2) > td:nth-child(2) {
+                                    text-align: center;
+                                  }
+                        - attributes:
+                            isMinWidthIndicator: true
+                            label: 🧀Fromages
+                          card:
+                            type: markdown
+                            content: >-
+                              <table>
+                                  <tbody>
+                              {% set items =
+                              state_attr('sensor.pronote_NOM PRENOM_menus','menus')
+                              %}
+
+                              {% for i in range(0, items | count, 1) %}
+                                {% if items[i].is_lunch == True %}
+                                <tr>
+                                <td width='11%'>      
+                                <mark>  
+                                {{ items[i].date | as_datetime | as_timestamp | timestamp_custom('%d/%m') }}
+                                </mark>
+                                </td>
+                                <td width='70%'>
+                                  {% for cheese in items[i].cheese %}
+                                    {{ cheese.name }}
+                                  {% endfor %}
+                                </td>
+                                  {% endif %}
+                              {% endfor %}
+                                </tbody>
+                              </table>
+                            card_mod:
+                              style:
+                                .: |
+                                  ha-card ha-markdown {
+                                    padding:0px
+                                  }
+                                  ha-card ha-markdown.no-header {
+                                    padding:0px
+                                  }
+                                   ha-markdown {
+                                      overflow-y: auto;
+                                    }
+                                ha-markdown$: |
+                                  div {
+                                      background-color:rgb(54, 54, 54, 0.3);
+                                      padding: 5px 5px;
+                                      color:white;
+                                      font-weight:normal;
+                                      font-size:1em;
+                                      border-top-left-radius: 10px; 
+                                      text-align: center;
+                                  }
+                                  table{
+                                    border-collapse: collapse;
+                                    font-family: Roboto;
+                                    width: 100%;
+                                    outline: 0px solid #393c3d;
+                                    margin-top: 5px;
+                                  } caption {
+                                      text-align: center;
+                                      font-weight: bold;
+                                      font-size: 1em;
+                                  } td {
+                                      padding: 5px 8px 5px 8px;
+                                      text-align: center;
+                                      border-bottom: 0px solid #1c2020;
+                                      margin-top: 5px;
+                                      font-size: 0.9em;
+                                  }
+                                  tr {
+                                      border-bottom: 0px solid #1c2020;
+                                  }
+
+                                  tr:nth-of-type(even) {
+                                      background-color: rgb(54, 54, 54, 0.3);
+                                  }
+                                  tr:last-of-type {
+                                      border-bottom: transparent;          }
+                                  mark {
+                                        background: transparent;
+                                        color: white;
+                                        border-radius: 5px;
+                                        padding: 5px;
+                                        border: solid grey 2px;
+                                        font-size: 0.8em;
+                                        font-weight: normal;
+                                        }
+                                  span {
+                                      background: #EC4B34;
+                                      color: #222627;
+                                      border-radius: 5px;
+                                      padding: 5px;
+                                  }
+                                  tr:nth-child(n+2) > td:nth-child(2) {
+                                    text-align: center;
+                                  }
+                        - attributes:
+                            isMinWidthIndicator: true
+                            label: 🍦Desserts
+                          card:
+                            type: markdown
+                            content: >-
+                              <table>
+                                  <tbody>
+                              {% set items =
+                              state_attr('sensor.pronote_NOM PRENOM_menus','menus')
+                              %} {% for i in range(0, items | count, 1) %}
+                                {% if items[i].is_lunch == True %}
+                                <tr>
+                                <td width='11%'>      
+                                <mark>  
+                                {{ items[i].date | as_datetime | as_timestamp | timestamp_custom('%d/%m') }}
+                                </mark>
+                                </td>
+                                <td width='70%'>
+                                  {% for dessert in items[i].dessert %}
+                                    {{ dessert.name }}
+                                  {% endfor %}
+                                </td>
+                                  {% endif %}
+                              {% endfor %}
+                                </tbody>
+                              </table>
+                            card_mod:
+                              style:
+                                .: |
+                                  ha-card ha-markdown {
+                                    padding:0px
+                                  }
+                                  ha-card ha-markdown.no-header {
+                                    padding:0px
+                                  }
+                                   ha-markdown {
+                                      overflow-y: auto;
+                                    }
+                                ha-markdown$: |
+                                  div {
+                                      background-color:rgb(54, 54, 54, 0.3);
+                                      padding: 5px 5px;
+                                      color:white;
+                                      font-weight:normal;
+                                      font-size:1em;
+                                      border-top-left-radius: 10px; 
+                                      text-align: center;
+                                  }
+                                  table{
+                                    border-collapse: collapse;
+                                    font-family: Roboto;
+                                    width: 100%;
+                                    outline: 0px solid #393c3d;
+                                    margin-top: 5px;
+                                  } caption {
+                                      text-align: center;
+                                      font-weight: bold;
+                                      font-size: 1em;
+                                  } td {
+                                      padding: 5px 8px 5px 8px;
+                                      text-align: center;
+                                      border-bottom: 0px solid #1c2020;
+                                      margin-top: 5px;
+                                      font-size: 0.9em;
+                                  }
+                                  tr {
+                                      border-bottom: 0px solid #1c2020;
+                                  }
+
+                                  tr:nth-of-type(even) {
+                                      background-color: rgb(54, 54, 54, 0.3);
+                                  }
+                                  tr:last-of-type {
+                                      border-bottom: transparent;          }
+                                  mark {
+                                        background: transparent;
+                                        color: white;
+                                        border-radius: 5px;
+                                        padding: 5px;
+                                        border: solid grey 2px;
+                                        font-size: 0.8em;
+                                        font-weight: normal;
+                                        }
+                                  span {
+                                      background: #EC4B34;
+                                      color: #222627;
+                                      border-radius: 5px;
+                                      padding: 5px;
+                                  }
+                                  tr:nth-child(n+2) > td:nth-child(2) {
+                                    text-align: center;
+                                  }
+                                  tr:nth-child(n+2) > td:nth-child(2) {
+                                    text-align: center;
+                                  }
+                    title: La chambre de nathan
