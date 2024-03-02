@@ -36,20 +36,20 @@ Integrations:
   - pronote (si utiliser sinon peut etre supprimer)( https://github.com/delphiki/hass-pronote )<br><br>
   
 Les backgrounds des cartes se trouvent lignes:
-  - meteo: 68
-  - horloge: 87
-  - salon: 239
-  - salle a manger: 393
-  - cuisine: 523
-  - couloir: 625
-  - salle de bain rdc: 707
-  - chambre parentale: 835
-  - chambre d'amis: 944
-  - chambre rox: 1051
-  - palier: 1158
-  - salle de bain etage: 1244
-  - chambre ethan: 1351
-  - chambre nathan: 1500
+  - meteo: 100
+  - horloge: 119
+  - salon: 271
+  - salle a manger: 425
+  - cuisine: 555
+  - couloir: 657
+  - salle de bain rdc: 739
+  - chambre parentale: 867
+  - chambre d'amis: 976
+  - chambre rox: 1083
+  - palier: 1190
+  - salle de bain etage: 1276
+  - chambre ethan: 1383
+  - chambre nathan: 1532
 <br><br>
 ![screenshot](https://i.ibb.co/RQ3GLKM/dashboard-0.png)
 ![screebshot2](https://i.ibb.co/pnqCMtz/dashboard-1.png)
