@@ -17,7 +17,7 @@ update en cours:<br>
 01/01/2024: résolution des problemes de ressources rencontré pour certain apareils (passage du maximum de parametres de cartes en version theme plutot quand carte modifiée) [en cours]<br>
 <br>
 Le code des cartes est dans le fichier carte dashboard
-pour le sensor "il fait nuit" le lien pour la création https://www.sigalou-domotique.fr/je-voudrais-savoir-si-nous-sommes-le-jour-ou-la-nuit
+pour le sensor "il fait nuit" le lien pour la création https://www.sigalou-domotique.fr/je-voudrais-savoir-si-nous-sommes-le-jour-ou-la-nuit<br>
 Addons et intégrations nécessaire.<br>
 Addon: 
   - lovelace-meteofrance-weather-card ( https://github.com/hacf-fr/lovelace-meteofrance-weather-card )
