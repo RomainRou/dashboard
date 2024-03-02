@@ -3,10 +3,10 @@ Dashboard 2024 <br>
 un tuto pour l'installation est dispo en bas de page<br>
 <br>
 update:<br>
-28/01/2024: nettoyage du code[terminer]<br>
+28/01/2024: nettoyage du code[terminer]<br><br>
 31/01/2024: maintenant le background animé de la carte meteo change en foction de l'état du sensor et ajout du background animé sur la carte horloge (les gif ou images peuvent être changer dans background-image: url(l'url de l'image);<br><br>
 <b> &#x26A0;<U><br>Attention il faut modifier la ligne 66 avec le nom de votre ville pour que le changement d'images sois pris en compte</U></b>[terminer]<br><br>
-01/02/2024: redaction d'un tuto d'installation[terminer]<br>
+01/02/2024: redaction d'un tuto d'installation[terminer]<br><br>
 02/02/2024: meilleur optimisation et nettoyage du code , remplacement chip-card par des chip-card-conditionel , ajout d'un fond pour les informations primaires et secondaires pour une meilleur visibilitée sur le background de la carte[terminer]<br> 
 11/02/2024: modification et externalisation de certain morceau de code du dashboard <br><br>
 <U><b> &#x26A0;<U><br>Attention le fichier dashboard est a placer ici a l'aide de file editor ou studio code server /homeassistant/themes/dashboard 2024/dashboard2024.yaml ,il se peut que le dossier themes et dashboard 2024 ne sois pas créé rajouté le et placer le fichier dashboard2024.yaml a l'interieur, et changer le theme en dashboard 2024 pour cela faite modifier tableau cliquer sur le crayon , dans configuration de la vue dans theme mettre dashboard 2024</U></b>[terminer]<br><br>
