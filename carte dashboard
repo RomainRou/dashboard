@@ -7,7 +7,39 @@ cards:
             #carte meteo france, les entités pour permettre le changement de background sont a changer aussi ligne 68
           - type: custom:mushroom-template-card
             entity: weather.VOTRE VILLE
-            icon: mdi:theme-light-dark
+            icon: {% if is_state("weather.VOTRE VILLE", "sunny") %}
+                    mdi:weather-sunny
+                  {% elif is_state("weather.VOTRE VILLE", "partlycloudy") %}
+                    mdi:weather-partly-cloudy
+                  {% elif is_state("weather.VOTRE VILLE", "cloudy") %}
+                    mdi:weather-cloudy
+                  {% elif is_state("weather.VOTRE VILLE", "mostlycloudy") %}
+                    mdi:weather-cloudy
+                  {% elif is_state("weather.VOTRE VILLE", "clear-night") %}
+                    mdi:weather-night
+                  {% elif is_state("weather.VOTRE VILLE", "fog") %}
+                    mdi:weather-fog
+                  {% elif is_state("weather.VOTRE VILLE", "rainy") %}
+                    mdi:weather-rainy
+                  {% elif is_state("weather.VOTRE VILLE", "lightning-rainy") %}
+                    mdi:weather-lightning-rainy
+                  {% elif is_state("weather.VOTRE VILLE", "night-partly-cloudy") %}
+                    mdi:weather-night-partly-cloudy
+                  {% elif is_state("weather.VOTRE VILLE", "hail") %}
+                    mdi:weather-hail
+                  {% elif is_state("weather.VOTRE VILLE", "lightning") %}
+                    mdi:weather-lightning
+                  {% elif is_state("weather.VOTRE VILLE", "pouring") %}
+                    mdi:weather-pouring
+                  {% elif is_state("weather.VOTRE VILLE", "snowy") %}
+                    mdi:weather-snowy
+                  {% elif is_state("weather.VOTRE VILLE", "snowy-rainy") %}
+                    mdi:weather-snowy-rainy 
+                  {% elif is_state("weather.VOTRE VILLE", "windy") %}
+                    mdi:weather-windy 
+                  {% elif is_state("weather.VOTRE VILLE", "windy-variant") %}
+                    mdi:weather-windy-variant 
+                  {% endif %}
             icon_color: |
               {% if is_state('binary_sensor.il_fait_nuit', 'off') %}
                 #80808080 
