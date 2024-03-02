@@ -2,9 +2,9 @@ type: vertical-stack
 cards:
   - type: horizontal-stack #première ligne de carte
     cards:
-      - type: custom:vertical-stack-in-card 
+      - type: custom:vertical-stack-in-card
         cards:
-            #carte meteo france, les entités pour permettre le changement de background sont a changer aussi ligne 66
+            #carte meteo france, les entités pour permettre le changement de background sont a changer aussi ligne 68
           - type: custom:mushroom-template-card
             entity: weather.VOTRE VILLE
             icon: mdi:theme-light-dark
@@ -37,6 +37,7 @@ cards:
                     overflow: visible !important;
                     white-space: normal !important;
                     text-shadow: 1px 1px 0px  #000000 ;
+                    z-index: 1;
                   }
                   .secondary {
                     position: relative;
@@ -44,6 +45,7 @@ cards:
                     top: -49px;
                     left: -155px;
                     text-shadow: 1px 1px 0px  #000000 ;
+                    z-index: 1;
                   }
                 mushroom-shape-icon$: |
                   .shape {
@@ -377,7 +379,7 @@ cards:
                 .: |
                   ha-card {
                     width: 66px;
-                    margin-left: 85%;
+                    margin-left:70%;
                     top: -170px;
                     background: none;
                     --chip-border-width: 0;
@@ -507,7 +509,7 @@ cards:
                 .: |
                   ha-card {
                     width: 66px;
-                    margin-left: 85%;
+                    margin-left: 70%;
                     top: -170px;
                     background: none;
                     --chip-border-width: 0;
@@ -544,12 +546,6 @@ cards:
               action: none
             hold_action:
               action: none
-            badge_icon: |+
-
-            badge_color: |+
-
-            secondary: ''
-            multiline_secondary: true
             card_mod:
               style:
                 mushroom-state-info$: |
@@ -653,8 +649,6 @@ cards:
               action: navigate
               navigation_path: '#sdb_rdc'
             entity: light.salle_de_bain_rdc
-            badge_icon: ''
-            badge_color: ''
             multiline_secondary: true
             card_mod:
               style:
@@ -718,7 +712,7 @@ cards:
         cards:
           - type: custom:mushroom-template-card
             icon: mdi:bed
-            icon_color: |
+            icon_color: |-
               {% if is_state('switch.chambre_parentale', 'on') %}
                 #FFAE0080
               {% else %}  
@@ -733,10 +727,6 @@ cards:
               action: none
             hold_action:
               action: none
-            badge_icon: |+
-
-            badge_color: |+
-
             entity: switch.chambre_parentale
             tap_action:
               action: navigate
@@ -867,10 +857,8 @@ cards:
               action: none
             hold_action:
               action: none
-            badge_icon: |+
-
-            badge_color: |+
-
+            badge_icon: ''
+            badge_color: ''
             entity: light.la_chambre_d_amis
             tap_action:
               action: navigate
@@ -950,7 +938,7 @@ cards:
         card_mod:
           style: |
             ha-card {
-              height: 178px ;
+              height: 178px;
               margin-left: auto;
               margin-right: auto;
               background-image: url(https://i.ibb.co/PTCWJ0d/chambredamis.png);
@@ -976,10 +964,8 @@ cards:
               action: none
             hold_action:
               action: none
-            badge_icon: |+
-
-            badge_color: |+
-
+            badge_icon: ''
+            badge_color: ''
             entity: light.la_chambre_de_rox
             tap_action:
               action: navigate
@@ -1059,7 +1045,7 @@ cards:
         card_mod:
           style: |
             ha-card {
-              height: 178px ;
+              height: 178px;
               margin-left: auto;
               margin-right: auto;
               background-image: url(https://i.ibb.co/xSGC5pv/chambre-rox.png);
@@ -1252,7 +1238,7 @@ cards:
         card_mod:
           style: |
             ha-card {
-              height: 178px ;
+              height: 178px;
               margin-left: auto;
               margin-right: auto;
               background-image: url(https://i.ibb.co/MRm950r/salledebain1etage.png);
@@ -1278,10 +1264,8 @@ cards:
               action: none
             hold_action:
               action: none
-            badge_icon: |+
-
-            badge_color: |+
-
+            badge_icon: ''
+            badge_color: ''
             entity: light.la_chambre_d_ethan
             tap_action:
               action: navigate
@@ -1361,7 +1345,7 @@ cards:
         card_mod:
           style: |
             ha-card {
-              height: 178px ;
+              height: 178px;
               margin-left: auto;
               margin-right: auto;
               background-image: url(https://i.ibb.co/K6SCvHg/chambre-ethan.png);
@@ -1388,10 +1372,8 @@ cards:
               action: none
             hold_action:
               action: none
-            badge_icon: |+
-
-            badge_color: |+
-
+            badge_icon: ''
+            badge_color: ''
             entity: light.la_chambre_de_nathan
             tap_action:
               action: navigate
@@ -1512,7 +1494,7 @@ cards:
         card_mod:
           style: |
             ha-card {
-              height: 178px ;
+              height: 178px;
               margin-left: auto;
               margin-right: auto;
               background-image: url(https://i.ibb.co/0KVhWgm/chambre-nathan.png);
@@ -1527,74 +1509,63 @@ cards:
           - type: custom:bubble-card
             card_type: pop-up
             hash: '#meteo'
-          - type: vertical-stack
-            cards:
-              - type: custom:meteofrance-weather-card
-                entity: weather.VOTRE VILLE #entité avec météo france
-                details: true
-                forecast: true
-                hourly_forecast: false
-                current: true
-                rainChanceEntity: sensor.VOTRE VILLE_rain_chance #entité avec météo france
-                uvEntity: sensor.VOTRE VILLE_uv #entité avec météo france
-                cloudCoverEntity: sensor.VOTRE VILLE_cloud_cover #entité avec météo france
-                freezeChanceEntity: sensor.VOTRE VILLE_freeze_chance #entité avec météo france
-                snowChanceEntity: sensor.VOTRE VILLE_snow_chance #entité avec météo france
-                alertEntity: sensor.45_weather_alert #entité avec météo france
-                rainForecastEntity: sensor.VOTRE VILLE_next_rain #entité avec météo france
+          - type: custom:meteofrance-weather-card
+            entity: weather.VOTRE VILLE #entité avec météo france
+            details: true
+            forecast: true
+            current: true
+            rainChanceEntity: sensor.VOTRE VILLE_rain_chance #entité avec météo france
+            uvEntity: sensor.VOTRE VILLE_uv #entité avec météo france
+            cloudCoverEntity: sensor.VOTRE VILLE_cloud_cover #entité avec météo france
+            freezeChanceEntity: sensor.VOTRE VILLE_freeze_chance #entité avec météo france
+            snowChanceEntity: sensor.VOTRE VILLE_snow_chance #entité avec météo france
+            alertEntity: sensor.NUMERO DE VOTRE DEPARTEMENT_weather_alert #entité avec météo france
+            rainForecastEntity: sensor.VOTRE VILLE_next_rain #entité avec météo france
       - type: vertical-stack
         cards:
           - type: custom:bubble-card
             card_type: pop-up
             hash: '#salon'
-          - type: vertical-stack
-            cards:
-              - type: custom:mushroom-light-card
-                entity: light.le_salon
-                show_brightness_control: true
-                use_light_color: true
-                show_color_control: false
-                collapsible_controls: true
-                icon: mdi:ceiling-light
-                show_color_temp_control: true
-              - type: custom:mushroom-alarm-control-panel-card
-                states:
-                  - armed_away
-                  - armed_night
-                entity: alarm_control_panel.alarmo
-              - type: custom:mushroom-media-player-card
-                entity: media_player.samsung_7_series_65
-                name: télé salon
-                size: normal
-                title: La salon
+          - type: custom:mushroom-light-card
+            entity: light.le_salon
+            show_brightness_control: true
+            use_light_color: true
+            collapsible_controls: true
+            icon: mdi:ceiling-light
+            show_color_temp_control: true
+          - type: custom:mushroom-alarm-control-panel-card
+            states:
+              - armed_away
+              - armed_night
+            entity: alarm_control_panel.alarmo
+          - type: custom:mushroom-media-player-card
+            entity: media_player.samsung_7_series_65
+            name: télé salon
+            size: normal
       - type: vertical-stack
         cards:
           - type: custom:bubble-card
             card_type: pop-up
             hash: '#salle_a_manger'
-          - type: vertical-stack
+          - type: custom:mushroom-light-card
+            entity: light.la_salle_a_manger
+            show_brightness_control: true
+            use_light_color: true
+            collapsible_controls: true
+            icon: mdi:ceiling-light
+            show_color_temp_control: true
+          - type: horizontal-stack
             cards:
-              - type: custom:mushroom-light-card
-                entity: light.la_salle_a_manger
-                show_brightness_control: true
-                use_light_color: true
-                show_color_control: false
-                name: ' La salle a manger'
-                collapsible_controls: true
-                icon: mdi:ceiling-light
-                show_color_temp_control: true
-              - type: horizontal-stack
-                cards:
-                  - type: custom:mushroom-entity-card
-                    entity: switch.salle_a_manger
-                    icon: mdi:power-socket-fr
-                    name: Prise salle à manger
-                    double_tap_action:
-                      action: none
-                    hold_action:
-                      action: none
-                    tap_action:
-                      action: toggle
+              - type: custom:mushroom-entity-card
+                entity: switch.salle_a_manger
+                icon: mdi:power-socket-fr
+                name: Prise salle à manger
+                double_tap_action:
+                  action: none
+                hold_action:
+                  action: none
+                tap_action:
+                  action: toggle
       - type: vertical-stack
         cards:
           - type: custom:bubble-card
@@ -1606,19 +1577,16 @@ cards:
                 entity: light.cuisine
                 show_brightness_control: true
                 use_light_color: true
-                show_color_control: false
-                name: ' La cuisine'
                 collapsible_controls: true
+                name: ' La cuisine'
                 show_color_temp_control: true
               - type: custom:mushroom-light-card
                 entity: light.plan_de_travail
                 show_brightness_control: true
                 use_light_color: true
-                show_color_control: false
-                name: ' Le plan de travail'
                 collapsible_controls: true
+                name: ' Le plan de travail'
                 show_color_temp_control: true
-                title: La cuisine
       - type: vertical-stack
         cards:
           - type: custom:bubble-card
@@ -1630,9 +1598,8 @@ cards:
                 entity: light.le_couloir
                 show_brightness_control: true
                 use_light_color: true
-                show_color_control: false
-                name: ' Le couloir'
                 collapsible_controls: true
+                name: ' Le couloir'
                 show_color_temp_control: true
       - type: vertical-stack
         cards:
@@ -1644,7 +1611,6 @@ cards:
               - type: custom:mushroom-light-card
                 show_brightness_control: true
                 use_light_color: true
-                show_color_control: false
                 collapsible_controls: true
       - type: vertical-stack
         cards:
@@ -1657,12 +1623,10 @@ cards:
                 entity: switch.chambre_parentale
                 show_brightness_control: true
                 use_light_color: true
-                show_color_control: false
                 name: ' La chambre parentale'
                 collapsible_controls: true
                 icon: mdi:ceiling-light
                 show_color_temp_control: true
-                card_mod: null
               - type: custom:mushroom-entity-card
                 entity: switch.prise_romain
                 icon: mdi:power-socket-fr
@@ -1679,12 +1643,10 @@ cards:
                 entity: light.la_chambre_d_amis
                 show_brightness_control: true
                 use_light_color: true
-                show_color_control: false
                 name: ' La chambre d''amis'
                 collapsible_controls: true
                 icon: mdi:ceiling-light
                 show_color_temp_control: true
-                title: La chambre d’amis
       - type: vertical-stack
         cards:
           - type: custom:bubble-card
@@ -1696,12 +1658,10 @@ cards:
                 entity: light.la_chambre_de_rox
                 show_brightness_control: true
                 use_light_color: true
-                show_color_control: false
                 name: La chambre de rox
                 collapsible_controls: true
                 icon: mdi:ceiling-light
                 show_color_temp_control: true
-                title: La chambre de rox
       - type: vertical-stack
         cards:
           - type: custom:bubble-card
@@ -1713,7 +1673,6 @@ cards:
                 entity: light.placard_etage
                 show_brightness_control: true
                 use_light_color: true
-                show_color_control: false
                 name: Placard étage
                 collapsible_controls: true
                 show_color_temp_control: true
@@ -1721,7 +1680,6 @@ cards:
                 show_brightness_control: true
                 layout: horizontal
                 use_light_color: true
-                show_color_control: false
                 collapsible_controls: true
                 title: Palier
       - type: vertical-stack
@@ -1735,10 +1693,8 @@ cards:
                 show_brightness_control: true
                 layout: horizontal
                 use_light_color: true
-                show_color_control: false
-                name: ' '
                 collapsible_controls: true
-                title: Salle de bain etage
+                title: Salle de bain étage
       - type: vertical-stack
         cards:
           - type: custom:bubble-card
@@ -1746,16 +1702,14 @@ cards:
             hash: '#chambre_ethan'
           - type: vertical-stack
             cards:
-              - icon: mdi:ceiling-light
-                type: custom:mushroom-light-card
+              - type: custom:mushroom-light-card
+                icon: mdi:ceiling-light
                 entity: light.la_chambre_d_ethan
                 show_brightness_control: true
                 use_light_color: true
-                show_color_control: false
-                name: ' La chambre d''ethan'
                 collapsible_controls: true
                 show_color_temp_control: true
-                title: La chambre d’ethan
+                name: ' La chambre d''ethan'
       - type: vertical-stack
         cards:
           - type: custom:bubble-card
@@ -1768,7 +1722,6 @@ cards:
                 entity: light.la_chambre_de_nathan
                 show_brightness_control: true
                 use_light_color: true
-                show_color_control: false
                 name: ' La chambre de nathan'
                 collapsible_controls: true
                 show_color_temp_control: true
@@ -2956,4 +2909,3 @@ cards:
                                   tr:nth-child(n+2) > td:nth-child(2) {
                                     text-align: center;
                                   }
-                    title: La chambre de nathan
