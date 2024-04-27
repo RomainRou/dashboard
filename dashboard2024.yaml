@@ -14,7 +14,7 @@ dashboard2024:
        #taille texte info secondaire
       mush-card-secondary-font-size: 9px
        #police caractere
-      primary-font-family: 'verdana'
+      primary-font-family: 'Roboto'
       paper-font-common-base_-_font-family: "var(--primary-font-family)"
       paper-font-common-code_-_font-family: "var(--primary-font-family)"
       paper-font-body1_-_font-family: "var(--primary-font-family)"
@@ -44,7 +44,7 @@ dashboard2024:
        #taille texte info secondaire
       mush-card-secondary-font-size: 9px
        #police caractere
-      primary-font-family: 'verdana'
+      primary-font-family: 'Roboto'
       paper-font-common-base_-_font-family: "var(--primary-font-family)"
       paper-font-common-code_-_font-family: "var(--primary-font-family)"
       paper-font-body1_-_font-family: "var(--primary-font-family)"
